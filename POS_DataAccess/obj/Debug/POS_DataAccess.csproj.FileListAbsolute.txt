@@ -1,0 +1,6 @@
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\bin\Debug\POS_DataAccess.dll
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\bin\Debug\POS_DataAccess.pdb
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\obj\Debug\POS_DataAccess.csproj.AssemblyReference.cache
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\obj\Debug\POS_DataAccess.csproj.CoreCompileInputs.cache
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\obj\Debug\POS_DataAccess.dll
+D:\ProgrammingAdvices\Projects\POS System\POS_DataAccess\obj\Debug\POS_DataAccess.pdb

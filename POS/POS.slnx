@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../POS_Business/POS_Business.csproj" Id="83171f86-7583-42e0-bbda-722621d4b31c" />
+  <Project Path="../POS_DataAccess/POS_DataAccess.csproj" Id="cb4358cb-1ad2-401d-959c-f2ff46f421a3" />
+  <Project Path="POS.csproj" Id="ff2612fd-7f4c-431a-965f-363fb4c1430e" />
+</Solution>
