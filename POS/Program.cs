@@ -1,4 +1,7 @@
-﻿using System;
+﻿using POS.Controls;
+using POS.Forms;
+using POS.Products;
+using System;
 using System.Windows.Forms;
 
 namespace POS
@@ -13,8 +16,9 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-         //   Application.Run(new frmMain());
-            Application.Run(new frmListUsers());
+//            Application.Run(new frmMain());
+         //   Application.Run(new frmSale());
+            Application.Run(new frmListProducts());
 
         }
 

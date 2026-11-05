@@ -29,8 +29,12 @@ namespace POS_Business.Services
             {
                 UserID = user.UserID,
                 FullName = user.FullName,
+                Username = user.Username,
                 Phone = user.Phone,
                 Email = user.Email,
+                Address = user.Address,
+                ImagePath = user.ImagePath,
+                CreatedAt = user.CreatedAt,
                 IsActive = user.IsActive,
                 RoleID = user.RoleID
 
@@ -50,7 +54,7 @@ namespace POS_Business.Services
 
             User user = new User { FullName = userDto.FullName, 
                 Username = userDto.Username,
-                PasswordHash = userDto.PasswordHash,
+                PasswordHash = userDto.Password,
                 Phone = userDto.Phone,
                 Email = userDto.Email,
                 Address = userDto.Address,

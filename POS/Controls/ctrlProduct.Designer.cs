@@ -32,6 +32,12 @@ namespace POS.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCart = new System.Windows.Forms.DataGridView();
             this.ColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,10 +61,24 @@ namespace POS.Controls
             // 
             // dgvCart
             // 
+            this.dgvCart.AllowDrop = true;
             this.dgvCart.AllowUserToAddRows = false;
             this.dgvCart.AllowUserToDeleteRows = false;
+            this.dgvCart.AllowUserToResizeColumns = false;
+            this.dgvCart.AllowUserToResizeRows = false;
+            this.dgvCart.BackgroundColor = System.Drawing.Color.White;
             this.dgvCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvCart.ColumnHeadersHeight = 30;
+            this.dgvCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(244)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCart.ColumnHeadersHeight = 40;
             this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColProductName,
             this.ColQuantity,
@@ -68,12 +88,29 @@ namespace POS.Controls
             this.ColMinus,
             this.Coldel});
             this.dgvCart.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(235)))), ((int)(((byte)(245)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvCart.EnableHeadersVisualStyles = false;
+            this.dgvCart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
             this.dgvCart.Location = new System.Drawing.Point(3, 23);
+            this.dgvCart.MultiSelect = false;
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvCart.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvCart.RowHeadersVisible = false;
-            this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCart.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Transparent;
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvCart.Size = new System.Drawing.Size(426, 350);
             this.dgvCart.TabIndex = 0;
             this.dgvCart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellContentClick);
@@ -96,7 +133,7 @@ namespace POS.Controls
             // 
             // ColPrice
             // 
-            this.ColPrice.FillWeight = 51.51112F;
+            this.ColPrice.FillWeight = 60F;
             this.ColPrice.HeaderText = "السعر ($)";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -104,7 +141,7 @@ namespace POS.Controls
             // 
             // ColCost
             // 
-            this.ColCost.FillWeight = 50F;
+            this.ColCost.FillWeight = 60F;
             this.ColCost.HeaderText = "تكلفة الوحدة";
             this.ColCost.Name = "ColCost";
             this.ColCost.ReadOnly = true;
@@ -112,33 +149,45 @@ namespace POS.Controls
             // 
             // ColPlus
             // 
-            this.ColPlus.FillWeight = 20F;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.ColPlus.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColPlus.FillWeight = 30F;
+            this.ColPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ColPlus.HeaderText = "";
             this.ColPlus.Name = "ColPlus";
             this.ColPlus.ReadOnly = true;
             this.ColPlus.Text = "+";
             this.ColPlus.UseColumnTextForButtonValue = true;
-            this.ColPlus.Width = 20;
+            this.ColPlus.Width = 30;
             // 
             // ColMinus
             // 
-            this.ColMinus.FillWeight = 20F;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ColMinus.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColMinus.FillWeight = 30F;
+            this.ColMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ColMinus.HeaderText = "";
             this.ColMinus.Name = "ColMinus";
             this.ColMinus.ReadOnly = true;
             this.ColMinus.Text = "-";
             this.ColMinus.UseColumnTextForButtonValue = true;
-            this.ColMinus.Width = 20;
+            this.ColMinus.Width = 30;
             // 
             // Coldel
             // 
-            this.Coldel.FillWeight = 20F;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Red;
+            this.Coldel.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Coldel.FillWeight = 30F;
+            this.Coldel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Coldel.HeaderText = "";
             this.Coldel.Name = "Coldel";
             this.Coldel.ReadOnly = true;
             this.Coldel.Text = "x";
             this.Coldel.UseColumnTextForButtonValue = true;
-            this.Coldel.Width = 20;
+            this.Coldel.Width = 30;
             // 
             // contextMenuStrip1
             // 

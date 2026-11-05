@@ -30,3 +30,35 @@ D:\ProgrammingAdvices\Projects\POS System\POS\obj\Debug\POS.Controls.ctrlProduct
 D:\ProgrammingAdvices\Projects\POS System\POS\obj\Debug\POS.frmListUsers.resources
 D:\ProgrammingAdvices\Projects\POS System\POS\obj\Debug\POS.Controls.frmTest.resources
 D:\ProgrammingAdvices\Projects\POS System\POS\obj\Debug\POS.Forms.frmAddUpdateUser.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS.exe.config
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS.exe
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_Business.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_DataAccess.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_Business.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_DataAccess.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.AssemblyReference.cache
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.ctrlDashboard.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.ctrlProduct.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.frmTest.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Forms.frmAddUpdateUser.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.frmListUsers.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.frmMain.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Properties.Resources.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.GenerateResource.cache
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.CoreCompileInputs.cache
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.Up2Date
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.exe
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Forms.frmSale.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Products.frmListProducts.resources

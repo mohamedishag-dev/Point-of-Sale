@@ -7,3 +7,12 @@ D:\ProgrammingAdvices\Projects\POS System\POS_Business\bin\Debug\POS_DataAccess.
 D:\ProgrammingAdvices\Projects\POS System\POS_Business\obj\Debug\POS_Busi.6EE709F8.Up2Date
 D:\ProgrammingAdvices\Projects\POS System\POS_Business\obj\Debug\POS_Business.dll
 D:\ProgrammingAdvices\Projects\POS System\POS_Business\obj\Debug\POS_Business.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\POS_Business.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\POS_Business.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\POS_DataAccess.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\POS_DataAccess.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.csproj.AssemblyReference.cache
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.csproj.CoreCompileInputs.cache
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Busi.6EE709F8.Up2Date
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.pdb

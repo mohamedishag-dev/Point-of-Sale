@@ -10,7 +10,7 @@ namespace POS_Business.Services
 {
     public interface IProductService
     {
-        DataTable GetAll();
+        DataTable GetAllProducts();
         bool DeleteProduct(int productID);
         bool AddNewProduct(Product product);
         bool IsProductExists(int productID);

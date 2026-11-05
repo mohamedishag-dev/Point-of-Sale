@@ -1,7 +1,9 @@
 ﻿using POS.Controls;
+using POS.Forms;
 using POS_Business.DTOs.Users;
 using POS_Business.Services;
 using POS_DataAccess.interfaceis;
+using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS_DataAccess.Models;
 namespace POS
 {
     public partial class frmMain : Form
@@ -48,7 +49,8 @@ namespace POS
 
         private void btnCashier_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmSale frm = new frmSale();
+            frm.ShowDialog();
 
         }
 

@@ -40,21 +40,21 @@
             this.labelUserID = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.llRemoveImage = new System.Windows.Forms.LinkLabel();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.llRemoveImage = new System.Windows.Forms.LinkLabel();
             this.llOpenFileDialog = new System.Windows.Forms.LinkLabel();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.txtPhone = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
@@ -208,6 +208,38 @@
             this.panel1.Size = new System.Drawing.Size(645, 387);
             this.panel1.TabIndex = 176;
             // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Location = new System.Drawing.Point(381, 317);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(117, 43);
+            this.btnClose.TabIndex = 12;
+            this.btnClose.Text = "الغاء";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(101)))), ((int)(((byte)(52)))));
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(252)))), ((int)(((byte)(231)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Location = new System.Drawing.Point(504, 317);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(117, 43);
+            this.btnSave.TabIndex = 11;
+            this.btnSave.Text = "حفظ";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // txtFullName
             // 
             this.txtFullName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
@@ -250,6 +282,19 @@
             this.textBox2.TabIndex = 5;
             this.textBox2.UseSystemPasswordChar = true;
             // 
+            // llRemoveImage
+            // 
+            this.llRemoveImage.AutoSize = true;
+            this.llRemoveImage.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.llRemoveImage.Location = new System.Drawing.Point(73, 349);
+            this.llRemoveImage.Name = "llRemoveImage";
+            this.llRemoveImage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.llRemoveImage.Size = new System.Drawing.Size(46, 22);
+            this.llRemoveImage.TabIndex = 10;
+            this.llRemoveImage.TabStop = true;
+            this.llRemoveImage.Text = "حذف ";
+            this.llRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemoveImage_LinkClicked);
+            // 
             // txtAddress
             // 
             this.txtAddress.BackColor = System.Drawing.Color.White;
@@ -281,9 +326,9 @@
             this.label3.Location = new System.Drawing.Point(504, 82);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label3.Size = new System.Drawing.Size(55, 22);
+            this.label3.Size = new System.Drawing.Size(115, 22);
             this.label3.TabIndex = 182;
-            this.label3.Text = "الايميل:";
+            this.label3.Text = "البريد الالكتروني:";
             // 
             // label1
             // 
@@ -295,44 +340,6 @@
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 180;
             this.label1.Text = "رقم الهاتف:";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.BackColor = System.Drawing.Color.White;
-            this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtEmail.Location = new System.Drawing.Point(323, 79);
-            this.txtEmail.MaxLength = 20;
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtEmail.Size = new System.Drawing.Size(175, 29);
-            this.txtEmail.TabIndex = 2;
-            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.BackColor = System.Drawing.Color.White;
-            this.txtPhone.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtPhone.Location = new System.Drawing.Point(17, 79);
-            this.txtPhone.MaxLength = 20;
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtPhone.Size = new System.Drawing.Size(175, 29);
-            this.txtPhone.TabIndex = 3;
-            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
-            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTestBox);
-            // 
-            // llRemoveImage
-            // 
-            this.llRemoveImage.AutoSize = true;
-            this.llRemoveImage.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.llRemoveImage.Location = new System.Drawing.Point(73, 349);
-            this.llRemoveImage.Name = "llRemoveImage";
-            this.llRemoveImage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.llRemoveImage.Size = new System.Drawing.Size(46, 22);
-            this.llRemoveImage.TabIndex = 10;
-            this.llRemoveImage.TabStop = true;
-            this.llRemoveImage.Text = "حذف ";
-            this.llRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemoveImage_LinkClicked);
             // 
             // llOpenFileDialog
             // 
@@ -347,6 +354,18 @@
             this.llOpenFileDialog.Text = "وضع صورة";
             this.llOpenFileDialog.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenFileDialog_LinkClicked);
             // 
+            // txtEmail
+            // 
+            this.txtEmail.BackColor = System.Drawing.Color.White;
+            this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.txtEmail.Location = new System.Drawing.Point(323, 79);
+            this.txtEmail.MaxLength = 20;
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtEmail.Size = new System.Drawing.Size(175, 29);
+            this.txtEmail.TabIndex = 2;
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
+            // 
             // pbPersonImage
             // 
             this.pbPersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -359,37 +378,18 @@
             this.pbPersonImage.TabIndex = 185;
             this.pbPersonImage.TabStop = false;
             // 
-            // btnClose
+            // txtPhone
             // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(381, 317);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(117, 43);
-            this.btnClose.TabIndex = 12;
-            this.btnClose.Text = "الغاء";
-            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(101)))), ((int)(((byte)(52)))));
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(252)))), ((int)(((byte)(231)))));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(504, 317);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(117, 43);
-            this.btnSave.TabIndex = 11;
-            this.btnSave.Text = "حفظ";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.txtPhone.BackColor = System.Drawing.Color.White;
+            this.txtPhone.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.txtPhone.Location = new System.Drawing.Point(17, 79);
+            this.txtPhone.MaxLength = 20;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtPhone.Size = new System.Drawing.Size(175, 29);
+            this.txtPhone.TabIndex = 3;
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
+            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTestBox);
             // 
             // openFileDialog1
             // 

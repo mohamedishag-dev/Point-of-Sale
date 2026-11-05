@@ -22,7 +22,6 @@ namespace POS.Controls
             // إعداد نافذة التطبيق
             this.Text = "نظام نقاط البيع - POS System";
             this.Size = new Size(1100, 700);
-            //   this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.FromArgb(240, 243, 246);
 
 
@@ -91,7 +90,6 @@ namespace POS.Controls
 
         private void AddToCart(string productName, decimal price)
         {
-            Form1 frm = new Form1();
             // التحقق مما إذا كان المنتج موجوداً مسبقاً في السلة لزيادة الكمية
             foreach (DataGridViewRow row in dgvCart.Rows)
             {
@@ -105,7 +103,7 @@ namespace POS.Controls
             }
 
             // إذا لم يكن موجوداً، أضفه كصف جديد
-            dgvCart.Rows.Add(productName, 1, price.ToString("F2"), price.ToString("F2"));
+            dgvCart.Rows.Add(productName, 1, price.ToString("F2"));
             CalculateTotals();
         }
 
@@ -130,6 +128,7 @@ namespace POS.Controls
         private void ctrlProduct_Load(object sender, EventArgs e)
         {
             SetupCustomUI();
+
         }
 
         private Image LoadImage(string fileName)
@@ -172,7 +171,6 @@ namespace POS.Controls
             if (e.RowIndex < 0) return;
 
             var row = dgvCart.Rows[e.RowIndex];
-          //  int qty = Convert.ToInt32(row.Cells["ColQuantity"].Value);
             decimal qty = Convert.ToDecimal(row.Cells["ColQuantity"].Value);
             decimal unitPrice = Convert.ToDecimal(row.Cells["ColCost"].Value);
 

@@ -34,7 +34,9 @@ namespace POS.Forms
         {
             llRemoveImage.Visible = false;
 
-            //     اضافة مستخدم جديد
+            if (_Mode==enMode.Update)
+                _LoadData();
+
         }
 
         private void _LoadData()
@@ -52,8 +54,10 @@ namespace POS.Forms
             //the following code will not be executed if the user was not found
             lblUserID.Text = _userID.ToString();
             txtFullName.Text = userDto.FullName;
-            txtAddress.Text = userDto.Address;
+            txtUserName.Text = userDto.Username;
             txtPhone.Text = userDto.Phone;
+            txtEmail.Text = userDto.Email;
+            txtAddress.Text = userDto.Address;
             txtEmail.Text = userDto.Email;
             // cbCountry.SelectedIndex = cbCountry.FindString(_Person.countryInfo.CountryName);
 
@@ -83,10 +87,7 @@ namespace POS.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //return;
-
-
+           
             if (!this.ValidateChildren())
             {
                 //Here we don't continue becuase the from is not valid
@@ -95,10 +96,11 @@ namespace POS.Forms
                 return;
             }
 
+
             CreateUserDto createUserDto = new CreateUserDto();
             createUserDto.FullName = txtFullName.Text.Trim();
             createUserDto.Username = txtUserName.Text.Trim();
-            createUserDto.PasswordHash = txtPassword.Text.Trim();
+            createUserDto.Password = txtPassword.Text.Trim();
             createUserDto.Phone = txtPhone.Text.Trim();
             createUserDto.Email = txtEmail.Text.Trim();
             createUserDto.Address = txtAddress.Text.Trim();

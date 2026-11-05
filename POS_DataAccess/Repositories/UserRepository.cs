@@ -82,9 +82,9 @@ namespace POS_DataAccess.Repositories
             int UserID = -1;
 
             string query = @"INSERT INTO Users (FullName, Username, PasswordHash, Phone,
-                                   Email, Address, CreatedAt,  ImagePath, IsActive, RoleID)
+                                   Email, Address, CreatedAt, ImagePath, IsActive, RoleID)
                              VALUES (@FullName, @Username, @PasswordHash, @Phone,
-                                    @Email, @Address, @CreatedAt,  @ImagePath, @IsActive, @RoleID)
+                                   @Email, @Address, @CreatedAt, @ImagePath, @IsActive, @RoleID)
                              SELECT SCOPE_IDENTITY();";
 
             try
@@ -237,7 +237,7 @@ namespace POS_DataAccess.Repositories
        
         public User GetUserById(int userID)
         {
-            const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, ImagePath, IsActive, RoleID 
+            const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address, ImagePath, CreatedAt, IsActive, RoleID 
                                      FROM Users WHERE UserID = @UserID;";
 
             try

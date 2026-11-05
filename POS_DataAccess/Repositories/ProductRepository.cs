@@ -8,13 +8,18 @@ namespace POS_DataAccess.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public DataTable GetAll()
+        public DataTable GetAllProducts()
         {
 
             DataTable dtProducts = new DataTable();
 
-            string query = @"SELECT *
-                               FROM Products";
+            string query = @"SELECT Products.ProductID, Products.SKU, Products.Barcode, Products.ProductName, Products.Price, Units.UnitName,
+                                    (SELECT ISNULL(SUM(Quantity), 0) FROM ProductBatches 
+                                        WHERE ProductBatches.ProductID = Products.ProductID 
+                                              AND ExpiryDate > CAST(GETDATE() AS DATE))AS StockQuantity
+                               FROM Products INNER JOIN
+                                    Units ON Products.UnitID = Units.UnitID INNER JOIN
+                                    Categories ON Products.CategoryID = Categories.CategoryID";
 
             try
             {

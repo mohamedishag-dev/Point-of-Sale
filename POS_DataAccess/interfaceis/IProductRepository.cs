@@ -5,7 +5,7 @@ namespace POS_DataAccess.interfaceis
 {
     public interface IProductRepository
     {
-        DataTable GetAll();
+        DataTable GetAllProducts();
         bool DeleteProduct(int productID);
         int AddNewProduct(Product product);
         bool UpdateProduct(Product product);

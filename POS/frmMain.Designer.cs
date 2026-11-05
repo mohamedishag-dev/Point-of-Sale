@@ -49,7 +49,7 @@
             this.lblLogo.AutoSize = true;
             this.lblLogo.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.lblLogo.Location = new System.Drawing.Point(933, 34);
+            this.lblLogo.Location = new System.Drawing.Point(933, 37);
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Size = new System.Drawing.Size(128, 36);
             this.lblLogo.TabIndex = 11;
@@ -67,9 +67,9 @@
             this.btnCashier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCashier.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCashier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnCashier.Location = new System.Drawing.Point(564, 170);
+            this.btnCashier.Location = new System.Drawing.Point(564, 183);
             this.btnCashier.Name = "btnCashier";
-            this.btnCashier.Size = new System.Drawing.Size(512, 69);
+            this.btnCashier.Size = new System.Drawing.Size(512, 74);
             this.btnCashier.TabIndex = 0;
             this.btnCashier.Text = "الكاشير";
             this.btnCashier.UseVisualStyleBackColor = false;
@@ -85,9 +85,9 @@
             this.btnSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSuppliers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnSuppliers.Location = new System.Drawing.Point(12, 254);
+            this.btnSuppliers.Location = new System.Drawing.Point(12, 274);
             this.btnSuppliers.Name = "btnSuppliers";
-            this.btnSuppliers.Size = new System.Drawing.Size(512, 69);
+            this.btnSuppliers.Size = new System.Drawing.Size(512, 74);
             this.btnSuppliers.TabIndex = 3;
             this.btnSuppliers.Text = "الموردين";
             this.btnSuppliers.UseVisualStyleBackColor = false;
@@ -103,9 +103,9 @@
             this.btnReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturns.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnReturns.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnReturns.Location = new System.Drawing.Point(12, 338);
+            this.btnReturns.Location = new System.Drawing.Point(12, 364);
             this.btnReturns.Name = "btnReturns";
-            this.btnReturns.Size = new System.Drawing.Size(512, 69);
+            this.btnReturns.Size = new System.Drawing.Size(512, 74);
             this.btnReturns.TabIndex = 5;
             this.btnReturns.Text = "المرتجعات";
             this.btnReturns.UseVisualStyleBackColor = false;
@@ -121,9 +121,9 @@
             this.btnInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInventory.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnInventory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnInventory.Location = new System.Drawing.Point(564, 254);
+            this.btnInventory.Location = new System.Drawing.Point(564, 274);
             this.btnInventory.Name = "btnInventory";
-            this.btnInventory.Size = new System.Drawing.Size(512, 69);
+            this.btnInventory.Size = new System.Drawing.Size(512, 74);
             this.btnInventory.TabIndex = 2;
             this.btnInventory.Text = "المخزون";
             this.btnInventory.UseVisualStyleBackColor = false;
@@ -139,9 +139,9 @@
             this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProducts.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnProducts.Location = new System.Drawing.Point(12, 170);
+            this.btnProducts.Location = new System.Drawing.Point(12, 183);
             this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(512, 69);
+            this.btnProducts.Size = new System.Drawing.Size(512, 74);
             this.btnProducts.TabIndex = 1;
             this.btnProducts.Text = "المنتجات";
             this.btnProducts.UseVisualStyleBackColor = false;
@@ -157,9 +157,9 @@
             this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnReports.Location = new System.Drawing.Point(564, 423);
+            this.btnReports.Location = new System.Drawing.Point(564, 456);
             this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(512, 69);
+            this.btnReports.Size = new System.Drawing.Size(512, 74);
             this.btnReports.TabIndex = 6;
             this.btnReports.Text = "التقارير";
             this.btnReports.UseVisualStyleBackColor = false;
@@ -175,9 +175,9 @@
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnUsers.Location = new System.Drawing.Point(564, 338);
+            this.btnUsers.Location = new System.Drawing.Point(564, 364);
             this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(512, 69);
+            this.btnUsers.Size = new System.Drawing.Size(512, 74);
             this.btnUsers.TabIndex = 4;
             this.btnUsers.Text = "المستخدمين";
             this.btnUsers.UseVisualStyleBackColor = false;
@@ -188,9 +188,9 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
             this.label1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.label1.Location = new System.Drawing.Point(726, 97);
+            this.label1.Location = new System.Drawing.Point(726, 104);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(351, 59);
+            this.label1.Size = new System.Drawing.Size(351, 64);
             this.label1.TabIndex = 9;
             this.label1.Text = "مبيعات اليوم\r\n 1000";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -199,9 +199,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(242)))), ((int)(((byte)(241)))));
             this.label2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(12, 97);
+            this.label2.Location = new System.Drawing.Point(12, 104);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(351, 59);
+            this.label2.Size = new System.Drawing.Size(351, 64);
             this.label2.TabIndex = 10;
             this.label2.Text = "عدد الطلبات\r\n 10\r\n";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -211,9 +211,9 @@
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(243)))), ((int)(((byte)(199)))));
             this.label3.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.label3.Location = new System.Drawing.Point(369, 97);
+            this.label3.Location = new System.Drawing.Point(369, 104);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(351, 59);
+            this.label3.Size = new System.Drawing.Size(351, 64);
             this.label3.TabIndex = 11;
             this.label3.Text = "مصروفات اليوم\r\n 200\r\n";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -230,9 +230,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 52);
+            this.button1.Size = new System.Drawing.Size(141, 56);
             this.button1.TabIndex = 13;
             this.button1.Text = "تسجيل الخروج";
             this.button1.UseVisualStyleBackColor = false;
@@ -249,9 +249,9 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(306, 12);
+            this.button2.Location = new System.Drawing.Point(306, 13);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 52);
+            this.button2.Size = new System.Drawing.Size(141, 56);
             this.button2.TabIndex = 14;
             this.button2.Text = "الاعدادات";
             this.button2.UseVisualStyleBackColor = false;
@@ -269,9 +269,9 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(159, 12);
+            this.button3.Location = new System.Drawing.Point(159, 13);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(141, 52);
+            this.button3.Size = new System.Drawing.Size(141, 56);
             this.button3.TabIndex = 15;
             this.button3.Text = "حسابي";
             this.button3.UseVisualStyleBackColor = false;
@@ -279,10 +279,10 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(1088, 521);
+            this.ClientSize = new System.Drawing.Size(1088, 561);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -297,6 +297,7 @@
             this.Controls.Add(this.btnReturns);
             this.Controls.Add(this.btnSuppliers);
             this.Controls.Add(this.btnCashier);
+            this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmMain_Load);

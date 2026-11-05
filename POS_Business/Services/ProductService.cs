@@ -1,5 +1,6 @@
 ﻿using POS_DataAccess.interfaceis;
 using POS_DataAccess.Models;
+using POS_DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,17 +12,12 @@ namespace POS_Business.Services
 {
     public class ProductService: IProductService
     {
-        private readonly IProductRepository _repo;
-        public ProductService(IProductRepository repository)
-        {
-            _repo = repository;
-        }
+        private readonly IProductRepository _repo = new ProductRepository();
 
-
-        public DataTable GetAll()
+        public DataTable GetAllProducts()
         {
             
-            return _repo.GetAll();
+            return _repo.GetAllProducts();
 
         }
 

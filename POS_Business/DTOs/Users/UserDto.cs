@@ -1,24 +1,21 @@
-﻿using POS_DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace POS_Business.DTOs.Users
 {
     public class UserDto
     {
         public int UserID { get; set; }
-        public int RoleID { get; set; }
-        public string FullName { get; set; } = string.Empty;
-        public string Phone { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
-        public string ImagePath { get; set; } = string.Empty;
-        public string RoleName { get; set; } = string.Empty;
-        public string CreatedAt { get; set; } = string.Empty;
+        public string FullName { get; set; }
+        public string Username { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string ImagePath { get; set; }
+        public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
+
+        public string RoleName { get; set; }
+        public int RoleID { get; set; }
 
     }
 
