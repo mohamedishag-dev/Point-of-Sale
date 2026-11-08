@@ -32,22 +32,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnClose = new System.Windows.Forms.Button();
             this.dgvCart = new System.Windows.Forms.DataGridView();
-            this.ColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPlus = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ColMinus = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Coldel = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTax = new System.Windows.Forms.Label();
@@ -59,6 +52,13 @@
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.cbFilterBy = new System.Windows.Forms.ComboBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.ColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPlus = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColMinus = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Coldel = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelProducts.SuspendLayout();
@@ -95,7 +95,7 @@
             this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
@@ -116,12 +116,12 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCart.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCart.EnableHeadersVisualStyles = false;
             this.dgvCart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
-            this.dgvCart.Location = new System.Drawing.Point(7, 39);
+            this.dgvCart.Location = new System.Drawing.Point(10, 39);
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -140,83 +140,9 @@
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
             this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCart.Size = new System.Drawing.Size(448, 350);
+            this.dgvCart.Size = new System.Drawing.Size(457, 350);
             this.dgvCart.TabIndex = 18;
             this.dgvCart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellContentClick);
-            // 
-            // ColProductName
-            // 
-            this.ColProductName.FillWeight = 150F;
-            this.ColProductName.Frozen = true;
-            this.ColProductName.HeaderText = "المنتج";
-            this.ColProductName.Name = "ColProductName";
-            this.ColProductName.ReadOnly = true;
-            this.ColProductName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColProductName.Width = 150;
-            // 
-            // ColQuantity
-            // 
-            this.ColQuantity.HeaderText = "الكمية";
-            this.ColQuantity.Name = "ColQuantity";
-            this.ColQuantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColQuantity.Width = 50;
-            // 
-            // ColCost
-            // 
-            this.ColCost.HeaderText = "كتلفة الوحدة";
-            this.ColCost.Name = "ColCost";
-            this.ColCost.ReadOnly = true;
-            this.ColCost.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColCost.Width = 80;
-            // 
-            // ColPrice
-            // 
-            this.ColPrice.HeaderText = "السعر ($)";
-            this.ColPrice.Name = "ColPrice";
-            this.ColPrice.ReadOnly = true;
-            this.ColPrice.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColPrice.Width = 80;
-            // 
-            // ColPlus
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.ColPlus.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColPlus.HeaderText = "";
-            this.ColPlus.Name = "ColPlus";
-            this.ColPlus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColPlus.Text = "+";
-            this.ColPlus.Width = 20;
-            // 
-            // ColMinus
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.ColMinus.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColMinus.HeaderText = "";
-            this.ColMinus.Name = "ColMinus";
-            this.ColMinus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColMinus.Text = "-";
-            this.ColMinus.Width = 20;
-            // 
-            // Coldel
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.Coldel.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Coldel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Coldel.HeaderText = "";
-            this.Coldel.Name = "Coldel";
-            this.Coldel.ReadOnly = true;
-            this.Coldel.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Coldel.Text = "حذف";
-            this.Coldel.Width = 30;
             // 
             // panel2
             // 
@@ -227,16 +153,16 @@
             this.panel2.Controls.Add(this.lblTotal);
             this.panel2.Controls.Add(this.btnSale);
             this.panel2.Controls.Add(this.lblSubtotal);
-            this.panel2.Location = new System.Drawing.Point(14, 12);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(466, 564);
+            this.panel2.Size = new System.Drawing.Size(476, 564);
             this.panel2.TabIndex = 19;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(207, 12);
+            this.label1.Location = new System.Drawing.Point(219, 12);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(248, 24);
@@ -298,7 +224,7 @@
             this.panelProducts.Controls.Add(this.cbFilterBy);
             this.panelProducts.Controls.Add(this.dgvProducts);
             this.panelProducts.Controls.Add(this.btnClose);
-            this.panelProducts.Location = new System.Drawing.Point(495, 12);
+            this.panelProducts.Location = new System.Drawing.Point(503, 12);
             this.panelProducts.Name = "panelProducts";
             this.panelProducts.Size = new System.Drawing.Size(705, 564);
             this.panelProducts.TabIndex = 20;
@@ -399,12 +325,88 @@
             this.dgvProducts.TabIndex = 18;
             this.dgvProducts.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentDoubleClick);
             // 
+            // ColProductName
+            // 
+            this.ColProductName.FillWeight = 150F;
+            this.ColProductName.Frozen = true;
+            this.ColProductName.HeaderText = "المنتج";
+            this.ColProductName.Name = "ColProductName";
+            this.ColProductName.ReadOnly = true;
+            this.ColProductName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColProductName.Width = 150;
+            // 
+            // ColQuantity
+            // 
+            this.ColQuantity.HeaderText = "الكمية";
+            this.ColQuantity.Name = "ColQuantity";
+            this.ColQuantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColQuantity.Width = 50;
+            // 
+            // ColCost
+            // 
+            this.ColCost.HeaderText = "كتلفة الوحدة";
+            this.ColCost.Name = "ColCost";
+            this.ColCost.ReadOnly = true;
+            this.ColCost.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ColPrice
+            // 
+            this.ColPrice.HeaderText = "السعر ($)";
+            this.ColPrice.Name = "ColPrice";
+            this.ColPrice.ReadOnly = true;
+            this.ColPrice.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColPrice.Width = 80;
+            // 
+            // ColPlus
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.ColPlus.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColPlus.HeaderText = "";
+            this.ColPlus.Name = "ColPlus";
+            this.ColPlus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColPlus.Text = "+";
+            this.ColPlus.UseColumnTextForButtonValue = true;
+            this.ColPlus.Width = 20;
+            // 
+            // ColMinus
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ColMinus.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColMinus.HeaderText = "";
+            this.ColMinus.Name = "ColMinus";
+            this.ColMinus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColMinus.Text = "-";
+            this.ColMinus.UseColumnTextForButtonValue = true;
+            this.ColMinus.Width = 20;
+            // 
+            // Coldel
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
+            this.Coldel.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Coldel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Coldel.HeaderText = "";
+            this.Coldel.Name = "Coldel";
+            this.Coldel.ReadOnly = true;
+            this.Coldel.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Coldel.Text = "حذف";
+            this.Coldel.UseColumnTextForButtonValue = true;
+            this.Coldel.Width = 30;
+            // 
             // frmSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(1216, 592);
+            this.ClientSize = new System.Drawing.Size(1223, 592);
             this.Controls.Add(this.panelProducts);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -2,19 +2,21 @@
 using POS_Business.Services;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
+using static POS.Forms.frmAddUpdateUser;
 
 namespace POS
 {
     public partial class frmListUsers : Form
     {
-        private readonly UserService _userService = new UserService();
+        private readonly IUserService _userService;
         private DataTable _dtAllUsers;
 
-        public frmListUsers()
+        public frmListUsers(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
+
         }
 
         private void frmListUsers_Load(object sender, EventArgs e)
@@ -65,9 +67,10 @@ namespace POS
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            frmAddUpdateUser frm = new frmAddUpdateUser();
+            frmAddUpdateUser frm = new frmAddUpdateUser(_userService);
+            frm.Mode = enMode.AddNew;
             frm.ShowDialog();
-
+            frmListUsers_Load(null, null);
         }
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -189,6 +192,15 @@ namespace POS
 
             lblRecordsCount.Text = dgvUsers.Rows.Count.ToString();
 
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUpdateUser frm = new frmAddUpdateUser(_userService);
+            frm.UserID = (int)dgvUsers.CurrentRow.Cells[0].Value;
+            frm.Mode = enMode.Update;
+            frm.ShowDialog();
+            frmListUsers_Load(null, null);
         }
     }
 

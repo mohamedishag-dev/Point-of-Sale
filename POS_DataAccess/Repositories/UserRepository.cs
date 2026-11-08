@@ -9,35 +9,6 @@ namespace POS_DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public bool Delete(int ID)
-        {
-            int rowsAffected = 0;
-
-            string query = @"Delete Users 
-                              WHERE UserID = @UserID ;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserID", ID);
-
-                        connection.Open();
-
-                        rowsAffected = command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-
-            }
-            return (rowsAffected > 0);
-        }
-
         public DataTable GetAll()
         {
 
@@ -50,7 +21,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -76,20 +47,49 @@ namespace POS_DataAccess.Repositories
 
         }
 
+        public bool Delete(int userID)
+        {
+            int rowsAffected = 0;
+
+            string query = @"Delete Users 
+                              WHERE UserID = @UserID ;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        connection.Open();
+
+                        rowsAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+            return (rowsAffected > 0);
+        }
+
         public int AddNewUser(User user)
         {
             //this function will return the new User id if succeeded and -1 if not.
             int UserID = -1;
 
-            string query = @"INSERT INTO Users (FullName, Username, PasswordHash, Phone,
-                                   Email, Address, CreatedAt, ImagePath, IsActive, RoleID)
-                             VALUES (@FullName, @Username, @PasswordHash, @Phone,
-                                   @Email, @Address, @CreatedAt, @ImagePath, @IsActive, @RoleID)
+            string query = @"INSERT INTO Users (FullName, Username, PasswordHash, Phone, Email,
+                                    Address, CreatedAt, ImagePath, IsActive, RoleID, CreatedBy)
+                             VALUES (@FullName, @Username, @PasswordHash, @Phone, @Email,
+                                    @Address, @CreatedAt, @ImagePath, @IsActive, @RoleID, @CreatedBy)
                              SELECT SCOPE_IDENTITY();";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -100,6 +100,7 @@ namespace POS_DataAccess.Repositories
                         command.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
                         command.Parameters.AddWithValue("@IsActive", user.IsActive);
                         command.Parameters.AddWithValue("@RoleID", user.RoleID);
+                        command.Parameters.AddWithValue("@CreatedBy", user.CreatedBy);
 
                         command.Parameters.AddWithValue("@Email", (object)user.Email ?? DBNull.Value);
                         command.Parameters.AddWithValue("@Address", (object)user.Address ?? DBNull.Value);
@@ -142,7 +143,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -173,6 +174,48 @@ namespace POS_DataAccess.Repositories
 
         }
 
+        public User GetUserById(int userID)
+        {
+            const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address, ImagePath, CreatedAt, IsActive, RoleID, CreatedBy 
+                                     FROM Users WHERE UserID = @UserID;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", userID);
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                            return null;
+
+                        return new User
+                        {
+                            UserID = (int)reader["UserID"],
+                            FullName = (string)reader["FullName"],
+                            Username = (string)reader["Username"],
+                            Phone = reader["Phone"] as string,
+                            Email = reader["Email"] as string,
+                            Address = reader["Address"] as string,
+                            ImagePath = reader["ImagePath"] as string,
+                            CreatedAt = (DateTime)reader["CreatedAt"],
+                            IsActive = (bool)reader["IsActive"],
+                            RoleID = (int)reader["RoleID"],
+                            CreatedBy = (int)reader["CreatedBy"]
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
         public bool IsUserExists(int userID)
         {
             bool isFound = false;
@@ -181,7 +224,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -212,7 +255,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -235,48 +278,7 @@ namespace POS_DataAccess.Repositories
             return isFound;
         }
        
-        public User GetUserById(int userID)
-        {
-            const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address, ImagePath, CreatedAt, IsActive, RoleID 
-                                     FROM Users WHERE UserID = @UserID;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@UserID", userID);
-                    connection.Open();
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (!reader.Read())
-                            return null;
-
-                        return new User
-                        {
-                            UserID = (int)reader["UserID"],
-                            FullName = (string)reader["FullName"],
-                            Username = (string)reader["Username"],
-                            Phone = reader["Phone"] as string,
-                            Email = reader["Email"] as string,
-                            Address = reader["Address"] as string,
-                            ImagePath = reader["ImagePath"] as string,
-                            CreatedAt = (DateTime)reader["CreatedAt"],
-                            IsActive = (bool)reader["IsActive"],
-                            RoleID = (int)reader["RoleID"]
-                        };
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-        }
-
-        public bool ChangePassword(int UserID, string NewPassword)
+        public bool ChangePassword(int userID, string newPassword)
         {
 
             int rowsAffected = 0;
@@ -287,11 +289,11 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@UserID", UserID);
-                    command.Parameters.AddWithValue("@NewPassword", NewPassword);
+                    command.Parameters.AddWithValue("@UserID", userID);
+                    command.Parameters.AddWithValue("@NewPassword", newPassword);
 
                     connection.Open();
                     rowsAffected = command.ExecuteNonQuery();
@@ -311,12 +313,12 @@ namespace POS_DataAccess.Repositories
 
         public User GetByUsernameAndPassword(string Username, string Password)
         {
-            const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, ImagePath, IsActive, RoleID 
+            const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, ImagePath, IsActive, RoleID, CreatedBy 
                                      FROM Users WHERE Username = @Username AND PasswordHash = @Password;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Username", Username);
@@ -340,7 +342,8 @@ namespace POS_DataAccess.Repositories
                             ImagePath = reader["ImagePath"] as string,
                             CreatedAt = (DateTime)reader["CreatedAt"],
                             IsActive = (bool)reader["IsActive"],
-                            RoleID = (int)reader["RoleID"]
+                            RoleID = (int)reader["RoleID"],
+                            CreatedBy = (int)reader["CreatedBy"]
                         };
                     }
                 }
@@ -350,6 +353,7 @@ namespace POS_DataAccess.Repositories
                 throw;
             }
         }
+
 
     }
 }

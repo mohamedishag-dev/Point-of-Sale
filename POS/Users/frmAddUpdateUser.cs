@@ -1,7 +1,6 @@
 ﻿using POS.Properties;
 using POS_Business.DTOs.Users;
 using POS_Business.Services;
-using POS_DataAccess.Models;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -10,31 +9,23 @@ namespace POS.Forms
 {
     public partial class frmAddUpdateUser : Form
     {
-        private UserService _userService = new UserService();
+        private readonly IUserService _userService;
         public enum enMode { AddNew = 0, Update = 1 };
-        private UserDto _createUserDto;
-        private int _userID = -1;
-        private enMode _Mode;
+        public int UserID = -1;
+        public enMode Mode;
 
-        public frmAddUpdateUser()
+        public frmAddUpdateUser(IUserService userService)
         {
             InitializeComponent();
-            _Mode = enMode.AddNew;
+            _userService = userService;
+            Mode = enMode.AddNew;
         }
-        public frmAddUpdateUser(int userID)
-        {
-            InitializeComponent();
-
-            _Mode = enMode.Update;
-            _userID = userID;
-        }
-
 
         private void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
             llRemoveImage.Visible = false;
 
-            if (_Mode==enMode.Update)
+            if (Mode == enMode.Update)
                 _LoadData();
 
         }
@@ -42,36 +33,33 @@ namespace POS.Forms
         private void _LoadData()
         {
 
-            UserDto userDto = _userService.GetUserById(_userID);
+            UserDto userDto = _userService.GetUserById(UserID);
 
             if (userDto == null)
             {
-                MessageBox.Show("No User with ID = " + _userID, "User Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("لا يوجد مستخدم بالرقم = " + UserID, "المستخدم غير موجود", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 this.Close();
                 return;
             }
 
             //the following code will not be executed if the user was not found
-            lblUserID.Text = _userID.ToString();
             txtFullName.Text = userDto.FullName;
             txtUserName.Text = userDto.Username;
             txtPhone.Text = userDto.Phone;
             txtEmail.Text = userDto.Email;
             txtAddress.Text = userDto.Address;
             txtEmail.Text = userDto.Email;
-            // cbCountry.SelectedIndex = cbCountry.FindString(_Person.countryInfo.CountryName);
-
+            checkbIsActive.Checked = userDto.IsActive;
 
             //load user image incase it was set.
             if (userDto.ImagePath != string.Empty)
-                pbPersonImage.ImageLocation = userDto.ImagePath;
+                circlepbUserImage.ImageLocation = userDto.ImagePath;
 
 
             //hide/show the remove linke incase there is no image for the user.
             llRemoveImage.Visible = (userDto.ImagePath != "");
 
         }
-
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -87,56 +75,43 @@ namespace POS.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-           
+
             if (!this.ValidateChildren())
             {
-                //Here we don't continue becuase the from is not valid
-                MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon",
-                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("بعض الحقول غير صالحة! ضع مؤشر الفأرة فوق الأيقونة الحمراء",
+                    "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-
-            CreateUserDto createUserDto = new CreateUserDto();
-            createUserDto.FullName = txtFullName.Text.Trim();
-            createUserDto.Username = txtUserName.Text.Trim();
-            createUserDto.Password = txtPassword.Text.Trim();
-            createUserDto.Phone = txtPhone.Text.Trim();
-            createUserDto.Email = txtEmail.Text.Trim();
-            createUserDto.Address = txtAddress.Text.Trim();
-            createUserDto.ImagePath = txtUserName.Text.Trim();
-
-            createUserDto.IsActive = checkbIsActive.Checked;
-            createUserDto.RoleID = 2;
-           
-            if (_userService.AddNewUser(ref createUserDto))
+            CreateUserDto createUserDto = new CreateUserDto
             {
-                lblUserID.Text = createUserDto.UserID.ToString();
-                //change form mode to update.
-                _Mode = enMode.Update;
+                FullName = txtFullName.Text.Trim(),
+                Username = txtUserName.Text.Trim(),
+                Password = txtPassword.Text.Trim(),
+                Phone = txtPhone.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                Address = txtAddress.Text.Trim(),
+                ImagePath = circlepbUserImage.ImageLocation,
+                IsActive = checkbIsActive.Checked,
+                RoleID = 2
+            };
+
+            bool success = false;
+
+            success = _userService.AddNewUser(ref createUserDto, 1);
+
+            if (success)
+            {
+                Mode = enMode.Update;
+                btnSave.Enabled = false;
                 lblTitle.Text = "تعديل مستخدم";
                 MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("خطأ: لم يتم حفظ البيانات بنجاح.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-        }
-
-        private void llOpenFileDialog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Process the selected file
-                string selectedFilePath = openFileDialog1.FileName;
-                pbPersonImage.Load(selectedFilePath);
-                llRemoveImage.Visible = true;
-                // ...
+                MessageBox.Show("خطأ: لم يتم حفظ البيانات.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
 
         }
 
@@ -150,7 +125,7 @@ namespace POS.Forms
             if (!Validatoin.ValidateEmail(txtEmail.Text))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtEmail, "Invalid Email Address Format!");
+                errorProvider1.SetError(txtEmail, "صيغة البريد الإلكتروني غير صحيحة!");
             }
             else
             {
@@ -166,7 +141,7 @@ namespace POS.Forms
             if (string.IsNullOrEmpty(Temp.Text))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(Temp, "This field is required!");
+                errorProvider1.SetError(Temp, "هذا الحقل مطلوب!");
             }
             else
             {
@@ -180,7 +155,7 @@ namespace POS.Forms
             if (string.IsNullOrEmpty(txtPassword.Text.Trim()))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtPassword, "Password cannot be blank");
+                errorProvider1.SetError(txtPassword, "كلمة المرور لا يمكن أن تكون فارغة");
             }
             else
             {
@@ -195,7 +170,7 @@ namespace POS.Forms
             if (txtPassword.Text.Trim() != txtConfirmPassword.Text.Trim())
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtConfirmPassword, "Password Confirmation does not match Password!");
+                errorProvider1.SetError(txtConfirmPassword, "تأكيد كلمة المرور لا يطابق كلمة المرور!");
             }
             else
             {
@@ -207,9 +182,27 @@ namespace POS.Forms
         private void llRemoveImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llRemoveImage.Visible = false;
-            pbPersonImage.ImageLocation = null;
-            pbPersonImage.Image = Resources.Male_512;
+            circlepbUserImage.ImageLocation = null;
+            circlepbUserImage.Image = Resources.Male_512;
 
         }
+
+        private void llOpenFileDialog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openFileDialog1.Filter = "ملفات الصور|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Process the selected file
+                string selectedFilePath = openFileDialog1.FileName;
+                circlepbUserImage.Load(selectedFilePath);
+                llRemoveImage.Visible = true;
+                // ...
+            }
+
+        }
+
     }
 }

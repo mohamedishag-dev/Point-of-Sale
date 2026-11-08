@@ -13,12 +13,12 @@ namespace POS_Business.Services
     public interface IUserService
     {
         DataTable GetAll();
-        bool Delete(int userID);
-        bool AddNewUser(ref CreateUserDto user);
-        UserDto GetUserById(int userID);
         bool IsUserExists(int userID);
+        UserDto GetUserById(int userID);
         bool IsUserExists(string Username);
+        bool Delete(int userID, int CreatedBy);
         bool ChangePassword(int userID, string password);
+        bool AddNewUser(ref CreateUserDto user, int CreatedBy);
         UserDto GetByUsernameAndPassword(string Username, string Password);
 
     }

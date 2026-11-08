@@ -61,7 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\clsTheme.cs" />
+    <Compile Include="Helpers\CirclePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global classes\Global.cs" />
+    <Compile Include="Helpers\Theme.cs" />
     <Compile Include="Controls\ctrlDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,16 +170,15 @@
       <Project>{83171f86-7583-42e0-bbda-722621d4b31c}</Project>
       <Name>POS_Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\POS_DataAccess\POS_DataAccess.csproj">
-      <Project>{cb4358cb-1ad2-401d-959c-f2ff46f421a3}</Project>
-      <Name>POS_DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Male 512.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_fluent_person_24_filled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

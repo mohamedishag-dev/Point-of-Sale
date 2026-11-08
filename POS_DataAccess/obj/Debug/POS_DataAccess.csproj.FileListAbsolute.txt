@@ -10,3 +10,12 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\obj\Debug\POS_DataAc
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\obj\Debug\POS_DataAccess.csproj.CoreCompileInputs.cache
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\obj\Debug\POS_DataAccess.dll
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\obj\Debug\POS_DataAccess.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_DataAccess\obj\Debug\POS_Data.8D593913.Up2Date

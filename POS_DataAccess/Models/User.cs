@@ -16,6 +16,7 @@ namespace POS_DataAccess.Models
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
         public int RoleID { get; set; }
+        public int CreatedBy { get; set; }
 
     }
 }

@@ -1,6 +1,8 @@
-﻿using POS_Business.Services;
+﻿using POS.Controls;
+using POS_Business.Services;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -17,12 +19,11 @@ namespace POS.Forms
         public frmSale()
         {
             InitializeComponent();
-
+            dgvCart.AutoGenerateColumns = false;
         }
 
         private void frmSale_Load(object sender, EventArgs e)
         {
-
             _dtAllProducts = _productService.GetAllProducts();
             cbFilterBy.SelectedIndex = 0;
             dgvCart.RowTemplate.Height = 30;
@@ -49,8 +50,8 @@ namespace POS.Forms
                 dgvProducts.Columns[5].HeaderText = "الكمية المتاحة";
                 dgvProducts.Columns[5].Width = 80;
 
-
             }
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)

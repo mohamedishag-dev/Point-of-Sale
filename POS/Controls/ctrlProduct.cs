@@ -91,6 +91,21 @@ namespace POS.Controls
         private void AddToCart(string productName, decimal price)
         {
             // التحقق مما إذا كان المنتج موجوداً مسبقاً في السلة لزيادة الكمية
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    if (row.Cells["ColProductName"].Value.ToString() == productName)
+            //    {
+            //        int qty = Convert.ToInt32(row.Cells["ColQuantity"].Value) + 1;
+            //        row.Cells["ColQuantity"].Value = qty;
+            //        CalculateTotals();
+            //        return;
+            //    }
+            //}
+
+            // إذا لم يكن موجوداً، أضفه كصف جديد
+            dataGridView1.Rows.Add(productName, 1, price.ToString("F2"));
+           
+            // التحقق مما إذا كان المنتج موجوداً مسبقاً في السلة لزيادة الكمية
             foreach (DataGridViewRow row in dgvCart.Rows)
             {
                 if (row.Cells["ColProductName"].Value.ToString() == productName)
@@ -116,7 +131,7 @@ namespace POS.Controls
                 decimal price = Convert.ToDecimal(row.Cells["ColCost"].Value);
                 subtotal += (qty * price);
             }
-
+     
             decimal tax = subtotal * taxRate;
             decimal total = subtotal + tax;
 

@@ -16,3 +16,11 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Busi.6EE709F8.Up2Date
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.dll
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\obj\Debug\POS_Business.pdb
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS_Business\bin\Debug\System.Threading.Tasks.Extensions.xml

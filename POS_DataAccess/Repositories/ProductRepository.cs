@@ -16,14 +16,14 @@ namespace POS_DataAccess.Repositories
             string query = @"SELECT Products.ProductID, Products.SKU, Products.Barcode, Products.ProductName, Products.Price, Units.UnitName,
                                     (SELECT ISNULL(SUM(Quantity), 0) FROM ProductBatches 
                                         WHERE ProductBatches.ProductID = Products.ProductID 
-                                              AND ExpiryDate > CAST(GETDATE() AS DATE))AS StockQuantity
+                                              AND ExpiryDate > CAST(GETDATE() AS DATE))AS Stock
                                FROM Products INNER JOIN
                                     Units ON Products.UnitID = Units.UnitID INNER JOIN
                                     Categories ON Products.CategoryID = Categories.CategoryID";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -58,7 +58,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -91,7 +91,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -144,7 +144,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -184,7 +184,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -213,7 +213,7 @@ namespace POS_DataAccess.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ProductID", productID);

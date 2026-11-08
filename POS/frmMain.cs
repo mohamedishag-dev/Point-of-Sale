@@ -1,50 +1,30 @@
-﻿using POS.Controls;
-using POS.Forms;
-using POS_Business.DTOs.Users;
+﻿using POS.Forms;
+using POS.Products;
 using POS_Business.Services;
-using POS_DataAccess.interfaceis;
-using POS_DataAccess.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace POS
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        private readonly IUserService _userService;
+        public frmMain(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
         }
-
-        private Color DefaultColor = Color.FromArgb(45, 212, 191);
-        private Panel pnlActivate;
-        private void ResetBackColor(Panel Pnl)
-        {
-  
-       
-            Pnl.BackColor = Color.FromArgb(37, 99, 235);
-            Pnl.BackColor = Color.Transparent;
-            pnlActivate = Pnl;
-        }
-
 
         private void frmMain_Load(object sender, EventArgs e)
         {
 
-     
+
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            frmListUsers frm = new frmListUsers();
+            frmListUsers frm = new frmListUsers(_userService);
             frm.ShowDialog();
-        
+
         }
 
         private void btnCashier_Click(object sender, EventArgs e)
@@ -56,31 +36,32 @@ namespace POS
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            frmListProducts frm = new frmListProducts();
+            frm.ShowDialog();
 
         }
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
         private void btnReturns_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
@@ -91,13 +72,13 @@ namespace POS
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
     }

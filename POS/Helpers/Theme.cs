@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace POS.Controls
 {
 
-    public static class clsTheme
+    public static class Theme
     {
         public static readonly Color Background = ColorTranslator.FromHtml("#F4F6F8");
         public static readonly Color Sidebar = ColorTranslator.FromHtml("#0B3B3A");

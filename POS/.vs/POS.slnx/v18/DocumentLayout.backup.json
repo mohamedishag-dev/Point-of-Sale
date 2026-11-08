@@ -3,23 +3,15 @@
   "WorkspaceRootPath": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\products\\frmlistproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:products\\frmlistproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\products\\frmsale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:products\\frmsale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\products\\frmlistproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:products\\frmlistproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\products\\frmsale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:products\\frmsale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,70 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frmListProducts.cs [Design]",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmListProducts.cs",
-              "RelativeDocumentMoniker": "Products\\frmListProducts.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmListProducts.cs [Design]*",
-              "RelativeToolTip": "Products\\frmListProducts.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T13:29:24.449Z",
-              "IsPinned": true,
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmSale.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmSale.cs",
-              "RelativeDocumentMoniker": "Products\\frmSale.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmSale.cs*",
-              "RelativeToolTip": "Products\\frmSale.cs*",
-              "ViewState": "AgIAABQAAAAAAAAAAADgvzQAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T13:40:12.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmSale.cs [Design]",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmSale.cs",
-              "RelativeDocumentMoniker": "Products\\frmSale.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmSale.cs [Design]*",
-              "RelativeToolTip": "Products\\frmSale.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T13:38:09.239Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmListProducts.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmListProducts.cs",
-              "RelativeDocumentMoniker": "Products\\frmListProducts.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Products\\frmListProducts.cs*",
-              "RelativeToolTip": "Products\\frmListProducts.cs*",
-              "ViewState": "AgIAACMAAAAAAAAAAAAlwDQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T13:35:08.571Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA2wBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-05T13:25:32.747Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmAddUpdateUser.cs [Design]",
+              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Users\\frmAddUpdateUser.cs",
+              "RelativeDocumentMoniker": "Users\\frmAddUpdateUser.cs",
+              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Users\\frmAddUpdateUser.cs [Design]*",
+              "RelativeToolTip": "Users\\frmAddUpdateUser.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-07T17:29:22.978Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmAddUpdateUser.cs",
+              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Users\\frmAddUpdateUser.cs",
+              "RelativeDocumentMoniker": "Users\\frmAddUpdateUser.cs",
+              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Users\\frmAddUpdateUser.cs*",
+              "RelativeToolTip": "Users\\frmAddUpdateUser.cs*",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAtwBcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-07T17:52:16.578Z",
               "EditorCaption": ""
             }
           ]

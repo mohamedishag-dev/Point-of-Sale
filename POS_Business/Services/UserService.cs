@@ -1,7 +1,7 @@
-﻿using POS_Business.DTOs.Users;
+﻿using POS_DataAccess.Repositories;
 using POS_DataAccess.interfaceis;
+using POS_Business.DTOs.Users;
 using POS_DataAccess.Models;
-using POS_DataAccess.Repositories;
 using System;
 using System.Data;
 namespace POS_Business.Services
@@ -9,21 +9,31 @@ namespace POS_Business.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _repo;
-
         public UserService(IUserRepository repository)
         {
             _repo = repository;
+        
         }
-        public UserService()
+
+
+        public DataTable GetAll()
         {
 
-            _repo = new UserRepository();
+            return _repo.GetAll();
 
+        }
+
+        public bool IsUserExists(int userID)
+        {
+            return _repo.IsUserExists(userID);
         }
 
         public UserDto GetUserById(int userID)
         {
             User user = _repo.GetUserById(userID);
+
+            if (user == null) 
+                return null;
 
             return new UserDto
             {
@@ -42,17 +52,20 @@ namespace POS_Business.Services
 
         }
 
-        public DataTable GetAll()
+        public bool IsUserExists(string Username)
         {
-
-            return _repo.GetAll();
-
+            return _repo.IsUserExists(Username);
         }
 
-        public bool AddNewUser(ref CreateUserDto userDto)
+        public bool UpdateUser(CreateUserDto userDto)
         {
+            if (userDto == null)
+                return false;
 
-            User user = new User { FullName = userDto.FullName, 
+            User user = new User
+            {
+                UserID = userDto.UserID,
+                FullName = userDto.FullName,
                 Username = userDto.Username,
                 PasswordHash = userDto.Password,
                 Phone = userDto.Phone,
@@ -64,36 +77,47 @@ namespace POS_Business.Services
                 RoleID = userDto.RoleID
             };
 
-
-        user.UserID = _repo.AddNewUser(user);
-            return (user.UserID != -1);
-
-        }
-
-        public bool Delete(int userID)
-        {
-            return _repo.Delete(userID);
-        }
-
-        public bool Update(User user)
-        {
-
             return _repo.UpdateUser(user);
         }
 
-        public bool IsUserExists(int userID)
+        public bool Delete(int userID, int CreatedBy)
         {
-            return _repo.IsUserExists(userID);
-        }
+            if (!GetUserById(CreatedBy).IsActive)
+                return false;
 
-        public bool IsUserExists(string Username)
-        {
-            return _repo.IsUserExists(Username);
+            return _repo.Delete(userID);
         }
 
         public bool ChangePassword(int userID, string password)
         {
             return false;
+        }
+
+        public bool AddNewUser(ref CreateUserDto userDto, int CreatedBy)
+        {
+            if (userDto == null)
+                return false;
+
+            if (!GetUserById(CreatedBy).IsActive)
+                return false;
+
+            User user = new User
+            {
+                FullName = userDto.FullName,
+                Username = userDto.Username,
+                PasswordHash = userDto.Password,
+                Phone = userDto.Phone,
+                Email = userDto.Email,
+                Address = userDto.Address,
+                ImagePath = userDto.ImagePath,
+                CreatedAt = DateTime.Now,
+                IsActive = userDto.IsActive,
+                RoleID = userDto.RoleID,
+                CreatedBy = userDto.RoleID
+            };
+
+            user.UserID = _repo.AddNewUser(user);
+            return (user.UserID != -1);
         }
 
         public UserDto GetByUsernameAndPassword(string Username, string Password)
