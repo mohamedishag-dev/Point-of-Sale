@@ -4,54 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_DataAccess.Repositories
 {
-    public class SaleItemsRepository: ISaleItemsRepository
+    public class SaleItemsRepository : ISaleItemsRepository
     {
-        public bool IsExists(int saleID)
+        public int AddSaleItem(SaleItem Item)
         {
-            bool isFound = false;
+            //this function will return the new SaleItem id if succeeded and -1 if not.
+            int ItemID = -1;
 
-            string query = "SELECT Found=1 FROM Sales WHERE SaleID = @SaleID";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@SaleID", saleID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
-            }
-
-            return isFound;
-        }
-
-        public int AddSaleItem(Sale sale)
-        {
-            //this function will return the new Sale id if succeeded and -1 if not.
-            int SaleID = -1;
-
-            string query = @"INSERT INTO Sales (CustomerID, UserID, SubTotal, Discount, Tax,
-                                    PaidAmount, SaleStatus, SaleDate, Notes)
-                             VALUES (@CustomerID, @UserID, @SubTotal, @Discount, @Tax,
-                                    @PaidAmount, @SaleStatus, @SaleDate, @Notes)
+            string query = @"INSERT INTO SaleItems (SaleID, BatchID, Quantity, UnitPrice)
+                             VALUES (@SaleID, @BatchID, @Quantity, @UnitPrice)
                              SELECT SCOPE_IDENTITY();";
 
             try
@@ -60,15 +24,11 @@ namespace POS_DataAccess.Repositories
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@CustomerID", sale.CustomerID);
-                        command.Parameters.AddWithValue("@UserID", sale.UserID);
-                        command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
-                        command.Parameters.AddWithValue("@Discount", sale.Discount);
-                        command.Parameters.AddWithValue("@Tax", sale.Tax);
-                        command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
-                        command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
-                        command.Parameters.AddWithValue("@SaleDate", sale.SaleDate);
-                        command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@SaleID", Item.SaleID);
+                        command.Parameters.AddWithValue("@BatchID", Item.BatchID);
+                        command.Parameters.AddWithValue("@Quantity", Item.Quantity);
+                        command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
+
 
                         connection.Open();
 
@@ -76,62 +36,27 @@ namespace POS_DataAccess.Repositories
 
                         if (result != null && int.TryParse(result.ToString(), out int insertedID))
                         {
-                            SaleID = insertedID;
+                            ItemID = insertedID;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                return -1;
             }
 
-            return SaleID;
+            return ItemID;
         }
 
-        public DataTable GetAllSaleItems()
-        {
-
-            DataTable dtCategories = new DataTable();
-
-            string query = @"SELECT * FROM Categories;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                dtCategories.Load(reader);
-                            }
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return dtCategories;
-
-        }
-
-        public bool UpdateSaleItem(Sale sale)
+        public bool UpdateSaleItem(SaleItem Item)
         {
             int rowsAffected = 0;
 
-            string query = @"Update Sales  
-                            SET SaleName = @SaleName
-                                IsActive = @IsActive
-                                WHERE SaleID = @SaleID";
+            string query = @"Update SaleItems  
+                             SET Quantity = @Quantity
+                                 UnitPrice = @UnitPrice
+                                 WHERE ItemID = @ItemID";
 
             try
             {
@@ -139,16 +64,9 @@ namespace POS_DataAccess.Repositories
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@SaleID", sale.SaleID);
-                        command.Parameters.AddWithValue("@CustomerID", sale.CustomerID);
-                        command.Parameters.AddWithValue("@UserID", sale.UserID);
-                        command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
-                        command.Parameters.AddWithValue("@Discount", sale.Discount);
-                        command.Parameters.AddWithValue("@Tax", sale.Tax);
-                        command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
-                        command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
-                        command.Parameters.AddWithValue("@SaleDate", sale.SaleDate);
-                        command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ItemID", Item.ItemID);
+                        command.Parameters.AddWithValue("@Quantity", Item.Quantity);
+                        command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
 
                         connection.Open();
                         rowsAffected = command.ExecuteNonQuery();
@@ -166,16 +84,16 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public Sale GetBySaleItemID(int saleID)
+        public SaleItem GetBySaleItemID(int ItemID)
         {
-            const string query = @"SELECT * FROM Sales WHERE SaleID = @SaleID;";
+            const string query = @"SELECT * FROM SaleItems WHERE ItemID = @ItemID;";
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@SaleID", saleID);
+                    command.Parameters.AddWithValue("@ItemID", ItemID);
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
@@ -183,19 +101,14 @@ namespace POS_DataAccess.Repositories
                         if (!reader.Read())
                             return null;
 
-                        return new Sale
+                        return new SaleItem
                         {
+                            ItemID = (int)reader["ItemID"],
                             SaleID = (int)reader["SaleID"],
-                            CustomerID = (int)reader["CustomerID"],
-                            UserID = (int)reader["UserID"],
-                            SubTotal = (decimal)reader["SubTotal"],
-                            Discount = (decimal)reader["Discount"],
-                            Tax = (decimal)reader["Tax"],
-                            PaidAmount = (decimal)reader["PaidAmount"],
-                            SaleStatus = (byte)reader["SaleStatus"],
-                            SaleDate = (DateTime)reader["SaleDate"],
-                            TotalAmount = (decimal)reader["TotalAmount"],
-                            Notes = (string)reader["Notes"] as string
+                            BatchID = (int)reader["BatchID"],
+                            Quantity = (decimal)reader["Quantity"],
+                            UnitPrice = (decimal)reader["UnitPrice"],
+
                         };
 
                     }
@@ -203,8 +116,53 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                return null;
             }
+
+        }
+
+        public List<SaleItem> GetAllSaleItems(int SaleID)
+        {
+
+            List<SaleItem> items = new List<SaleItem>();
+
+            string query = @"SELECT * FROM SaleItems
+                                WHERE SaleID = @SaleID;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@SaleID", SaleID);
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                items.Add(new SaleItem
+                                {
+                                    SaleID = reader.GetInt32(reader.GetOrdinal("SaleID")),
+                                    ItemID = reader.GetInt32(reader.GetOrdinal("ItemID")),
+                                    BatchID = reader.GetInt32(reader.GetOrdinal("BatchID")),
+                                    Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
+                                    UnitPrice = reader.GetDecimal(reader.GetOrdinal("UnitPrice"))
+                                });
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return items;
 
         }
 

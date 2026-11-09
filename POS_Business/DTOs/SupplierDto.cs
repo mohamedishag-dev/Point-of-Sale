@@ -15,5 +15,6 @@ namespace POS_Business.DTOs
         public string Address { get; set; }
         public string City { get; set; }
         public decimal OpeningBalance { get; set; }
+
     }
 }

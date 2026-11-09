@@ -1,17 +1,12 @@
-﻿using POS_Business.DTOs;
+﻿using System.Data;
+using POS_Business.DTOs;
+using POS_DataAccess.Models;
 using POS_Business.interfaceis;
 using POS_DataAccess.interfaceis;
-using POS_DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_Business.Services
 {
-    public class SaleService: ISaleService
+    public class SaleService : ISaleService
     {
         private readonly ISaleRepository _repo;
         public SaleService(ISaleRepository repository)
@@ -31,29 +26,69 @@ namespace POS_Business.Services
 
         }
 
+        public bool AddSale(SaleDto saleDto)
+        {
+            if (saleDto == null)
+                return false;
+
+            if (saleDto.Items == null)
+                return false;
+
+            Sale sale = new Sale
+            {
+                CustomerID = saleDto.CustomerID,
+                UserID = saleDto.UserID,
+                SubTotal = saleDto.SubTotal,
+                Discount = saleDto.Discount,
+                Tax = saleDto.Tax,
+                PaidAmount = saleDto.PaidAmount,
+                SaleStatus = saleDto.SaleStatus,
+                SaleDate = saleDto.SaleDate,
+                LastStatusDate = saleDto.LastStatusDate,
+                Notes = saleDto.Notes,
+
+            };
+
+            foreach (var item in saleDto.Items)
+            {
+                sale.Items.Add(new SaleItem
+                {
+                    BatchID = item.BatchID,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice
+                });
+
+            }
+
+            sale.SaleID = _repo.AddNewSale(sale);
+
+            return (sale.SaleID != -1);
+        }
+
+        public SaleDto GetBySaleID(int saleID)
+        {
+            return null;
+        }
+
         public bool UpdateSale(SaleDto saleDto)
         {
+            if (saleDto == null)
+                return false;
+
+
             Sale sale = new Sale
             {
                 SaleID = saleDto.SaleID,
-                CustomerID=saleDto.CustomerID,
-                UserID=saleDto.UserID,
+                CustomerID = saleDto.CustomerID,
+                UserID = saleDto.UserID,
                 SubTotal = saleDto.SubTotal,
                 Discount = saleDto.Discount,
                 PaidAmount = saleDto.PaidAmount,
-                TotalAmount = saleDto.TotalAmount,
+                //  TotalAmount = saleDto.TotalAmount,
 
             };
 
             return _repo.UpdateSale(sale);
-        }
-        public bool AddNewSale(SaleDto sale)
-        {
-            return false;
-        }
-        public SaleDto GetBySaleID(int saleID)
-        {
-            return new SaleDto();
         }
 
     }

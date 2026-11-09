@@ -1,22 +1,18 @@
-﻿using POS_DataAccess.interfaceis;
+﻿using POS_Business.DTOs.Products;
+using POS_DataAccess.interfaceis;
 using POS_DataAccess.Models;
 using POS_DataAccess.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_Business.Services
 {
-    public class ProductService: IProductService
+    public class ProductService : IProductService
     {
         private readonly IProductRepository _repo = new ProductRepository();
 
         public DataTable GetAllProducts()
         {
-            
+
             return _repo.GetAllProducts();
 
         }
@@ -25,9 +21,9 @@ namespace POS_Business.Services
         {
             if (_repo.IsProductExists(productID))
                 return (_repo.DeleteProduct(productID));
-           
+
             return false;
-      
+
         }
 
         public bool AddNewProduct(Product product)
@@ -40,25 +36,47 @@ namespace POS_Business.Services
 
         public bool IsProductExists(int productID)
         {
-            
+
             return _repo.IsProductExists(productID);
+
+        }
+
+        public bool IsProductExists(string productName)
+        {
+
+            return _repo.IsProductExists(productName);
 
         }
 
         public bool UpdateProduct(Product product)
         {
-        
+
             return _repo.UpdateProduct(product);
-       
+
         }
 
-        public  Product GetProductById(int productID)
+        public ProductDto GetProductByID(int productID)
         {
-            
-            return _repo.GetProductById(productID);
+            Product product = _repo.GetProductById(productID);
+
+            if (product == null)
+                return null;
+
+            return new ProductDto
+            {
+                ProductID = product.ProductID,
+                CategoryID = product.CategoryID,
+                UnitID = product.UnitID,
+                ProductName = product.ProductName,
+                SKU = product.SKU,
+                Barcode = product.Barcode,
+                Price = product.Price,
+                ImagePath = product.ImagePath as string,
+                Description = product.Description,
+                CreatedBy = product.CreatedBy
+            };
+
 
         }
-
-
     }
 }

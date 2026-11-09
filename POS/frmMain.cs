@@ -1,5 +1,8 @@
-﻿using POS.Forms;
+﻿using Microsoft.Extensions.DependencyInjection;
+using POS.Forms;
 using POS.Products;
+using POS.Suppliers;
+using POS_Business.interfaceis;
 using POS_Business.Services;
 using System;
 using System.Windows.Forms;
@@ -7,22 +10,17 @@ namespace POS
 {
     public partial class frmMain : Form
     {
-        private readonly IUserService _userService;
-        public frmMain(IUserService userService)
+        private readonly IServiceProvider _serviceProvider;
+
+        public frmMain(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _userService = userService;
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-
-
+            _serviceProvider = serviceProvider;
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            frmListUsers frm = new frmListUsers(_userService);
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmListUsers>();
             frm.ShowDialog();
 
         }
@@ -47,9 +45,11 @@ namespace POS
 
         }
 
-        private void btnSuppliers_Click(object sender, EventArgs e)
+        private void btnSuppliers_Click(object sender, EventArgs e)    
         {
-            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmListSupplier>();
+            frm.ShowDialog(); 
 
         }
 
@@ -65,7 +65,7 @@ namespace POS
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -28,7 +28,7 @@ namespace POS_Business.Services
             return _repo.IsUserExists(userID);
         }
 
-        public UserDto GetUserById(int userID)
+        public UserDto GetUserByID(int userID)
         {
             User user = _repo.GetUserById(userID);
 
@@ -82,7 +82,7 @@ namespace POS_Business.Services
 
         public bool Delete(int userID, int CreatedBy)
         {
-            if (!GetUserById(CreatedBy).IsActive)
+            if (!GetUserByID(CreatedBy).IsActive)
                 return false;
 
             return _repo.Delete(userID);
@@ -98,7 +98,7 @@ namespace POS_Business.Services
             if (userDto == null)
                 return false;
 
-            if (!GetUserById(CreatedBy).IsActive)
+            if (!GetUserByID(CreatedBy).IsActive)
                 return false;
 
             User user = new User

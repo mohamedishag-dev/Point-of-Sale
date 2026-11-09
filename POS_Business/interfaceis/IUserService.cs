@@ -14,7 +14,7 @@ namespace POS_Business.Services
     {
         DataTable GetAll();
         bool IsUserExists(int userID);
-        UserDto GetUserById(int userID);
+        UserDto GetUserByID(int userID);
         bool IsUserExists(string Username);
         bool Delete(int userID, int CreatedBy);
         bool ChangePassword(int userID, string password);

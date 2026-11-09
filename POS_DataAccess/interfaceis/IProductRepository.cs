@@ -11,6 +11,7 @@ namespace POS_DataAccess.interfaceis
         bool UpdateProduct(Product product);
         bool IsProductExists(int productID);
         Product GetProductById(int productID);
+        bool IsProductExists(string productName);
 
     }
 }

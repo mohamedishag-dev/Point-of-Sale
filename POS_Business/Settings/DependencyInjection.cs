@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using POS_Business.interfaceis;
 using POS_Business.Services;
-using POS_DataAccess.interfaceis;
-using POS_DataAccess.Repositories;
-
 
 namespace POS_Business
 {

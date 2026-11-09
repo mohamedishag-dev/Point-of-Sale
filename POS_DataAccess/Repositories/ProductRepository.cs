@@ -207,6 +207,37 @@ namespace POS_DataAccess.Repositories
             return isFound;
         }
 
+        public bool IsProductExists(string productName)
+        {
+            bool isFound = false;
+
+            string query = "SELECT Found=1 FROM Products WHERE productName = @productName";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@productName", productName);
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            isFound = reader.HasRows;
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isFound = false;
+            }
+
+            return isFound;
+        }
+
         public Product GetProductById(int productID)
         {
             const string query = @"SELECT * FROM Products WHERE ProductID = @ProductID;";
@@ -232,9 +263,9 @@ namespace POS_DataAccess.Repositories
                             ProductName = (string)reader["ProductName"],
                             SKU = (string)reader["SKU"],
                             Barcode = (string)reader["Barcode"] as string,
-                            Price = (int)reader["Price"],
+                            Price = (decimal)reader["Price"],
                             Description = (string)reader["Description"] as string,
-                            CreatedAt = (DateTime)reader["CreatedAt"],
+                          //  CreatedAt = (DateTime)reader["CreatedAt"],
                             ImagePath = reader["ImagePath"] as string,
                             CreatedBy = (int)reader["CreatedBy"],
                       

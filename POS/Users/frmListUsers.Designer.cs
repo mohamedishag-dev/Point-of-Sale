@@ -124,6 +124,7 @@
             this.lblRecordsCount.Size = new System.Drawing.Size(69, 18);
             this.lblRecordsCount.TabIndex = 15;
             this.lblRecordsCount.Text = "0";
+            this.lblRecordsCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 

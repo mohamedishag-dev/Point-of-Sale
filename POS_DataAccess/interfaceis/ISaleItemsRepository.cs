@@ -10,10 +10,10 @@ namespace POS_DataAccess.interfaceis
 {
     public interface ISaleItemsRepository
     {
-        bool IsExists(int saleID);
-        int AddSaleItem(Sale sale);
-        DataTable GetAllSaleItems();
-        bool UpdateSaleItem(Sale sale);
-        Sale GetBySaleItemID(int saleID);
+        int AddSaleItem(SaleItem Item);
+        bool UpdateSaleItem(SaleItem Item);
+        SaleItem GetBySaleItemID(int ItemID);
+        List<SaleItem> GetAllSaleItems(int SaleID);
+
     }
 }

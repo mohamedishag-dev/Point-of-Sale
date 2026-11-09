@@ -1,9 +1,8 @@
 ﻿using POS_DataAccess.interfaceis;
 using POS_DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
+using System;
 
 namespace POS_DataAccess.Repositories
 {
@@ -357,3 +356,4 @@ namespace POS_DataAccess.Repositories
 
     }
 }
+

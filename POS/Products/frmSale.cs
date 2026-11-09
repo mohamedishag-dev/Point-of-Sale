@@ -1,8 +1,6 @@
-﻿using POS.Controls;
-using POS_Business.Services;
+﻿using POS_Business.Services;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -72,22 +70,20 @@ namespace POS.Forms
             CalculateTotals();
         }
 
-        private void AddToCart(string productName, decimal price)
+        private void AddToCart(string productName, decimal price, decimal Quantity = 0)
         {
-            // التحقق مما إذا كان المنتج موجوداً مسبقاً في السلة لزيادة الكمية
             foreach (DataGridViewRow row in dgvCart.Rows)
             {
                 if (row.Cells["ColProductName"].Value.ToString() == productName)
                 {
-                    int qty = Convert.ToInt32(row.Cells["ColQuantity"].Value) + 1;
+                    int qty = (int)(Quantity > 0 ? Quantity : Convert.ToInt32(row.Cells["ColQuantity"].Value) + 1);
                     row.Cells["ColQuantity"].Value = qty;
                     CalculateTotals();
                     return;
                 }
             }
 
-            // إذا لم يكن موجوداً، أضفه كصف جديد
-            dgvCart.Rows.Add(productName, 1, price.ToString("F2"), price.ToString("F2"));
+            dgvCart.Rows.Add(productName, Quantity > 0 ? Quantity : 1, price.ToString("F2"), price.ToString("F2"));
             CalculateTotals();
         }
 
@@ -190,5 +186,33 @@ namespace POS.Forms
 
         }
 
+        private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
+        }
+
+        private void txtBarcode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
+        }
+
+        private void txtFilterValue_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            var products = _productService.GetProductByID(int.Parse(txtBarcode.Text.ToString()));
+
+            if (products == null)
+                return;
+
+            AddToCart(products.ProductName, products.Price, int.Parse(txtQuantity.Text));
+  
+
+        }
     }
 }

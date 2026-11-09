@@ -53,8 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\RoleDto.cs" />
-    <Compile Include="DTOs\SaleDto.cs" />
+    <Compile Include="DTOs\Products\ProductDto.cs" />
+    <Compile Include="DTOs\SupplierDto.cs" />
+    <Compile Include="DTOs\Users\RoleDto.cs" />
+    <Compile Include="DTOs\Sales\SaleDto.cs" />
+    <Compile Include="DTOs\Sales\SaleItemDto.cs" />
     <Compile Include="interfaceis\IRoleService.cs" />
     <Compile Include="interfaceis\ISaleService.cs" />
     <Compile Include="Services\RoleService.cs" />

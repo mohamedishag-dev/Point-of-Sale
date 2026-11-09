@@ -3,10 +3,8 @@
   "WorkspaceRootPath": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{83171F86-7583-42E0-BBDA-722621D4B31C}|..\\POS_Business\\POS_Business.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_business\\services\\saleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{83171F86-7583-42E0-BBDA-722621D4B31C}|..\\POS_Business\\POS_Business.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_business\\dtos\\saledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos\\forms\\frmtsets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:forms\\frmtsets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -20,47 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA2wBoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAWwB4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-05T13:25:32.747Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SaleDto.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\DTOs\\SaleDto.cs",
-              "RelativeDocumentMoniker": "..\\POS_Business\\DTOs\\SaleDto.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\DTOs\\SaleDto.cs",
-              "RelativeToolTip": "..\\POS_Business\\DTOs\\SaleDto.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA0wA0AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-07T19:28:47.129Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SaleService.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\SaleService.cs",
-              "RelativeDocumentMoniker": "..\\POS_Business\\Services\\SaleService.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\SaleService.cs",
-              "RelativeToolTip": "..\\POS_Business\\Services\\SaleService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAywCAAAAAAAAAAAAAAAA==",
+              "Title": "frmTsets.cs [Design]",
+              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Forms\\frmTsets.cs",
+              "RelativeDocumentMoniker": "Forms\\frmTsets.cs",
+              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Forms\\frmTsets.cs [Design]",
+              "RelativeToolTip": "Forms\\frmTsets.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-07T19:26:46.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-09T06:04:44.659Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

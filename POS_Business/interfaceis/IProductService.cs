@@ -1,4 +1,5 @@
-﻿using POS_DataAccess.Models;
+﻿using POS_Business.DTOs.Products;
+using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,7 @@ namespace POS_Business.Services
         bool AddNewProduct(Product product);
         bool IsProductExists(int productID);
         bool UpdateProduct(Product product);
-        Product GetProductById(int productID);
-
+        ProductDto GetProductByID(int productID);
+        bool IsProductExists(string productName);
     }
 }

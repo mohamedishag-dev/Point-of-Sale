@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace POS_DataAccess.Models
 {
@@ -14,8 +16,11 @@ namespace POS_DataAccess.Models
         public byte SaleStatus { set; get; }
         public DateTime SaleDate { set; get; }
         public DateTime LastStatusDate { set; get; }
-        public decimal TotalAmount { set; get; }
         public string Notes { set; get; }
+
+        public decimal TotalAmount => (SubTotal - Discount + Tax);
+        public List<SaleItem> Items { get; set; } = new List<SaleItem>();
+        public List<Payment> Payments { get; set; } = new List<Payment>();
 
     }
 }

@@ -33,7 +33,7 @@ namespace POS.Forms
         private void _LoadData()
         {
 
-            UserDto userDto = _userService.GetUserById(UserID);
+            UserDto userDto = _userService.GetUserByID(UserID);
 
             if (userDto == null)
             {

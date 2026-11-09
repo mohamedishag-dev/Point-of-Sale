@@ -56,8 +56,9 @@
     <Compile Include="interfaceis\IRoleRepository.cs" />
     <Compile Include="interfaceis\ISaleItemsRepository.cs" />
     <Compile Include="interfaceis\ISaleRepository.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Sale.cs" />
-    <Compile Include="Models\SaleItems.cs" />
+    <Compile Include="Models\SaleItem.cs" />
     <Compile Include="Repositories\SaleItemsRepository.cs" />
     <Compile Include="Repositories\SaleRepository.cs" />
     <Compile Include="Settings\DependencyInjection.cs" />
