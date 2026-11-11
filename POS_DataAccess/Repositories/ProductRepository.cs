@@ -1,4 +1,4 @@
-﻿using POS_DataAccess.interfaceis;
+﻿using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -139,7 +139,7 @@ namespace POS_DataAccess.Repositories
                                     Barcode = @Barcode,
                                     Price = @Price,
                                     Description = @Description,
-                                    ImagePath = @ImagePath,
+                                    ImagePath = @ImagePath
                               WHERE ProductID = @ProductID";
 
             try
@@ -149,13 +149,14 @@ namespace POS_DataAccess.Repositories
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
 
+                        command.Parameters.AddWithValue("@ProductID ", product.ProductID);
                         command.Parameters.AddWithValue("@CategoryID", product.CategoryID);
                         command.Parameters.AddWithValue("@UnitID", product.UnitID);
                         command.Parameters.AddWithValue("@ProductName", product.ProductName);
                         command.Parameters.AddWithValue("@SKU", product.SKU);
                         command.Parameters.AddWithValue("@Price", product.Price);
                         command.Parameters.AddWithValue("@Description", product.Description);
-                       
+
                         command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
 
@@ -265,10 +266,10 @@ namespace POS_DataAccess.Repositories
                             Barcode = (string)reader["Barcode"] as string,
                             Price = (decimal)reader["Price"],
                             Description = (string)reader["Description"] as string,
-                          //  CreatedAt = (DateTime)reader["CreatedAt"],
+                            CreatedAt = (DateTime)reader["CreatedAt"],
                             ImagePath = reader["ImagePath"] as string,
                             CreatedBy = (int)reader["CreatedBy"],
-                      
+
                         };
                     }
                 }

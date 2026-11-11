@@ -1,4 +1,4 @@
-﻿using POS_Business.interfaceis;
+﻿using POS_Business.Interfaces;
 using POS_Business.Services;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using POS_Business.interfaceis;
-using POS_DataAccess.interfaceis;
+﻿using POS_Business.Interfaces;
+using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System.Data;
 
@@ -8,8 +8,8 @@ namespace POS_Business.Services
     public class ProductBatchesService : IProductBatchesService
     {
 
-        private readonly IProductBatchesRepository _repo;
-        public ProductBatchesService(IProductBatchesRepository repository)
+        private readonly IProductBatchRepository _repo;
+        public ProductBatchesService(IProductBatchRepository repository)
         {
             _repo = repository;
 

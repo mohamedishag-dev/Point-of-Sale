@@ -1,4 +1,4 @@
-﻿using POS_DataAccess.interfaceis;
+﻿using POS_DataAccess.Interfaces;
 using System.Data.SqlClient;
 using POS_DataAccess.Models;
 using System.Data;

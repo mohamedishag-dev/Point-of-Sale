@@ -2,18 +2,18 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace POS.Products
 {
     public partial class frmListProducts : Form
     {
-        private readonly ProductService _productService = new ProductService();
+        private readonly IProductService _productService;
         private DataTable _dtAllProducts;
 
-        public frmListProducts()
+        public frmListProducts(IProductService productService)
         {
             InitializeComponent();
+            _productService = productService;
         }
 
         private void frmListProducts_Load(object sender, EventArgs e)

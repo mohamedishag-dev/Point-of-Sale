@@ -1,4 +1,5 @@
-﻿using POS_DataAccess.Models;
+﻿using POS_Business.DTOs.Sales;
+using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,9 @@ namespace POS_Business.DTOs
         public DateTime LastStatusDate { set; get; }
         public string Notes { set; get; }
 
-        public decimal TotalAmount =>( SubTotal - Discount + Tax);
         public decimal SubTotal => Items?.Sum(i => i.TotalAmount) ?? 0m;
         public List<SaleItemDto> Items { get; set; } = new List<SaleItemDto>();
+        public List<PaymentDto> Payments { get; set; } = new List<PaymentDto>();
 
-        //public decimal PaidAmount => Payments?.Sum(i => i.Amount) ?? 0m;
-        //public List<SaleItem> Items { get; set; } = new List<SaleItem>();
-        //public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using POS_DataAccess.interfaceis;
+﻿using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace POS_DataAccess.Repositories
 {
     public class SaleItemsRepository : ISaleItemsRepository
     {
-        public int AddSaleItem(SaleItem Item)
+        public int AddItem(SaleItem Item)
         {
-            //this function will return the new SaleItem id if succeeded and -1 if not.
+            //this function will return the new Item id if succeeded and -1 if not.
             int ItemID = -1;
 
             string query = @"INSERT INTO SaleItems (SaleID, BatchID, Quantity, UnitPrice)
@@ -49,7 +49,7 @@ namespace POS_DataAccess.Repositories
             return ItemID;
         }
 
-        public bool UpdateSaleItem(SaleItem Item)
+        public bool UpdateItem(SaleItem Item)
         {
             int rowsAffected = 0;
 
@@ -84,7 +84,7 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public SaleItem GetBySaleItemID(int ItemID)
+        public SaleItem GetByItemID(int ItemID)
         {
             const string query = @"SELECT * FROM SaleItems WHERE ItemID = @ItemID;";
 
@@ -121,7 +121,7 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public List<SaleItem> GetAllSaleItems(int SaleID)
+        public  List<SaleItem> GetAllItems(int SaleID)
         {
 
             List<SaleItem> items = new List<SaleItem>();
@@ -145,11 +145,11 @@ namespace POS_DataAccess.Repositories
                             {
                                 items.Add(new SaleItem
                                 {
-                                    SaleID = reader.GetInt32(reader.GetOrdinal("SaleID")),
-                                    ItemID = reader.GetInt32(reader.GetOrdinal("ItemID")),
-                                    BatchID = reader.GetInt32(reader.GetOrdinal("BatchID")),
-                                    Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
-                                    UnitPrice = reader.GetDecimal(reader.GetOrdinal("UnitPrice"))
+                                    SaleID = (int)reader["SaleID"],
+                                    ItemID = (int)reader["ItemID"],
+                                    BatchID = (int)reader["BatchID"],
+                                    Quantity = (decimal)reader["Quantity"],
+                                    UnitPrice = (decimal)reader["UnitPrice"],
                                 });
                             }
                         }

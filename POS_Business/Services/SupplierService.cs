@@ -1,6 +1,6 @@
 ﻿using POS_Business.DTOs;
-using POS_Business.interfaceis;
-using POS_DataAccess.interfaceis;
+using POS_Business.Interfaces;
+using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System.Data;
 

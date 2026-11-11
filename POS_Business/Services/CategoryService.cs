@@ -1,5 +1,5 @@
 ﻿using POS_Business.Servicies;
-using POS_DataAccess.interfaceis;
+using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System.Data;
 

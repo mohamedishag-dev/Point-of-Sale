@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using POS_Business.interfaceis;
+using POS_Business.Interfaces;
 using POS_Business.Services;
 
 namespace POS_Business
@@ -12,8 +12,11 @@ namespace POS_Business
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExpensesService, ExpensesService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ISettingsService, SettingsService>();
             services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IProductBatchesService, ProductBatchesService>();
             return services;
         }

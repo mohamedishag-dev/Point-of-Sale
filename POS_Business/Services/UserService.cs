@@ -1,5 +1,5 @@
 ﻿using POS_DataAccess.Repositories;
-using POS_DataAccess.interfaceis;
+using POS_DataAccess.Interfaces;
 using POS_Business.DTOs.Users;
 using POS_DataAccess.Models;
 using System;

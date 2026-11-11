@@ -10,13 +10,13 @@ namespace POS.Forms
         private decimal subtotal = 0.00m;
         private const decimal taxRate = 0.08m;
 
-        private readonly ProductService _productService = new ProductService();
+        private readonly IProductService _productService;
         private DataTable _dtAllProducts;
 
-
-        public frmSale()
+        public frmSale(IProductService productService)
         {
             InitializeComponent();
+            _productService = productService;
             dgvCart.AutoGenerateColumns = false;
         }
 

@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using POS.Controls;
 using POS.Forms;
+using POS.Products;
+using POS.Purchases;
+using POS.Settings;
 using POS.Suppliers;
 using POS_Business;
 using System;
@@ -24,7 +27,11 @@ namespace POS
 
             DependencyInjection.AddBusiness(services);
             services.AddTransient<frmMain>();
+            services.AddTransient<frmSale>();
+            services.AddTransient<frmSettings>();
             services.AddTransient<frmListUsers>();
+            services.AddTransient<frmLisPurchases>();
+            services.AddTransient<frmListProducts>();
             services.AddTransient<frmListSupplier>();
             ServiceProvider = services.BuildServiceProvider();
 
@@ -32,19 +39,7 @@ namespace POS
             Application.Run(MainForm);
 
         }
-        private static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddTransient<frmMain>();
-            services.AddTransient<frmListSupplier>();
-            // services.AddTransient<frmAddEditSupplier>();
-            // services.AddTransient<frmListCustomer>();
-
-            // الخدمات (مثال)
-            // services.AddScoped<ISupplierService, SupplierService>();
-            // services.AddDbContext<AppDbContext>();
-        }
 
     }
-
 
 }

@@ -142,17 +142,34 @@
     <Compile Include="Controls\ctrlProduct.Designer.cs">
       <DependentUpon>ctrlProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\frmTest.cs">
+    <Compile Include="Controls\frmExpenses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\frmTest.Designer.cs">
-      <DependentUpon>frmTest.cs</DependentUpon>
+    <Compile Include="Controls\frmExpenses.Designer.cs">
+      <DependentUpon>frmExpenses.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\frmListProducts.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Products\frmListProducts.Designer.cs">
       <DependentUpon>frmListProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchases\frmLisPurchases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\frmLisPurchases.Designer.cs">
+      <DependentUpon>frmLisPurchases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Suppliers\frmListSupplier.cs">
       <SubType>Form</SubType>
@@ -193,14 +210,20 @@
     <EmbeddedResource Include="Controls\ctrlProduct.resx">
       <DependentUpon>ctrlProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\frmTest.resx">
-      <DependentUpon>frmTest.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\frmExpenses.resx">
+      <DependentUpon>frmExpenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTsets.resx">
       <DependentUpon>frmTsets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\frmListProducts.resx">
       <DependentUpon>frmListProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frmLisPurchases.resx">
+      <DependentUpon>frmLisPurchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frmListSupplier.resx">
       <DependentUpon>frmListSupplier.cs</DependentUpon>
@@ -219,14 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

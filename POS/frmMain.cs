@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using POS.Forms;
 using POS.Products;
+using POS.Purchases;
+using POS.Settings;
 using POS.Suppliers;
-using POS_Business.interfaceis;
-using POS_Business.Services;
 using System;
 using System.Windows.Forms;
 namespace POS
@@ -27,29 +27,30 @@ namespace POS
 
         private void btnCashier_Click(object sender, EventArgs e)
         {
-            frmSale frm = new frmSale();
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmSale>();
             frm.ShowDialog();
 
         }
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            frmListProducts frm = new frmListProducts();
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmListProducts>();
             frm.ShowDialog();
 
         }
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
+            
             MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
 
-        private void btnSuppliers_Click(object sender, EventArgs e)    
+        private void btnSuppliers_Click(object sender, EventArgs e)
         {
 
             var frm = POS.Program.ServiceProvider.GetRequiredService<frmListSupplier>();
-            frm.ShowDialog(); 
+            frm.ShowDialog();
 
         }
 
@@ -61,6 +62,7 @@ namespace POS
 
         private void btnReports_Click(object sender, EventArgs e)
         {
+        
             MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
@@ -76,10 +78,22 @@ namespace POS
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnSettings_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmSettings>();
+            frm.ShowDialog();
+        }
 
+        private void btnPurchases_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmLisPurchases>();
+            frm.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmLisPurchases>();
+            frm.ShowDialog();
         }
     }
 }
