@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -10,7 +11,6 @@ namespace POS_DataAccess.Repositories
     {
         public DataTable GetAll()
         {
-
             DataTable dtBaths = new DataTable();
 
             string query = @"SELECT * FROM ProductBatches";
@@ -18,17 +18,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtBaths.Load(reader);
-                            }
+                            dtBaths.Load(reader);
                         }
                     }
                 }
@@ -36,7 +34,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
+                EventViewerLogger.Error("Failed to get the ProductBatches", ex);
             }
 
             return dtBaths;
@@ -66,10 +64,38 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
-
+                EventViewerLogger.Error("Failed to delete the ProductBatch", ex);
             }
             return (rowsAffected > 0);
+        }
+
+        public bool IsBathExists(int BathID)
+        {
+            bool isFound = false;
+
+            string query = "SELECT Found=1 FROM ProductBatches WHERE BathID = @BathID";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@BathID", BathID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        isFound = reader.HasRows;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to check if the Batch exists", ex);
+            }
+
+            return isFound;
         }
 
         public int AddNewBath(ProductBatches Bath)
@@ -86,32 +112,31 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@ProductID", Bath.ProductID);
+                    command.Parameters.AddWithValue("@BatchNumber", Bath.BatchNumber);
+                    command.Parameters.AddWithValue("@ProductionDate", (object)Bath.ProductionDate ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ExpiryDate", Bath.ExpiryDate);
+                    command.Parameters.AddWithValue("@ProductCost", Bath.ProductCost);
+                    command.Parameters.AddWithValue("@Quantity", Bath.Quantity);
+                    command.Parameters.AddWithValue("@CreatedAt", Bath.CreatedAt);
+                    command.Parameters.AddWithValue("@CreatedBy", Bath.CreatedBy);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@ProductID", Bath.ProductID);
-                        command.Parameters.AddWithValue("@BatchNumber", Bath.BatchNumber);
-                        command.Parameters.AddWithValue("@ProductionDate",(object)Bath.ProductionDate ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@ExpiryDate", Bath.ExpiryDate);
-                        command.Parameters.AddWithValue("@ProductCost", Bath.ProductCost);
-                        command.Parameters.AddWithValue("@Quantity", Bath.Quantity);
-                        command.Parameters.AddWithValue("@CreatedAt", Bath.CreatedAt);
-                        command.Parameters.AddWithValue("@CreatedBy", Bath.CreatedBy);
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            BathID = insertedID;
-                        }
+                        BathID = insertedID;
                     }
                 }
+
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add the ProductBatch", ex);
             }
 
             return BathID;
@@ -134,63 +159,30 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
 
-                        command.Parameters.AddWithValue("@ProductID", Bath.ProductID);
-                        command.Parameters.AddWithValue("@BatchNumber", Bath.BatchNumber);
-                        command.Parameters.AddWithValue("@ProductionDate", (object)Bath.ProductionDate ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@ExpiryDate", Bath.ExpiryDate);
-                        command.Parameters.AddWithValue("@ProductCost", Bath.ProductCost);
-                        command.Parameters.AddWithValue("@Quantity", Bath.Quantity);
+                    command.Parameters.AddWithValue("@ProductID", Bath.ProductID);
+                    command.Parameters.AddWithValue("@BatchNumber", Bath.BatchNumber);
+                    command.Parameters.AddWithValue("@ProductionDate", (object)Bath.ProductionDate ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ExpiryDate", Bath.ExpiryDate);
+                    command.Parameters.AddWithValue("@ProductCost", Bath.ProductCost);
+                    command.Parameters.AddWithValue("@Quantity", Bath.Quantity);
 
 
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-                    }
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update the ProductBatch", ex);
             }
 
             return (rowsAffected > 0);
 
-        }
-
-        public bool IsBathExists(int BathID)
-        {
-            bool isFound = false;
-
-            string query = "SELECT Found=1 FROM ProductBatches WHERE BathID = @BathID";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@BathID", BathID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
-            }
-
-            return isFound;
         }
 
         public ProductBatches GetBathById(int BathID)
@@ -205,19 +197,19 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@BathID", BathID);
                     connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (!reader.Read())
                             return null;
 
                         return new ProductBatches
                         {
-                         
+
                             BatchID = (int)reader["BatchID"],
                             ProductID = (int)reader["ProductID"],
-                            BatchNumber =   (string)reader["BatchNumber"],
-                            ProductionDate   = (DateTime)reader["ProductionDate"],
-                            ExpiryDate=(DateTime)reader["ExpiryDate"],
+                            BatchNumber = (string)reader["BatchNumber"],
+                            ProductionDate = (DateTime)reader["ProductionDate"],
+                            ExpiryDate = (DateTime)reader["ExpiryDate"],
                             ProductCost = (decimal)reader["ProductCost"],
                             Quantity = (decimal)reader["Quantity"],
                             CreatedAt = (DateTime)reader["CreatedAt"],
@@ -229,7 +221,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the ProductBatch", ex);
+                return null;
             }
 
         }

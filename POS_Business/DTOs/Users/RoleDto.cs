@@ -1,8 +1,5 @@
-﻿using System;
+﻿using POS_Business.DTOs.Users;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_Business.DTOs
 {
@@ -10,6 +7,7 @@ namespace POS_Business.DTOs
     {
         public int RoleID { get; set; }
         public string RoleName { get; set; }
+        public List<PermissionsDot> Permissions { get; set; } = new List<PermissionsDot>();
 
     }
 }

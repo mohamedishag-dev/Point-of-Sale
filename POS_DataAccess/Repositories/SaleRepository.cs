@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -8,9 +9,8 @@ namespace POS_DataAccess.Repositories
 {
     public class SaleRepository : ISaleRepository
     {
-        private readonly ISaleItemsRepository _items;
-        public SaleRepository(ISaleItemsRepository items) => _items = items;
-
+        private readonly ISaleItemsRepository _saleItems;
+        public SaleRepository(ISaleItemsRepository items) => _saleItems = items;
 
         public bool SaveChanges()
         {
@@ -18,9 +18,58 @@ namespace POS_DataAccess.Repositories
             return false;
         }
 
+        public int AddSale(Sale sale)
+        {
+            //this function will return the new Sale id if succeeded and -1 if not.
+            int SaleID = -1;
+
+            string query = @"INSERT INTO Sales (CustomerID, UserID, SubTotal, Discount, Tax,
+                                    PaidAmount, SaleStatus, SaleDate, LastStatusDate, Notes)
+                             VALUES (@CustomerID, @UserID, @SubTotal, @Discount, @Tax,
+                                    @PaidAmount, @SaleStatus, @SaleDate, @LastStatusDate, @Notes)
+                             SELECT SCOPE_IDENTITY();";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CustomerID", sale.CustomerID);
+                    command.Parameters.AddWithValue("@UserID", sale.UserID);
+                    command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
+                    command.Parameters.AddWithValue("@Discount", sale.Discount);
+                    command.Parameters.AddWithValue("@Tax", sale.Tax);
+                    command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
+                    command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
+                    command.Parameters.AddWithValue("@LastStatusDate", sale.LastStatusDate);
+                    command.Parameters.AddWithValue("@SaleDate", sale.SaleDate);
+                    command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                    {
+                        SaleID = insertedID;
+                        foreach (var item in sale.Items)
+                        {
+                            item.SaleID = SaleID;
+                            _saleItems.AddItem(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to add the sale", ex);
+            }
+
+            return SaleID;
+        }
+
         public DataTable GetAllSales()
         {
-
             DataTable dtSales = new DataTable();
 
             string query = @"SELECT Sales.SaleID, Customers.CustomerName, Sales.SubTotal, Sales.Discount, Sales.Tax, 
@@ -34,17 +83,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtSales.Load(reader);
-                            }
+                            dtSales.Load(reader);
                         }
                     }
                 }
@@ -52,7 +99,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
+                EventViewerLogger.Error("Failed to get the sales", ex);
             }
 
             return dtSales;
@@ -68,78 +115,24 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SaleID", saleID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@SaleID", saleID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the sale exists", ex);
             }
 
             return isFound;
-        }
-
-        public int AddNewSale(Sale sale)
-        {
-            //this function will return the new Sale id if succeeded and -1 if not.
-            int SaleID = -1;
-
-            string query = @"INSERT INTO Sales (CustomerID, UserID, SubTotal, Discount, Tax,
-                                    PaidAmount, SaleStatus, SaleDate, LastStatusDate, Notes)
-                             VALUES (@CustomerID, @UserID, @SubTotal, @Discount, @Tax,
-                                    @PaidAmount, @SaleStatus, @SaleDate, @LastStatusDate, @Notes)
-                             SELECT SCOPE_IDENTITY();";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@CustomerID", sale.CustomerID);
-                        command.Parameters.AddWithValue("@UserID", sale.UserID);
-                        command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
-                        command.Parameters.AddWithValue("@Discount", sale.Discount);
-                        command.Parameters.AddWithValue("@Tax", sale.Tax);
-                        command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
-                        command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
-                        command.Parameters.AddWithValue("@LastStatusDate", sale.LastStatusDate);
-                        command.Parameters.AddWithValue("@SaleDate", sale.SaleDate);
-                        command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            SaleID = insertedID;
-                            foreach (var item in sale.Items)
-                            {
-                                item.SaleID = SaleID;
-                                _items.AddItem(item);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-            return SaleID;
         }
 
         public bool UpdateSale(Sale sale)
@@ -147,43 +140,41 @@ namespace POS_DataAccess.Repositories
             int rowsAffected = 0;
 
             string query = @"Update Sales  
-                            SET SubTotal = @SubTotal,
-                                Discount = @Discount,
-                                PaidAmount = @PaidAmount,
-                                SaleStatus = @SaleStatus,
+                            SET SubTotal       = @SubTotal,
+                                Discount       = @Discount,
+                                PaidAmount     = @PaidAmount,
+                                SaleStatus     = @SaleStatus,
                                 LastStatusDate = @LastStatusDate,
-                                Notes = @Notes
-                                WHERE SaleID = @SaleID";
+                                Notes          = @Notes
+                                WHERE SaleID   = @SaleID";
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SaleID", sale.SaleID);
+                    command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
+                    command.Parameters.AddWithValue("@Discount", sale.Discount);
+                    command.Parameters.AddWithValue("@Tax", sale.Tax);
+                    command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
+                    command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
+                    command.Parameters.AddWithValue("@LastStatusDate", sale.LastStatusDate);
+                    command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
+
+                    connection.Open();
+                    foreach (var item in sale.Items)
                     {
-                        command.Parameters.AddWithValue("@SaleID", sale.SaleID);
-                        command.Parameters.AddWithValue("@SubTotal", sale.SubTotal);
-                        command.Parameters.AddWithValue("@Discount", sale.Discount);
-                        command.Parameters.AddWithValue("@Tax", sale.Tax);
-                        command.Parameters.AddWithValue("@PaidAmount", sale.PaidAmount);
-                        command.Parameters.AddWithValue("@SaleStatus", sale.SaleStatus);
-                        command.Parameters.AddWithValue("@LastStatusDate", sale.LastStatusDate);
-                        command.Parameters.AddWithValue("@Notes", (object)sale.Notes ?? DBNull.Value);
-
-                        connection.Open();
-                        foreach (var item in sale.Items)
-                        {
-                            _items.UpdateItem(item);
-                        }
-                        rowsAffected = command.ExecuteNonQuery();
-
+                        _saleItems.UpdateItem(item);
                     }
+                    rowsAffected = command.ExecuteNonQuery();
+
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update the sale", ex);
             }
 
             return (rowsAffected > 0);
@@ -202,7 +193,7 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@SaleID", saleID);
                     connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (!reader.Read())
                             return null;
@@ -220,7 +211,7 @@ namespace POS_DataAccess.Repositories
                             SaleDate = (DateTime)reader["SaleDate"],
                             LastStatusDate = (DateTime)reader["LastStatusDate"],
                             Notes = (string)reader["Notes"] as string,
-                            Items = _items.GetAllItems(saleID)
+                            Items = _saleItems.GetAllItems(saleID)
                         };
 
                     }
@@ -228,7 +219,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the sale", ex);
+                return null;
             }
 
         }

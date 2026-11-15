@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -10,7 +11,6 @@ namespace POS_DataAccess.Repositories
     {
         public DataTable GetAllProducts()
         {
-
             DataTable dtProducts = new DataTable();
 
             string query = @"SELECT Products.ProductID, Products.SKU, Products.Barcode, Products.ProductName, Products.Price, Units.UnitName,
@@ -24,17 +24,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtProducts.Load(reader);
-                            }
+                            dtProducts.Load(reader);
                         }
                     }
                 }
@@ -42,6 +40,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
+                EventViewerLogger.Error("Failed to get all Products", ex);
 
             }
 
@@ -72,7 +71,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to delete all Product", ex);
 
             }
             return (rowsAffected > 0);
@@ -92,35 +91,33 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@CategoryID", product.CategoryID);
+                    command.Parameters.AddWithValue("@UnitID", product.UnitID);
+                    command.Parameters.AddWithValue("@ProductName", product.ProductName);
+                    command.Parameters.AddWithValue("@SKU", product.SKU);
+                    command.Parameters.AddWithValue("@Price", product.Price);
+                    command.Parameters.AddWithValue("@Description", product.Description);
+                    command.Parameters.AddWithValue("@CreatedAt", product.CreatedAt);
+                    command.Parameters.AddWithValue("@CreatedBy", product.CreatedBy);
+
+                    command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@CategoryID", product.CategoryID);
-                        command.Parameters.AddWithValue("@UnitID", product.UnitID);
-                        command.Parameters.AddWithValue("@ProductName", product.ProductName);
-                        command.Parameters.AddWithValue("@SKU", product.SKU);
-                        command.Parameters.AddWithValue("@Price", product.Price);
-                        command.Parameters.AddWithValue("@Description", product.Description);
-                        command.Parameters.AddWithValue("@CreatedAt", product.CreatedAt);
-                        command.Parameters.AddWithValue("@CreatedBy", product.CreatedBy);
-
-                        command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            ProductID = insertedID;
-                        }
+                        ProductID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add all Product", ex);
             }
 
             return ProductID;
@@ -145,32 +142,28 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
+                    command.Parameters.AddWithValue("@ProductID ", product.ProductID);
+                    command.Parameters.AddWithValue("@CategoryID", product.CategoryID);
+                    command.Parameters.AddWithValue("@UnitID", product.UnitID);
+                    command.Parameters.AddWithValue("@ProductName", product.ProductName);
+                    command.Parameters.AddWithValue("@SKU", product.SKU);
+                    command.Parameters.AddWithValue("@Price", product.Price);
+                    command.Parameters.AddWithValue("@Description", product.Description);
 
-                        command.Parameters.AddWithValue("@ProductID ", product.ProductID);
-                        command.Parameters.AddWithValue("@CategoryID", product.CategoryID);
-                        command.Parameters.AddWithValue("@UnitID", product.UnitID);
-                        command.Parameters.AddWithValue("@ProductName", product.ProductName);
-                        command.Parameters.AddWithValue("@SKU", product.SKU);
-                        command.Parameters.AddWithValue("@Price", product.Price);
-                        command.Parameters.AddWithValue("@Description", product.Description);
+                    command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
 
-                        command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
-
-                    }
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update all Products", ex);
             }
 
             return (rowsAffected > 0);
@@ -186,54 +179,22 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@ProductID", productID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@ProductID", productID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
+
                 }
+
             }
             catch (Exception ex)
             {
-                isFound = false;
-            }
-
-            return isFound;
-        }
-
-        public bool IsProductExists(string productName)
-        {
-            bool isFound = false;
-
-            string query = "SELECT Found=1 FROM Products WHERE productName = @productName";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@productName", productName);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the Product exists", ex);
             }
 
             return isFound;
@@ -276,9 +237,39 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the Product by ID", ex);
+                return null;
             }
 
+        }
+
+        public bool IsProductExists(string productName)
+        {
+            bool isFound = false;
+
+            string query = "SELECT Found=1 FROM Products WHERE productName = @productName";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@productName", productName);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        isFound = reader.HasRows;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to check if the Product exists", ex);
+            }
+
+            return isFound;
         }
 
 

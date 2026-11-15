@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -10,25 +11,31 @@ namespace POS_DataAccess.Repositories
     {
         public DataTable GetAllExpenses()
         {
+            DataTable dtExpenses = new DataTable();
+
             const string query = @"SELECT e.ExpenseID, e.ExpenseType, e.ExpenseDate, e.Amount, e.Notes, u.Username
                                    FROM Expenses e
                                    INNER JOIN Users u ON e.UserID = u.UserID
                                    ORDER BY e.ExpenseDate DESC, e.ExpenseID DESC;";
 
-            var dt = new DataTable();
-
-            using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
+            try
             {
-
-                connection.Open();
-                using (var reader = command.ExecuteReader())
+                using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (var command = new SqlCommand(query, connection))
                 {
-                    dt.Load(reader);
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        dtExpenses.Load(reader);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to get all Expenses", ex);
+            }
 
-            return dt;
+            return dtExpenses;
         }
 
         public int AddExpense(Expense expense)
@@ -39,12 +46,12 @@ namespace POS_DataAccess.Repositories
                                    SELECT SCOPE_IDENTITY();";
             try
             {
-                using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                using (var command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@UserID", expense.UserID);
                     command.Parameters.AddWithValue("@ExpenseType", (object)expense.ExpenseType ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@ExpenseDate", SqlDbType.DateTime).Value = expense.ExpenseDate;
+                    command.Parameters.AddWithValue("@ExpenseDate", expense.ExpenseDate);
                     command.Parameters.AddWithValue("@Amount", expense.Amount);
                     command.Parameters.AddWithValue("@Notes", (object)expense.Notes ?? DBNull.Value);
 
@@ -60,10 +67,35 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add the Expense", ex);
             }
             return ExpenseID;
 
+        }
+
+        public bool DeleteExpense(int expenseID)
+        {
+            int rowsAffected = 0;
+            const string query = "DELETE FROM Expenses WHERE ExpenseID = @ExpenseID;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ExpenseID", expenseID);
+
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to delete the Expense", ex);
+            }
+
+                 
+            return (rowsAffected > 0);
         }
 
         public bool UpdateExpense(Expense expense)
@@ -75,11 +107,11 @@ namespace POS_DataAccess.Repositories
                                        ExpenseDate = @ExpenseDate,
                                        Amount      = @Amount,
                                        Notes       = @Notes
-                                   WHERE ExpenseID = @ExpenseID;";
+                                 WHERE ExpenseID   = @ExpenseID;";
             try
             {
-                using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                using (var command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID);
 
@@ -91,24 +123,10 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update the Expense", ex);
             }
 
             return (rowsAffected > 0);
-        }
-
-        public bool DeleteExpense(int expenseID)
-        {
-            const string query = "DELETE FROM Expenses WHERE ExpenseID = @ExpenseID;";
-
-            using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@ExpenseID", expenseID);
-
-                connection.Open();
-                return command.ExecuteNonQuery() > 0;
-            }
         }
 
 

@@ -1,8 +1,9 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
-using System.Data.SqlClient;
-using System.Data;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
 {
@@ -10,7 +11,6 @@ namespace POS_DataAccess.Repositories
     {
         public DataTable GetAll()
         {
-
             DataTable dtUsers = new DataTable();
 
             string query = @"SELECT U.UserID, U.FullName, U.Username, U.Phone,
@@ -21,17 +21,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtUsers.Load(reader);
-                            }
+                            dtUsers.Load(reader);
                         }
                     }
                 }
@@ -39,43 +37,14 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
+                EventViewerLogger.Error("Failed to get users", ex);
             }
 
             return dtUsers;
 
         }
 
-        public bool Delete(int userID)
-        {
-            int rowsAffected = 0;
-
-            string query = @"Delete Users 
-                              WHERE UserID = @UserID ;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserID", userID);
-
-                        connection.Open();
-
-                        rowsAffected = command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-
-            }
-            return (rowsAffected > 0);
-        }
-
-        public int AddNewUser(User user)
+        public int AddUser(User user)
         {
             //this function will return the new User id if succeeded and -1 if not.
             int UserID = -1;
@@ -89,84 +58,103 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@FullName", user.FullName);
+                    command.Parameters.AddWithValue("@Username", user.Username);
+                    command.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
+                    command.Parameters.AddWithValue("@Phone", user.Phone);
+                    command.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
+                    command.Parameters.AddWithValue("@IsActive", user.IsActive);
+                    command.Parameters.AddWithValue("@RoleID", user.RoleID);
+                    command.Parameters.AddWithValue("@CreatedBy", user.CreatedBy);
+
+                    command.Parameters.AddWithValue("@Email", (object)user.Email ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Address", (object)user.Address ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath", (object)user.ImagePath ?? DBNull.Value);
+
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@FullName", user.FullName);
-                        command.Parameters.AddWithValue("@Username", user.Username);
-                        command.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
-                        command.Parameters.AddWithValue("@Phone", user.Phone);
-                        command.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
-                        command.Parameters.AddWithValue("@IsActive", user.IsActive);
-                        command.Parameters.AddWithValue("@RoleID", user.RoleID);
-                        command.Parameters.AddWithValue("@CreatedBy", user.CreatedBy);
-
-                        command.Parameters.AddWithValue("@Email", (object)user.Email ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@Address", (object)user.Address ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@ImagePath", (object)user.ImagePath ?? DBNull.Value);
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            UserID = insertedID;
-                        }
+                        UserID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add user", ex);
             }
 
             return UserID;
         }
 
+        public bool Delete(int userID)
+        {
+            int rowsAffected = 0;
+
+            string query = @"Delete Users 
+                              WHERE UserID = @UserID ;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", userID);
+
+                    connection.Open();
+
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to delete user", ex);
+            }
+
+            return (rowsAffected > 0);
+        }
+
         public bool UpdateUser(User user)
         {
-
             int rowsAffected = 0;
 
             string query = @"Update Users  
                             SET FullName = @FullName, 
                                 Username = @Username, 
-                                Phone = @Phone, 
-                                Email = @Email, 
-                                Email = @Email, 
-                                Address = @Address, 
-                                IsActive = @IsActive
-                                RoleID = @RoleID
-                                WHERE UserID = @UserID";
+                                Phone    = @Phone, 
+                                Email    = @Email, 
+                                Address  = @Address, 
+                                ImagePath= @ImagePath, 
+                                IsActive = @IsActive,
+                                RoleID   = @RoleID
+                            WHERE UserID = @UserID";
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserID", user.UserID);
-                        command.Parameters.AddWithValue("@FullName", user.FullName);
-                        command.Parameters.AddWithValue("@Username", user.Username);
-                        command.Parameters.AddWithValue("@Phone", user.Phone);
-                        command.Parameters.AddWithValue("@Email", (object)user.Email ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@Address", user.Address);
-                        command.Parameters.AddWithValue("@ImagePath", (object)user.ImagePath ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@IsActive", user.IsActive);
-                        command.Parameters.AddWithValue("@RoleID", user.RoleID);
+                    command.Parameters.AddWithValue("@UserID", user.UserID);
+                    command.Parameters.AddWithValue("@FullName", user.FullName);
+                    command.Parameters.AddWithValue("@Username", user.Username);
+                    command.Parameters.AddWithValue("@Phone", user.Phone);
+                    command.Parameters.AddWithValue("@Email", (object)user.Email ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Address", (object)user.Address ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath", (object)user.ImagePath ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@IsActive", user.IsActive);
+                    command.Parameters.AddWithValue("@RoleID", user.RoleID);
 
-
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
-
-                    }
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update user", ex);
             }
 
             return (rowsAffected > 0);
@@ -175,7 +163,8 @@ namespace POS_DataAccess.Repositories
 
         public User GetUserById(int userID)
         {
-            const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address, ImagePath, CreatedAt, IsActive, RoleID, CreatedBy 
+            const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address,
+                                          ImagePath, CreatedAt, IsActive, RoleID, CreatedBy 
                                      FROM Users WHERE UserID = @UserID;";
 
             try
@@ -186,7 +175,7 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@UserID", userID);
                     connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (!reader.Read())
                             return null;
@@ -210,7 +199,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get user", ex);
+                return null;
             }
 
         }
@@ -224,23 +214,21 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@UserID", userID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@UserID", userID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the user exists", ex);
             }
 
             return isFound;
@@ -255,36 +243,32 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@Username", Username);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@Username", Username);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
                 }
             }
             catch (Exception ex)
             {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the user exists", ex);
             }
 
             return isFound;
         }
-       
+
         public bool ChangePassword(int userID, string newPassword)
         {
-
             int rowsAffected = 0;
 
             string query = @"Update Users  
                             SET PasswordHash = @NewPassword
-                            WHERE UserID = @UserID";
+                            WHERE UserID = @UserID;";
 
             try
             {
@@ -301,19 +285,17 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
-                return false;
-
+                EventViewerLogger.Error("Failed to update user", ex);
             }
-           
 
             return (rowsAffected > 0);
         }
 
         public User GetByUsernameAndPassword(string Username, string Password)
         {
-            const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, ImagePath, IsActive, RoleID, CreatedBy 
-                                     FROM Users WHERE Username = @Username AND PasswordHash = @Password;";
+            const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, 
+                                          ImagePath, CreatedAt, IsActive, RoleID, CreatedBy 
+                                    FROM Users WHERE Username = @Username AND PasswordHash = @Password;";
 
             try
             {
@@ -349,7 +331,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get user", ex);
+                return null;
             }
         }
 

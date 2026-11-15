@@ -162,7 +162,7 @@ namespace POS_Business.Services
             sale.SaleDate = DateTime.Now;
             sale.LastStatusDate = sale.SaleDate;
 
-            sale.SaleID = _sales.AddNewSale(sale);
+            sale.SaleID = _sales.AddSale(sale);
 
             foreach (var item in sale.Items)
             {

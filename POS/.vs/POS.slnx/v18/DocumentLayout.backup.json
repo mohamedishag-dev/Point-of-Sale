@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\stock movements\\frmliststock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:stock movements\\frmliststock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\stock movements\\frmliststock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FF2612FD-7F4C-431A-965F-363FB4C1430E}|POS.csproj|solutionrelative:stock movements\\frmliststock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmListStock.cs",
+              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Stock Movements\\frmListStock.cs",
+              "RelativeDocumentMoniker": "Stock Movements\\frmListStock.cs",
+              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Stock Movements\\frmListStock.cs",
+              "RelativeToolTip": "Stock Movements\\frmListStock.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T12:36:43.292Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmListStock.cs [Design]",
+              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Stock Movements\\frmListStock.cs",
+              "RelativeDocumentMoniker": "Stock Movements\\frmListStock.cs",
+              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\Stock Movements\\frmListStock.cs [Design]",
+              "RelativeToolTip": "Stock Movements\\frmListStock.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-15T09:33:18.501Z",
+              "EditorCaption": " [Design]",
+              "OwnerCaption": "%2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

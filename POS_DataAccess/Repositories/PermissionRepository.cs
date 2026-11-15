@@ -1,11 +1,12 @@
-﻿using POS_DataAccess.Models;
+﻿using POS_DataAccess.LogDAL;
+using POS_DataAccess.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
 {
-    public class PermissionRepository 
+    public class PermissionRepository
     {
         public DataTable GetAll()
         {
@@ -17,24 +18,24 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtPermissions.Load(reader);
-                            }
+                            dtPermissions.Load(reader);
                         }
                     }
                 }
 
+
             }
             catch (Exception ex)
             {
+                EventViewerLogger.Error("Failed to get the Permissions", ex);
 
             }
 
@@ -54,22 +55,20 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@PermissionID", permission.ID);
-                        command.Parameters.AddWithValue("@PermissionName", permission.PermissionName);
+                    command.Parameters.AddWithValue("@PermissionID", permission.ID);
+                    command.Parameters.AddWithValue("@PermissionName", permission.PermissionName);
 
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-                    }
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update the Permissions", ex);
             }
 
             return (rowsAffected > 0);
@@ -103,7 +102,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the Permissions", ex);
+                return null;
             }
 
         }

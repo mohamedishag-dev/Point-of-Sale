@@ -6,10 +6,11 @@ namespace POS_DataAccess.Interfaces
     public interface ICategoryRepository
     {
         DataTable GetAll();
-        bool Deactivate(int ID);
-        bool IsExists(int ID);
-        int Add(Category entity);
-        bool Update(Category entity);
+        int Add(Category category);
+        bool IsExists(int CategoryID);
+        bool Update(Category category);
+        bool Deactivate(int CategoryID);
         Category GetByCategoryID(int CategoryID);
+
     }
 }

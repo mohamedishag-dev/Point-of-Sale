@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -8,34 +9,6 @@ namespace POS_DataAccess.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public bool Deactivate(int categoryID)
-        {
-            int rowsAffected = 0;
-
-            const string query = "UPDATE Categories SET IsActive = 0 WHERE CategoryID = @CategoryID;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@CategoryID", categoryID);
-
-                        connection.Open();
-
-                        rowsAffected = command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-
-            }
-            return (rowsAffected > 0);
-        }
-
         public DataTable GetAll()
         {
 
@@ -46,17 +19,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtCategories.Load(reader);
-                            }
+                            dtCategories.Load(reader);
                         }
                     }
                 }
@@ -64,7 +35,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
+                EventViewerLogger.Error("Failed to get all categories", ex);
             }
 
             return dtCategories;
@@ -101,7 +72,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add the category", ex);
             }
 
             return CategoryID;
@@ -133,6 +104,7 @@ namespace POS_DataAccess.Repositories
             catch (Exception ex)
             {
                 isFound = false;
+                EventViewerLogger.Error("Failed to check if the category exists", ex);
             }
 
             return isFound;
@@ -167,11 +139,39 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
+                EventViewerLogger.Error("Failed to update the category", ex);
                 return false;
             }
 
             return (rowsAffected > 0);
 
+        }
+
+        public bool Deactivate(int categoryID)
+        {
+            int rowsAffected = 0;
+
+            const string query = "UPDATE Categories SET IsActive = 0 WHERE CategoryID = @CategoryID;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@CategoryID", categoryID);
+
+                        connection.Open();
+
+                        rowsAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to deactivate the category", ex);
+            }
+            return (rowsAffected > 0);
         }
 
         public Category GetByCategoryID(int CategoryID)
@@ -195,18 +195,18 @@ namespace POS_DataAccess.Repositories
                         {
                             CategoryID = (int)reader["CategoryID"],
                             CategoryName = (string)reader["CategoryName"],
-                          
+
                         };
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the category by ID", ex);
+                return null;
             }
 
         }
-
 
     }
 

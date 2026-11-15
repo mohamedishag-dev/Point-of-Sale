@@ -13,9 +13,8 @@ namespace POS_Business.DTOs.Users
         public string ImagePath { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
-
-        public string RoleName { get; set; }
         public int RoleID { get; set; }
+        public RoleDto Role { get; set; }
 
     }
 

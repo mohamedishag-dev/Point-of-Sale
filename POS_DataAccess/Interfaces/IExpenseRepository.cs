@@ -7,8 +7,8 @@ namespace POS_DataAccess.Interfaces
     {
         DataTable GetAllExpenses();
         int AddExpense(Expense expense);
-        bool UpdateExpense(Expense expense);
         bool DeleteExpense(int expenseID);
+        bool UpdateExpense(Expense expense);
 
     }
 }

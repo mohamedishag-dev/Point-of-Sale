@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using POS.Controls;
 using POS.Forms;
+using POS.Login;
 using POS.Products;
 using POS.Purchases;
 using POS.Settings;
+using POS.Stock_Movements;
 using POS.Suppliers;
 using POS_Business;
 using System;
@@ -20,6 +21,7 @@ namespace POS
         [STAThread]
         internal static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -28,15 +30,22 @@ namespace POS
             DependencyInjection.AddBusiness(services);
             services.AddTransient<frmMain>();
             services.AddTransient<frmSale>();
+            services.AddTransient<frmLogin>();
             services.AddTransient<frmSettings>();
+            services.AddTransient<frmListStock>();
             services.AddTransient<frmListUsers>();
             services.AddTransient<frmLisPurchases>();
             services.AddTransient<frmListProducts>();
             services.AddTransient<frmListSupplier>();
             ServiceProvider = services.BuildServiceProvider();
 
+            using (var login = ServiceProvider.GetRequiredService<frmLogin>())
+            {
+                if (login.ShowDialog() != DialogResult.OK) return;
+            }
+
             var MainForm = ServiceProvider.GetRequiredService<frmMain>();
-            Application.Run(MainForm);
+            MainForm.ShowDialog();
 
         }
 

@@ -1,40 +1,18 @@
-﻿using POS_DataAccess.Repositories;
+﻿using POS_Business.DTOs.Users;
+using POS_Business.Interfaces;
+using POS_Business.Security;
 using POS_DataAccess.Interfaces;
-using POS_Business.DTOs.Users;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
+using System.Threading.Tasks;
+
 namespace POS_Business.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUserService, IAuthService
     {
-        private readonly IUserRepository _repo;
-        public UserService(IUserRepository repository)
+        internal UserDto toDto(User user)
         {
-            _repo = repository;
-        
-        }
-
-
-        public DataTable GetAll()
-        {
-
-            return _repo.GetAll();
-
-        }
-
-        public bool IsUserExists(int userID)
-        {
-            return _repo.IsUserExists(userID);
-        }
-
-        public UserDto GetUserByID(int userID)
-        {
-            User user = _repo.GetUserById(userID);
-
-            if (user == null) 
-                return null;
-
             return new UserDto
             {
                 UserID = user.UserID,
@@ -49,20 +27,10 @@ namespace POS_Business.Services
                 RoleID = user.RoleID
 
             };
-
         }
-
-        public bool IsUserExists(string Username)
+        internal User toUser(CreateUserDto userDto)
         {
-            return _repo.IsUserExists(Username);
-        }
-
-        public bool UpdateUser(CreateUserDto userDto)
-        {
-            if (userDto == null)
-                return false;
-
-            User user = new User
+            return new User
             {
                 UserID = userDto.UserID,
                 FullName = userDto.FullName,
@@ -74,18 +42,82 @@ namespace POS_Business.Services
                 ImagePath = userDto.ImagePath,
                 CreatedAt = DateTime.Now,
                 IsActive = userDto.IsActive,
-                RoleID = userDto.RoleID
+                RoleID = userDto.RoleID,
+                CreatedBy = userDto.UserID
             };
-
-            return _repo.UpdateUser(user);
         }
 
-        public bool Delete(int userID, int CreatedBy)
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
         {
-            if (!GetUserByID(CreatedBy).IsActive)
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
+        }
+
+        public DataTable GetAll()
+        {
+
+            return _userRepository.GetAll();
+
+        }
+
+        public bool Delete(int userID)
+        {
+            Session.Require("");
+
+            if (!_userRepository.IsUserExists(userID))
                 return false;
 
-            return _repo.Delete(userID);
+            return _userRepository.Delete(userID);
+
+        }
+
+        public bool IsUserExists(int userID)
+        {
+            return _userRepository.IsUserExists(userID);
+        }
+
+        public UserDto GetUserByID(int userID)
+        {
+            User user = _userRepository.GetUserById(userID);
+
+            if (user == null)
+                return null;
+
+            UserDto userDto = toDto(user);
+            
+            // _roleRepository
+            return toDto(user);
+        }
+
+        public bool IsUserExists(string Username)
+        {
+            return _userRepository.IsUserExists(Username);
+        }
+
+        public bool UpdateUser(CreateUserDto userDto)
+        {
+            if (userDto == null)
+                return false;
+
+            User user = toUser(userDto);
+
+            return _userRepository.UpdateUser(user);
+        }
+
+        public bool AddUser(ref CreateUserDto userDto)
+        {
+            Session.Require("");
+
+            if (userDto == null) { return false; }
+
+
+            userDto.UserID = Session.CurrentUser.UserID;
+            User user = toUser(userDto);
+
+            user.UserID = _userRepository.AddUser(user);
+            return (user.UserID != -1);
         }
 
         public bool ChangePassword(int userID, string password)
@@ -93,52 +125,34 @@ namespace POS_Business.Services
             return false;
         }
 
-        public bool AddNewUser(ref CreateUserDto userDto, int CreatedBy)
+        public async Task<AuthResult> Login(string username, string password)
         {
-            if (userDto == null)
-                return false;
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password))
+                return new AuthResult { Status = LoginStatus.InvalidCredentials };
 
-            if (!GetUserByID(CreatedBy).IsActive)
-                return false;
+            User user = _userRepository.GetByUsernameAndPassword(username, password);
 
-            User user = new User
-            {
-                FullName = userDto.FullName,
-                Username = userDto.Username,
-                PasswordHash = userDto.Password,
-                Phone = userDto.Phone,
-                Email = userDto.Email,
-                Address = userDto.Address,
-                ImagePath = userDto.ImagePath,
-                CreatedAt = DateTime.Now,
-                IsActive = userDto.IsActive,
-                RoleID = userDto.RoleID,
-                CreatedBy = userDto.RoleID
-            };
+            if (user == null)
+                return new AuthResult { Status = LoginStatus.InvalidCredentials };
 
-            user.UserID = _repo.AddNewUser(user);
-            return (user.UserID != -1);
+            if (!user.IsActive)
+                return new AuthResult { Status = LoginStatus.Inactive };
+
+            Session.Start(toDto(user));
+            return new AuthResult { Status = LoginStatus.Success };
+
         }
 
-        public UserDto GetByUsernameAndPassword(string Username, string Password)
+        public UserDto GetByUsernameAndPassword(string username, string password)
         {
 
-            User user = _repo.GetByUsernameAndPassword(Username, Password);
+            User user = _userRepository.GetByUsernameAndPassword(username, password);
 
             if (user == null) return null;
 
             if (!user.IsActive) return null;
 
-            return new UserDto
-            {
-                UserID = user.UserID,
-                FullName = user.FullName,
-                Phone = user.Phone,
-                Email = user.Email,
-                IsActive = user.IsActive,
-                RoleID = user.RoleID
-
-            };
+            return toDto(user);
         }
 
     }

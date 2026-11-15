@@ -48,8 +48,6 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\Microsoft.Extensions.
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.AssemblyReference.cache
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.ctrlDashboard.resources
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.ctrlProduct.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Forms.frmAddUpdateUser.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.frmListUsers.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.frmMain.resources
@@ -76,7 +74,6 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Numerics.Vecto
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Text.Encodings.Web.xml
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.Text.Json.xml
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\System.ValueTuple.xml
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Forms.frmTsets.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\libSkiaSharp.dylib
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\x86\libSkiaSharp.dll
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\x64\libSkiaSharp.dll
@@ -102,8 +99,8 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\SkiaSharp.HarfBuzz.pd
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\SkiaSharp.Views.Desktop.Common.pdb
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\SkiaSharp.Views.WindowsForms.pdb
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\SkiaSharp.xml
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.csproj.SuggestedBindingRedirects.cache
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.exe.config
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Purchases.frmLisPurchases.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Settings.frmSettings.resources
-D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Controls.frmExpenses.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Login.frmLogin.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_Business.dll.config
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Stock_Movements.frmListStock.resources

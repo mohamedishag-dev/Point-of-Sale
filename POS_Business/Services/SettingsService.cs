@@ -16,7 +16,7 @@ namespace POS_Business.Services
 
         public SettingsDto Get()
         {
-            Settings settings = _settings.Get();
+            POS_DataAccess.Models.Settings settings = _settings.Get();
 
             if (settings == null) return null;
 
@@ -37,7 +37,7 @@ namespace POS_Business.Services
         {
             if (dto == null) return false;
 
-            Settings settings = new Settings
+            POS_DataAccess.Models.Settings settings = new POS_DataAccess.Models.Settings
             {
                 StoreName = dto.StoreName,
                 StorePhone = dto.StorePhone,

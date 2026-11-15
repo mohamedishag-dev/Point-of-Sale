@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -14,27 +15,37 @@ namespace POS_DataAccess.Repositories
                                           LowStockThreshold, AllowNegativeStock, ReceiptFooter
                                      FROM Settings WHERE SettingID = 1;";
 
-            using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
+            try
             {
-                connection.Open();
-                using (var reader = command.ExecuteReader())
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    if (!reader.Read()) return null;
-                    return new Settings
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        StoreName = (string)reader["StoreName"],
-                        StorePhone = reader["StorePhone"] as string,
-                        StoreAddress = reader["StoreAddress"] as string,
-                        CurrencySymbol = (string)reader["CurrencySymbol"],
-                        TaxRate = (decimal)reader["TaxRate"],
-                        LowStockThreshold = (decimal)reader["LowStockThreshold"],
-                        ReceiptFooter = reader["ReceiptFooter"] as string,
-                        LastModified = DateTime.Now
-                    };
+                        if (!reader.Read()) return null;
+                        return new Settings
+                        {
+                            StoreName = (string)reader["StoreName"],
+                            StorePhone = reader["StorePhone"] as string,
+                            StoreAddress = reader["StoreAddress"] as string,
+                            CurrencySymbol = (string)reader["CurrencySymbol"],
+                            TaxRate = (decimal)reader["TaxRate"],
+                            LowStockThreshold = (decimal)reader["LowStockThreshold"],
+                            ReceiptFooter = reader["ReceiptFooter"] as string,
+                            LastModified = DateTime.Now
+                        };
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to get settings", ex);
+                return null;
+            }
+
         }
+
         public bool Update(Settings settings)
         {
             int rowsAffected = 0;
@@ -46,30 +57,37 @@ namespace POS_DataAccess.Repositories
                                           CurrencySymbol = @CurrencySymbol,
                                           TaxRate = @TaxRate, 
                                           LowStockThreshold = @LowStockThreshold,
---                                          AllowNegativeStock = @AllowNegativeStock, 
                                           ReceiptFooter = @ReceiptFooter,
                                           LastModified = GETDATE()
                                     WHERE SettingID = 1;";
 
-            using (var connection = new SqlConnection(DataAccessSettings.ConnectionString))
-            using (var command = new SqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@StoreName", settings.StoreName);
-                command.Parameters.AddWithValue("@StorePhone", (object)settings.StorePhone ?? DBNull.Value);
-                command.Parameters.AddWithValue("@StoreAddress", (object)settings.StoreAddress ?? DBNull.Value);
-                command.Parameters.AddWithValue("@CurrencySymbol", settings.CurrencySymbol);
-                command.Parameters.AddWithValue("@TaxRate", (object)settings.TaxRate ?? DBNull.Value);
-                command.Parameters.Add("@LowStockThreshold", SqlDbType.Decimal).Value = settings.LowStockThreshold;
-                command.Parameters.AddWithValue("@ReceiptFooter", (object)settings.ReceiptFooter ?? DBNull.Value);
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StoreName", settings.StoreName);
+                    command.Parameters.AddWithValue("@StorePhone", (object)settings.StorePhone ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@StoreAddress", (object)settings.StoreAddress ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@CurrencySymbol", settings.CurrencySymbol);
+                    command.Parameters.AddWithValue("@TaxRate", (object)settings.TaxRate ?? DBNull.Value);
+                    command.Parameters.Add("@LowStockThreshold", SqlDbType.Decimal).Value = settings.LowStockThreshold;
+                    command.Parameters.AddWithValue("@ReceiptFooter", (object)settings.ReceiptFooter ?? DBNull.Value);
 
-                connection.Open();
+                    connection.Open();
 
-               rowsAffected = command.ExecuteNonQuery();
-                return (rowsAffected > 0);
+                    rowsAffected = command.ExecuteNonQuery();
 
+                }
             }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to update settings", ex);
+            }
+
+            return (rowsAffected > 0);
+
         }
 
     }
-
 }

@@ -1,4 +1,5 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Data;
@@ -12,27 +13,21 @@ namespace POS_DataAccess.Repositories
         {
             DataTable dtPurchases = new DataTable();
 
-            string query = @"SELECT Purchases.PurchaseID, Suppliers.SupplierName, Users.Username, Purchases.PurchaseDate,  Purchases.PaidAmount,
-                                    Purchases.TotalAmount, Purchases.TotalAmount - Purchases.PaidAmount AS Remaining
-                              FROM  Purchases
-                              INNER JOIN Suppliers ON Purchases.SupplierID = Suppliers.SupplierID
-                              INNER JOIN Users ON Purchases.UserID = Users.UserID
-                              ORDER BY Purchases.PurchaseDate DESC;";
+            string query = @"SELECT * FROM Purchases_View
+                             ORDER BY PurchaseDate, Remaining DESC;";
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtPurchases.Load(reader);
-                            }
+                            dtPurchases.Load(reader);
                         }
                     }
                 }
@@ -40,7 +35,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-
+                EventViewerLogger.Error("Failed to get the purchases", ex);
             }
 
             return dtPurchases;
@@ -58,30 +53,27 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SupplierID", purchase.SupplierID);
+                    command.Parameters.AddWithValue("@UserID", purchase.UserID);
+                    command.Parameters.AddWithValue("@PurchaseDate", purchase.PurchaseDate);
+                    command.Parameters.AddWithValue("@PaidAmount", purchase.PaidAmount);
+                    command.Parameters.AddWithValue("@TotalAmount", purchase.TotalAmount);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@SupplierID", purchase.SupplierID);
-                        command.Parameters.AddWithValue("@UserID", purchase.UserID);
-                        command.Parameters.AddWithValue("@PurchaseDate", purchase.PurchaseDate);
-                        command.Parameters.AddWithValue("@PaidAmount", purchase.PaidAmount);
-                        command.Parameters.AddWithValue("@TotalAmount", purchase.TotalAmount);
-
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            PurchaseID = insertedID;
-                        }
+                        PurchaseID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to add the purchase", ex);
             }
 
             return PurchaseID;
@@ -96,23 +88,21 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@PurchaseID", purchaseID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@PurchaseID", purchaseID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the Purchase exists", ex);
             }
 
             return isFound;
@@ -132,26 +122,24 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
 
-                        command.Parameters.AddWithValue("@PurchaseID", purchase.PurchaseID);
-                        command.Parameters.AddWithValue("@SupplierID", purchase.SupplierID);
-                        command.Parameters.AddWithValue("@UserID", purchase.UserID);
-                        command.Parameters.AddWithValue("@PurchaseDate", purchase.PurchaseDate);
-                        command.Parameters.AddWithValue("@PaidAmount", purchase.PaidAmount);
-                        command.Parameters.AddWithValue("@TotalAmount", purchase.TotalAmount);
+                    command.Parameters.AddWithValue("@PurchaseID", purchase.PurchaseID);
+                    command.Parameters.AddWithValue("@SupplierID", purchase.SupplierID);
+                    command.Parameters.AddWithValue("@UserID", purchase.UserID);
+                    command.Parameters.AddWithValue("@PurchaseDate", purchase.PurchaseDate);
+                    command.Parameters.AddWithValue("@PaidAmount", purchase.PaidAmount);
+                    command.Parameters.AddWithValue("@TotalAmount", purchase.TotalAmount);
 
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-                    }
                 }
-
             }
             catch (Exception ex)
             {
+                EventViewerLogger.Error("Failed to update the purchase", ex);
                 return false;
             }
 
@@ -172,7 +160,7 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@PurchaseID", purchaseID);
                     connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (!reader.Read())
                             return null;
@@ -191,7 +179,8 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get the Purchase by ID", ex);
+                return null;
             }
 
         }

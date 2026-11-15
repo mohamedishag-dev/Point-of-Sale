@@ -98,7 +98,7 @@ namespace POS.Forms
 
             bool success = false;
 
-            success = _userService.AddNewUser(ref createUserDto, 1);
+            success = _userService.AddUser(ref createUserDto);
 
             if (success)
             {

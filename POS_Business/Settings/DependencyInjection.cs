@@ -11,12 +11,14 @@ namespace POS_Business
             POS_DataAccess.DependencyInjection.AddDataAccess(services);
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IAuthService, UserService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IExpensesService, ExpensesService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISettingsService, SettingsService>();
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IStockMovementService, StockMovementService>();
             services.AddScoped<IProductBatchesService, ProductBatchesService>();
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿using POS_Business.DTOs.Expenses;
 using POS_Business.Interfaces;
+using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System.Data;
 
@@ -7,8 +8,8 @@ namespace POS_Business.Services
 {
     public class ExpensesService : IExpensesService
     {
-        private readonly IExpensesRepository _repo;
-        public ExpensesService(IExpensesRepository expensesRepository) => _repo = expensesRepository;
+        private readonly IExpenseRepository _repo;
+        public ExpensesService(IExpenseRepository expensesRepository) => _repo = expensesRepository;
 
         public bool AddExpense(ExpenseDto expenseDto)
         {

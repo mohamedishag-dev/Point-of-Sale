@@ -87,6 +87,7 @@ namespace POS.Products
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
+
             MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }

@@ -1,8 +1,9 @@
 ﻿using POS_DataAccess.Interfaces;
-using System.Data.SqlClient;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
-using System.Data;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
 {
@@ -10,7 +11,6 @@ namespace POS_DataAccess.Repositories
     {
         public DataTable GetAllSuppliers()
         {
-
             DataTable dtSuppliers = new DataTable();
 
             string query = @"SELECT SupplierID, SupplierName, Phone, Email, City, Address, OpeningBalance
@@ -19,17 +19,15 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
-                            {
-                                dtSuppliers.Load(reader);
-                            }
+                            dtSuppliers.Load(reader);
                         }
                     }
                 }
@@ -37,7 +35,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                return null;
+                EventViewerLogger.Error("Failed to get all suppliers", ex);
             }
 
             return dtSuppliers;
@@ -53,54 +51,21 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SupplierID", supplierID);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@SupplierID", supplierID);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
+                        isFound = reader.HasRows;
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                isFound = false;
-            }
-
-            return isFound;
-        }
-
-        public bool IsExists(string supplierName)
-        {
-            bool isFound = false;
-
-            string query = "SELECT Found=1 FROM Suppliers WHERE SupplierName = @SupplierName";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@SupplierName", supplierName);
-
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            isFound = reader.HasRows;
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                isFound = false;
+                EventViewerLogger.Error("Failed to check if the supplier exists", ex);
             }
 
             return isFound;
@@ -118,33 +83,60 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
+                    command.Parameters.AddWithValue("@Phone", supplier.Phone);
+                    command.Parameters.AddWithValue("@Email", supplier.Email);
+                    command.Parameters.AddWithValue("@City", supplier.City);
+                    command.Parameters.AddWithValue("@Address", supplier.Address);
+                    command.Parameters.AddWithValue("@OpeningBalance", supplier.OpeningBalance);
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
-                        command.Parameters.AddWithValue("@Phone", supplier.Phone);
-                        command.Parameters.AddWithValue("@Email", supplier.Email);
-                        command.Parameters.AddWithValue("@City", supplier.City);
-                        command.Parameters.AddWithValue("@Address", supplier.Address);
-                        command.Parameters.AddWithValue("@OpeningBalance", supplier.OpeningBalance);
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            supplierID = insertedID;
-                        }
+                        supplierID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
-                return -1;
+                EventViewerLogger.Error("Failed to add supplier", ex);
             }
 
             return supplierID;
+        }
+
+        public bool IsExists(string supplierName)
+        {
+            bool isFound = false;
+
+            string query = "SELECT Found=1 FROM Suppliers WHERE SupplierName = @SupplierName";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@SupplierName", supplierName);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        isFound = reader.HasRows;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to check if the supplier exists", ex);
+            }
+
+            return isFound;
         }
 
         public bool DeleteSupplier(int supplierID)
@@ -157,20 +149,18 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@SupplierID", supplierID);
+                    command.Parameters.AddWithValue("@SupplierID", supplierID);
 
-                        connection.Open();
+                    connection.Open();
 
-                        rowsAffected = command.ExecuteNonQuery();
-                    }
+                    rowsAffected = command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to delete supplier", ex);
             }
 
             return (rowsAffected > 0);
@@ -178,7 +168,6 @@ namespace POS_DataAccess.Repositories
 
         public bool UpdateSupplier(Supplier supplier)
         {
-
             int rowsAffected = 0;
 
             string query = @"Update Suppliers  
@@ -193,28 +182,24 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
-                        command.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
-                        command.Parameters.AddWithValue("@Phone", supplier.Phone);
-                        command.Parameters.AddWithValue("@Email", (object)supplier.Email ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@City", supplier.City);
-                        command.Parameters.AddWithValue("@Address", (object)supplier.Address ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@OpeningBalance", supplier.OpeningBalance);
+                    command.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
+                    command.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
+                    command.Parameters.AddWithValue("@Phone", supplier.Phone);
+                    command.Parameters.AddWithValue("@Email", (object)supplier.Email ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@City", supplier.City);
+                    command.Parameters.AddWithValue("@Address", (object)supplier.Address ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@OpeningBalance", supplier.OpeningBalance);
 
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
-
-                    }
                 }
-
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update supplier", ex);
             }
 
             return (rowsAffected > 0);
@@ -234,7 +219,7 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@SupplierID", supplierID);
                     connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (!reader.Read())
                             return null;
@@ -255,11 +240,11 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw;
+                EventViewerLogger.Error("Failed to get supplier", ex);
+                return null;
             }
 
         }
-
 
     }
 

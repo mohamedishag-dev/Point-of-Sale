@@ -1,8 +1,8 @@
 ﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
@@ -21,29 +21,27 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SaleID", Item.SaleID);
+                    command.Parameters.AddWithValue("@BatchID", Item.BatchID);
+                    command.Parameters.AddWithValue("@Quantity", Item.Quantity);
+                    command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
+
+
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
                     {
-                        command.Parameters.AddWithValue("@SaleID", Item.SaleID);
-                        command.Parameters.AddWithValue("@BatchID", Item.BatchID);
-                        command.Parameters.AddWithValue("@Quantity", Item.Quantity);
-                        command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
-
-
-                        connection.Open();
-
-                        object result = command.ExecuteScalar();
-
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                        {
-                            ItemID = insertedID;
-                        }
+                        ItemID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
-                return -1;
+                EventViewerLogger.Error("Failed to add the sale item", ex);
             }
 
             return ItemID;
@@ -61,23 +59,21 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@ItemID", Item.ItemID);
-                        command.Parameters.AddWithValue("@Quantity", Item.Quantity);
-                        command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
+                    command.Parameters.AddWithValue("@ItemID", Item.ItemID);
+                    command.Parameters.AddWithValue("@Quantity", Item.Quantity);
+                    command.Parameters.AddWithValue("@UnitPrice", Item.UnitPrice);
 
-                        connection.Open();
-                        rowsAffected = command.ExecuteNonQuery();
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
 
-                    }
                 }
 
             }
             catch (Exception ex)
             {
-                return false;
+                EventViewerLogger.Error("Failed to update the item", ex);
             }
 
             return (rowsAffected > 0);
@@ -116,12 +112,13 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
+                EventViewerLogger.Error("Failed to get the item", ex);
                 return null;
             }
 
         }
 
-        public  List<SaleItem> GetAllItems(int SaleID)
+        public List<SaleItem> GetAllItems(int SaleID)
         {
 
             List<SaleItem> items = new List<SaleItem>();
@@ -132,26 +129,24 @@ namespace POS_DataAccess.Repositories
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@SaleID", SaleID);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@SaleID", SaleID);
-
-                        connection.Open();
-
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            items.Add(new SaleItem
                             {
-                                items.Add(new SaleItem
-                                {
-                                    SaleID = (int)reader["SaleID"],
-                                    ItemID = (int)reader["ItemID"],
-                                    BatchID = (int)reader["BatchID"],
-                                    Quantity = (decimal)reader["Quantity"],
-                                    UnitPrice = (decimal)reader["UnitPrice"],
-                                });
-                            }
+                                SaleID = (int)reader["SaleID"],
+                                ItemID = (int)reader["ItemID"],
+                                BatchID = (int)reader["BatchID"],
+                                Quantity = (decimal)reader["Quantity"],
+                                UnitPrice = (decimal)reader["UnitPrice"],
+                            });
                         }
                     }
                 }
@@ -159,7 +154,7 @@ namespace POS_DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                return null;
+                EventViewerLogger.Error("Failed to get the items", ex);
             }
 
             return items;

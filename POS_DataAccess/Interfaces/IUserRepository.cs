@@ -1,21 +1,15 @@
 ﻿using POS_DataAccess.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_DataAccess.Interfaces
 {
-    public interface IUserRepository 
+    public interface IUserRepository
     {
         DataTable GetAll();
         bool Delete(int ID);
+        int AddUser(User user);
         User GetUserById(int ID);
         bool IsUserExists(int ID);
-        int AddNewUser(User user);
         bool UpdateUser(User user);
         bool IsUserExists(string Username);
         bool ChangePassword(int UserID, string NewPassword);
