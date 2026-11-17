@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace POS_DataAccess.Models
 {
@@ -15,8 +14,9 @@ namespace POS_DataAccess.Models
         public string ImagePath { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
-        public int RoleID { get; set; }
         public int CreatedBy { get; set; }
+        public int RoleID { get; set; }
+        public Role Role { get; set; }
 
     }
 }

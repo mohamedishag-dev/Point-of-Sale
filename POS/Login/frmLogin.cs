@@ -20,9 +20,9 @@ namespace POS.Login
         private static extern bool ReleaseCapture();
         private const int EM_SETCUEBANNER = 0x1501;
 
-        private readonly IAuthService _authService;
+        private readonly IAuthorizationService _authService;
 
-        public frmLogin(IAuthService authService)
+        public frmLogin(IAuthorizationService authService)
         {
             InitializeComponent();
             _authService = authService;

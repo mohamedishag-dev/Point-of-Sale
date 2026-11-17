@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace POS_Business.Interfaces
 {
-    public interface IAuthService
+    public interface IAuthorizationService
     {
         Task<AuthResult> Login(string username, string password);
 

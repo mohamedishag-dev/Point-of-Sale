@@ -124,6 +124,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Global classes\Global.cs" />
+    <Compile Include="Helpers\Util.cs" />
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -40,15 +40,22 @@
             this.lblFilter = new System.Windows.Forms.Label();
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.cbFilterBy = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.cbMovementType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovements)).BeginInit();
             this.cmsSuppliers.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvMovements
@@ -127,18 +134,19 @@
             this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
             this.btnClose.Location = new System.Drawing.Point(11, 539);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(121, 47);
+            this.btnClose.Size = new System.Drawing.Size(121, 41);
             this.btnClose.TabIndex = 43;
             this.btnClose.Text = "أغلاق";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblFilter
             // 
             this.lblFilter.AutoSize = true;
             this.lblFilter.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
             this.lblFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.lblFilter.Location = new System.Drawing.Point(949, 160);
+            this.lblFilter.Location = new System.Drawing.Point(987, 135);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(37, 22);
             this.lblFilter.TabIndex = 42;
@@ -149,7 +157,7 @@
             this.txtFilterValue.BackColor = System.Drawing.Color.White;
             this.txtFilterValue.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
             this.txtFilterValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.txtFilterValue.Location = new System.Drawing.Point(593, 159);
+            this.txtFilterValue.Location = new System.Drawing.Point(684, 159);
             this.txtFilterValue.Multiline = true;
             this.txtFilterValue.Name = "txtFilterValue";
             this.txtFilterValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -172,21 +180,10 @@
             "الهاتق",
             "الايميل",
             "المدينة"});
-            this.cbFilterBy.Location = new System.Drawing.Point(766, 156);
+            this.cbFilterBy.Location = new System.Drawing.Point(857, 159);
             this.cbFilterBy.Name = "cbFilterBy";
             this.cbFilterBy.Size = new System.Drawing.Size(167, 30);
             this.cbFilterBy.TabIndex = 41;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.label1.Location = new System.Drawing.Point(867, 549);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 24);
-            this.label1.TabIndex = 37;
-            this.label1.Text = "اجمالي الحركات";
             // 
             // lblTitle
             // 
@@ -260,12 +257,108 @@
             this.label6.Text = "حركات مبيعات\r\n0";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.dtpFrom);
+            this.groupBox1.Controls.Add(this.dtpTo);
+            this.groupBox1.Location = new System.Drawing.Point(193, 132);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(272, 65);
+            this.groupBox1.TabIndex = 52;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "المشتريات ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.label3.Location = new System.Drawing.Point(71, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 17);
+            this.label3.TabIndex = 45;
+            this.label3.Text = "الى تاريخ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.label7.Location = new System.Drawing.Point(208, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 17);
+            this.label7.TabIndex = 44;
+            this.label7.Text = "من تاريخ";
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFrom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpFrom.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFrom.Location = new System.Drawing.Point(141, 35);
+            this.dtpFrom.MinDate = new System.DateTime(1953, 1, 1, 0, 0, 0, 0);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(119, 22);
+            this.dtpFrom.TabIndex = 43;
+            this.dtpFrom.Value = new System.DateTime(2026, 11, 17, 0, 0, 0, 0);
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpTo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpTo.Font = new System.Drawing.Font("Times New Roman", 9.75F);
+            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTo.Location = new System.Drawing.Point(6, 35);
+            this.dtpTo.MinDate = new System.DateTime(1953, 1, 1, 0, 0, 0, 0);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(119, 22);
+            this.dtpTo.TabIndex = 42;
+            this.dtpTo.Value = new System.DateTime(2026, 11, 17, 0, 0, 0, 0);
+            // 
+            // cbMovementType
+            // 
+            this.cbMovementType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
+            this.cbMovementType.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbMovementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMovementType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbMovementType.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.cbMovementType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.cbMovementType.FormattingEnabled = true;
+            this.cbMovementType.Items.AddRange(new object[] {
+            "الكل",
+            "بيع",
+            "شراء",
+            "تالف",
+            "مرتجع"});
+            this.cbMovementType.Location = new System.Drawing.Point(488, 159);
+            this.cbMovementType.Name = "cbMovementType";
+            this.cbMovementType.Size = new System.Drawing.Size(167, 30);
+            this.cbMovementType.TabIndex = 53;
+            this.cbMovementType.SelectedIndexChanged += new System.EventHandler(this.cbMovementType_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.label8.Location = new System.Drawing.Point(575, 134);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 22);
+            this.label8.TabIndex = 54;
+            this.label8.Text = "نوع الحركة";
+            // 
             // frmListStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1036, 592);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cbMovementType);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -277,7 +370,6 @@
             this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.txtFilterValue);
             this.Controls.Add(this.cbFilterBy);
-            this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmListStock";
@@ -287,6 +379,8 @@
             this.Load += new System.EventHandler(this.frmListStock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovements)).EndInit();
             this.cmsSuppliers.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,12 +395,18 @@
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txtFilterValue;
         private System.Windows.Forms.ComboBox cbFilterBy;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private System.Windows.Forms.DateTimePicker dtpTo;
+        private System.Windows.Forms.ComboBox cbMovementType;
+        private System.Windows.Forms.Label label8;
     }
 }

@@ -1,19 +1,21 @@
-﻿using POS_DataAccess.LogDAL;
+﻿using POS_DataAccess.Interfaces;
+using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
 {
-    public class PermissionRepository
+    public class PermissionRepository : IPermissionRepository
     {
-        public DataTable GetAll()
+        public DataTable GetAllPermissions()
         {
 
             DataTable dtPermissions = new DataTable();
 
-            string query = @"SELECT * FROM Permissions";
+            string query = @"SELECT PermissionID, PermissionName FROM Permissions";
 
             try
             {
@@ -43,69 +45,37 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public bool Update(Permission permission)
+        public List<Permission> GetAllPermissionsByRole(int roleID)
         {
-
-            int rowsAffected = 0;
-
-            string query = @"Update Permissions  
-                                SET PermissionName = @PermissionName
-                              WHERE PermissionID = @PermissionID";
-
+            List<Permission> permissions = new List<Permission>();
+            string query = @"SELECT p.PermissionID, p.PermissionName FROM Permissions p
+                              INNER JOIN RolePermissions ON p.PermissionID = RolePermissions.PermissionID
+                              WHERE RolePermissions.RoleID = @RoleID";
             try
             {
                 using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@PermissionID", permission.ID);
-                    command.Parameters.AddWithValue("@PermissionName", permission.PermissionName);
-
+                    command.Parameters.AddWithValue("@RoleID", roleID);
                     connection.Open();
-                    rowsAffected = command.ExecuteNonQuery();
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                EventViewerLogger.Error("Failed to update the Permissions", ex);
-            }
-
-            return (rowsAffected > 0);
-
-        }
-
-        public Permission GetById(int PermissionID)
-        {
-            const string query = @"SELECT * FROM Permissions WHERE PermissionID = @PermissionID;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@PermissionID", PermissionID);
-                    connection.Open();
-
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if (!reader.Read())
-                            return null;
-
-                        return new Permission
+                        while (reader.Read())
                         {
-                            ID = (int)reader["PermissionID"],
-                            PermissionName = (string)reader["PermissionName"]
-                        };
+                            permissions.Add(new Permission
+                            {
+                                ID = (int)reader["PermissionID"],
+                                PermissionName = (string)reader["PermissionName"]
+                            });
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 EventViewerLogger.Error("Failed to get the Permissions", ex);
-                return null;
             }
-
+            return permissions;
         }
 
     }

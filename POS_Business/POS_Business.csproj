@@ -114,17 +114,18 @@
     <Compile Include="DTOs\Settings\SettingsDto.cs" />
     <Compile Include="DTOs\Suppliers\SupplierDto.cs" />
     <Compile Include="DTOs\Users\AuthResult.cs" />
-    <Compile Include="DTOs\Users\PermissionsDot.cs" />
+    <Compile Include="DTOs\Users\PermissionDto.cs" />
     <Compile Include="DTOs\Users\RoleDto.cs" />
     <Compile Include="DTOs\Sales\SaleDto.cs" />
     <Compile Include="DTOs\Sales\SaleItemDto.cs" />
-    <Compile Include="Interfaces\IAuthService.cs" />
+    <Compile Include="Interfaces\IAuthorizationService.cs" />
     <Compile Include="Interfaces\IExpensesService.cs" />
     <Compile Include="Interfaces\IPurchaseService.cs" />
     <Compile Include="Interfaces\IRoleService.cs" />
     <Compile Include="Interfaces\ISaleService.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
     <Compile Include="Interfaces\IStockMovementService.cs" />
+    <Compile Include="Security\PasswordHasher.cs" />
     <Compile Include="Security\Session.cs" />
     <Compile Include="Services\ExpensesService.cs" />
     <Compile Include="Services\PurchaseService.cs" />
@@ -148,6 +149,11 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="LogBAL\Logger.cs" />
+    <Compile Include="Validations\RoleValidator.cs" />
+    <Compile Include="Validations\SaleValidator.cs" />
+    <Compile Include="Validations\UserValidator.cs" />
+    <Compile Include="Validations\ValidationException.cs" />
+    <Compile Include="Validations\ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\POS_DataAccess\POS_DataAccess.csproj">

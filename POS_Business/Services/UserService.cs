@@ -1,6 +1,7 @@
 ﻿using POS_Business.DTOs.Users;
 using POS_Business.Interfaces;
 using POS_Business.Security;
+using POS_Business.Validations;
 using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace POS_Business.Services
 {
-    public class UserService : IUserService, IAuthService
+    public class UserService : IUserService, IAuthorizationService
     {
         internal UserDto toDto(User user)
         {
@@ -48,16 +49,16 @@ namespace POS_Business.Services
         }
 
         private readonly IUserRepository _userRepository;
-        private readonly IRoleRepository _roleRepository;
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
+        private readonly IRoleService _roleService;
+        public UserService(IUserRepository userRepository, IRoleService roleService)
         {
             _userRepository = userRepository;
-            _roleRepository = roleRepository;
+            _roleService = roleService;
         }
+
 
         public DataTable GetAll()
         {
-
             return _userRepository.GetAll();
 
         }
@@ -81,14 +82,13 @@ namespace POS_Business.Services
         public UserDto GetUserByID(int userID)
         {
             User user = _userRepository.GetUserById(userID);
-
             if (user == null)
                 return null;
 
             UserDto userDto = toDto(user);
-            
-            // _roleRepository
-            return toDto(user);
+            userDto.Role = _roleService.GetRoleByID(user.RoleID);
+
+            return userDto;
         }
 
         public bool IsUserExists(string Username)
@@ -106,11 +106,14 @@ namespace POS_Business.Services
             return _userRepository.UpdateUser(user);
         }
 
-        public bool AddUser(ref CreateUserDto userDto)
+        public bool AddUser(CreateUserDto userDto)
         {
-            Session.Require("");
+            Session.Require(Perm.UsersManage);
 
-            if (userDto == null) { return false; }
+            UserValidator.Validate(userDto).ThrowIfInvalid();
+
+            if (IsUserExists(userDto.Username))
+                throw new ValidationException("اسم المستخدم موجود بالفعل");
 
 
             userDto.UserID = Session.CurrentUser.UserID;
@@ -122,7 +125,9 @@ namespace POS_Business.Services
 
         public bool ChangePassword(int userID, string password)
         {
-            return false;
+            Session.Require(Perm.UsersManage);
+
+            return _userRepository.ChangePassword(userID, PasswordHasher.HashPassword(password));
         }
 
         public async Task<AuthResult> Login(string username, string password)
@@ -139,6 +144,7 @@ namespace POS_Business.Services
                 return new AuthResult { Status = LoginStatus.Inactive };
 
             Session.Start(toDto(user));
+            Session.CurrentUser.Role = _roleService.GetRoleByID(user.RoleID);
             return new AuthResult { Status = LoginStatus.Success };
 
         }
@@ -146,7 +152,7 @@ namespace POS_Business.Services
         public UserDto GetByUsernameAndPassword(string username, string password)
         {
 
-            User user = _userRepository.GetByUsernameAndPassword(username, password);
+            User user = _userRepository.GetByUsernameAndPassword(username, PasswordHasher.HashPassword(password));
 
             if (user == null) return null;
 

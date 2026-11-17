@@ -2,6 +2,7 @@
 using POS_DataAccess.LogDAL;
 using POS_DataAccess.Models;
 using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace POS_DataAccess.Repositories
@@ -40,6 +41,27 @@ namespace POS_DataAccess.Repositories
             }
 
             return RoleID;
+        }
+
+        public DataTable GetAllRoles()
+        {
+            DataTable dtRoles = new DataTable();
+            string query = @"SELECT RoleID, RoleName FROM Roles";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    adapter.Fill(dtRoles);
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to get the roles", ex);
+                return null;
+            }
+            return dtRoles;
         }
 
         public Role GetById(int roleID)

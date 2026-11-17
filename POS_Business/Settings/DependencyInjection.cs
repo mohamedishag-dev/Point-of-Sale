@@ -11,7 +11,7 @@ namespace POS_Business
             POS_DataAccess.DependencyInjection.AddDataAccess(services);
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IAuthService, UserService>();
+            services.AddScoped<IAuthorizationService, UserService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IExpensesService, ExpensesService>();
             services.AddScoped<IProductService, ProductService>();

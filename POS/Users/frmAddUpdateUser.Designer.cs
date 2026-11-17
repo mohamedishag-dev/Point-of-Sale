@@ -91,7 +91,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Times New Roman", 15.75F);
             this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
-            this.btnClose.Location = new System.Drawing.Point(337, 11);
+            this.btnClose.Location = new System.Drawing.Point(208, 11);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(136, 43);
@@ -110,7 +110,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(484, 11);
+            this.btnSave.Location = new System.Drawing.Point(355, 11);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(136, 43);
@@ -127,7 +127,7 @@
             this.txtFullName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtFullName.Size = new System.Drawing.Size(180, 29);
+            this.txtFullName.Size = new System.Drawing.Size(368, 29);
             this.txtFullName.TabIndex = 0;
             this.txtFullName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTestBox);
             // 
@@ -135,7 +135,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(143, 69);
+            this.label6.Location = new System.Drawing.Point(428, 69);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -146,7 +146,7 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtPassword.Location = new System.Drawing.Point(143, 222);
+            this.txtPassword.Location = new System.Drawing.Point(331, 287);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -159,7 +159,7 @@
             // 
             this.labelConfirmPassword.AutoSize = true;
             this.labelConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.labelConfirmPassword.Location = new System.Drawing.Point(331, 197);
+            this.labelConfirmPassword.Location = new System.Drawing.Point(202, 262);
             this.labelConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelConfirmPassword.Name = "labelConfirmPassword";
             this.labelConfirmPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -171,7 +171,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(143, 261);
+            this.label4.Location = new System.Drawing.Point(281, 202);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -183,7 +183,7 @@
             // 
             this.labelPassword.AutoSize = true;
             this.labelPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.labelPassword.Location = new System.Drawing.Point(143, 197);
+            this.labelPassword.Location = new System.Drawing.Point(423, 262);
             this.labelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -197,7 +197,7 @@
             this.checkbIsActive.Checked = true;
             this.checkbIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkbIsActive.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.checkbIsActive.Location = new System.Drawing.Point(143, 418);
+            this.checkbIsActive.Location = new System.Drawing.Point(401, 418);
             this.checkbIsActive.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.checkbIsActive.Name = "checkbIsActive";
             this.checkbIsActive.Size = new System.Drawing.Size(110, 26);
@@ -208,7 +208,7 @@
             // txtConfirmPassword
             // 
             this.txtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtConfirmPassword.Location = new System.Drawing.Point(331, 222);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(143, 287);
             this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -235,7 +235,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(143, 327);
+            this.label2.Location = new System.Drawing.Point(453, 327);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -247,7 +247,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(143, 134);
+            this.label3.Location = new System.Drawing.Point(401, 202);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -259,7 +259,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(331, 131);
+            this.label1.Location = new System.Drawing.Point(247, 130);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -271,7 +271,7 @@
             // 
             this.txtEmail.BackColor = System.Drawing.Color.White;
             this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtEmail.Location = new System.Drawing.Point(143, 156);
+            this.txtEmail.Location = new System.Drawing.Point(331, 224);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtEmail.MaxLength = 20;
             this.txtEmail.Name = "txtEmail";
@@ -284,7 +284,7 @@
             // 
             this.txtPhone.BackColor = System.Drawing.Color.White;
             this.txtPhone.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtPhone.Location = new System.Drawing.Point(331, 156);
+            this.txtPhone.Location = new System.Drawing.Point(143, 155);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPhone.MaxLength = 20;
             this.txtPhone.Name = "txtPhone";
@@ -297,7 +297,7 @@
             // txtUserName
             // 
             this.txtUserName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.txtUserName.Location = new System.Drawing.Point(331, 94);
+            this.txtUserName.Location = new System.Drawing.Point(331, 155);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -309,7 +309,7 @@
             // 
             this.labelUserName.AutoSize = true;
             this.labelUserName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.labelUserName.Location = new System.Drawing.Point(331, 69);
+            this.labelUserName.Location = new System.Drawing.Point(416, 130);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUserName.Name = "labelUserName";
             this.labelUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -325,10 +325,10 @@
             "كاشير",
             "محاسب",
             "مدير مخزن"});
-            this.cmbRole.Location = new System.Drawing.Point(143, 286);
+            this.cmbRole.Location = new System.Drawing.Point(143, 224);
             this.cmbRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbRole.Name = "cmbRole";
-            this.cmbRole.Size = new System.Drawing.Size(368, 30);
+            this.cmbRole.Size = new System.Drawing.Size(180, 30);
             this.cmbRole.TabIndex = 4;
             // 
             // panel1
@@ -339,7 +339,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 475);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(722, 65);
+            this.panel1.Size = new System.Drawing.Size(515, 65);
             this.panel1.TabIndex = 11;
             // 
             // llOpenFileDialog
@@ -354,6 +354,7 @@
             this.llOpenFileDialog.TabIndex = 217;
             this.llOpenFileDialog.TabStop = true;
             this.llOpenFileDialog.Text = "وضع صورة";
+            this.llOpenFileDialog.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenFileDialog_LinkClicked);
             // 
             // llRemoveImage
             // 
@@ -368,6 +369,7 @@
             this.llRemoveImage.TabIndex = 218;
             this.llRemoveImage.TabStop = true;
             this.llRemoveImage.Text = "حذف ";
+            this.llRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemoveImage_LinkClicked);
             // 
             // circlepbUserImage
             // 
@@ -415,7 +417,6 @@
             this.MinimizeBox = false;
             this.Name = "frmAddUpdateUser";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RightToLeftLayout = true;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "اضافة مستخدم جديد";

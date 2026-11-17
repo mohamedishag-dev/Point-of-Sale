@@ -9,7 +9,7 @@ namespace POS_Business.Services
         bool IsUserExists(int userID);
         UserDto GetUserByID(int userID);
         bool IsUserExists(string Username);
-        bool AddUser(ref CreateUserDto createUser);
+        bool AddUser(CreateUserDto createUser);
         bool ChangePassword(int userID, string password);
         UserDto GetByUsernameAndPassword(string Username, string Password);
 

@@ -1,6 +1,7 @@
 ﻿using POS.Properties;
 using POS_Business.DTOs.Users;
 using POS_Business.Services;
+using POS_Business.Validations;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -63,9 +64,7 @@ namespace POS.Forms
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -87,9 +86,9 @@ namespace POS.Forms
             {
                 FullName = txtFullName.Text.Trim(),
                 Username = txtUserName.Text.Trim(),
-                Password = txtPassword.Text.Trim(),
-                Phone = txtPhone.Text.Trim(),
-                Email = txtEmail.Text.Trim(),
+                Password = txtPassword.Text,
+                Phone = txtPhone.Text,
+                Email = txtEmail.Text,
                 Address = txtAddress.Text.Trim(),
                 ImagePath = circlepbUserImage.ImageLocation,
                 IsActive = checkbIsActive.Checked,
@@ -98,18 +97,25 @@ namespace POS.Forms
 
             bool success = false;
 
-            success = _userService.AddUser(ref createUserDto);
+            success = _userService.AddUser(createUserDto);
 
-            if (success)
+            try
             {
-                Mode = enMode.Update;
-                btnSave.Enabled = false;
-                lblTitle.Text = "تعديل مستخدم";
-                MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                success = _userService.AddUser(createUserDto);
+                if (success)
+                {
+                    btnSave.Enabled = false;
+                    MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("خطأ: لم يتم حفظ البيانات.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
-            else
+            catch (ValidationException ex)
             {
-                MessageBox.Show("خطأ: لم يتم حفظ البيانات.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Join("\n", ex.Errors), "خطأ في البيانات");
             }
 
 
@@ -204,5 +210,6 @@ namespace POS.Forms
 
         }
 
+      
     }
 }

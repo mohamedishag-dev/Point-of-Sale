@@ -7,7 +7,7 @@ namespace POS_Business.DTOs
     {
         public int RoleID { get; set; }
         public string RoleName { get; set; }
-        public List<PermissionsDot> Permissions { get; set; } = new List<PermissionsDot>();
+        public List<PermissionDto> Permissions { get; set; } = new List<PermissionDto>();
 
     }
 }

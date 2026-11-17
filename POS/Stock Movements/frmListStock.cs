@@ -69,5 +69,23 @@ namespace POS.Stock_Movements
             }
 
         }
+
+        private void cbMovementType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string FilterColumn = "MovementType";
+            string FilterValue = cbMovementType.Text;
+
+            if (FilterValue == "الكل")
+                _dtAllMovements.DefaultView.RowFilter = "";
+            else
+                _dtAllMovements.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, FilterValue);
+
+            lblRecordsCount.Text = dgvMovements.Rows.Count.ToString();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

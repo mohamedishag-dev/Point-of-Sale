@@ -1,19 +1,20 @@
 ﻿using POS_Business.DTOs;
 using POS_DataAccess.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace POS_Business.Interfaces
 {
     public interface IRoleService
     {
-        bool DeleteRole(int roleID); 
-        bool UpdateRole(RoleDto role);
+        DataTable GetAllRoles();
         bool IsExists(int roleID);
         bool AddRole(RoleDto role);
-        RoleDto GetRoleById(int roleID);
+        bool DeleteRole(int roleID);
+        DataTable GetAllPermissions();
+        bool UpdateRole(RoleDto role);
+        RoleDto GetRoleByID(int roleID);
+        List<Permission> GetAllPermissionsByRole(int roleID);
+
     }
 }
