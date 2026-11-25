@@ -1,4 +1,6 @@
-﻿using POS_Business.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using POS_Business.Services;
+using POS_Business.Servicies;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -8,12 +10,14 @@ namespace POS.Products
     public partial class frmListProducts : Form
     {
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
         private DataTable _dtAllProducts;
 
-        public frmListProducts(IProductService productService)
+        public frmListProducts(IProductService productService, ICategoryService categoryService)
         {
             InitializeComponent();
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         private void frmListProducts_Load(object sender, EventArgs e)
@@ -23,6 +27,8 @@ namespace POS.Products
             dgvProducts.RowTemplate.Height = 35;
             dgvProducts.DataSource = _dtAllProducts;
             dgvProducts.Columns.RemoveAt(0);
+
+            _FillCategoriesAndUnits();
 
             if (dgvProducts.Rows.Count > 0)
             {
@@ -44,6 +50,38 @@ namespace POS.Products
 
             }
 
+        }
+
+        private void _FillCategoriesAndUnits()
+        {
+            dgvUnits.RowTemplate.Height = 30;
+            dgvUnits.DataSource = _categoryService.GetAllUnits();
+            if (dgvUnits.Rows.Count > 0)
+            {
+
+                dgvUnits.Columns[0].HeaderText = "الرقم";
+                dgvUnits.Columns[0].Width = 20;
+
+                dgvUnits.Columns[1].HeaderText = "اسم الوحدة";
+                dgvUnits.Columns[1].Width = 80;
+
+            }
+
+            dgvCategories.RowTemplate.Height = 30;
+            dgvCategories.DataSource = _categoryService.GetAllCategories();
+            if (dgvCategories.Rows.Count > 0)
+            {
+
+                dgvCategories.Columns[0].HeaderText = "الرقم";
+                dgvCategories.Columns[0].Width = 20;
+
+                dgvCategories.Columns[1].HeaderText = "اسم القسم";
+                dgvCategories.Columns[1].Width = 50;
+
+                dgvCategories.Columns[2].HeaderText = "الحالة";
+                dgvCategories.Columns[2].Width = 40;
+
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -88,7 +126,24 @@ namespace POS.Products
         private void btnAddUser_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show("هذه الميزة لم يتم تنفيذها بعد!", "غير جاهزة!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddProduct>();
+            frm.ShowDialog();
+        }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddCategory>();
+            frm.ShowDialog();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddCategory>();
+            frm.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

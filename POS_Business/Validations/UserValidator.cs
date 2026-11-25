@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Users;
+﻿using POS_Business.Security.Users;
 
 namespace POS_Business.Validations
 {
@@ -22,7 +22,7 @@ namespace POS_Business.Validations
             if (string.IsNullOrWhiteSpace(user.Phone))
                 result.Add("رقم الهاتف مطلوب");
         
-            if (!user.Email.Contains("@"))
+            if (!string.IsNullOrWhiteSpace(user.Email) && !user.Email.Contains("@"))
                 result.Add("البريد الإلكتروني غير صحيح");
 
             return result;

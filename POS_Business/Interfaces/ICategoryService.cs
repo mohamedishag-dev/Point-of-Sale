@@ -1,17 +1,19 @@
-﻿using POS_DataAccess.Models;
-using System.Collections.Generic;
+﻿using POS_Business.DTOs.Products;
 using System.Data;
 
 namespace POS_Business.Servicies
 {
     public interface ICategoryService
     {
-        DataTable GetAll();
-        bool IsExists(int ID);
-        bool Deactivate(int ID);
-        bool Add(Category entity);
-        bool Update(Category entity);
-       // Category GetByCategoryID(int CategoryID);
+        DataTable GetAllUnits();
+        DataTable GetAllCategories();
+        bool IsExists(int CategoryID);
+        bool Deactivate(int CategoryID);
+        bool AddCategory(CategoryDto Category);
+        UnitDto GetByUnitName(string UnitName);
+        bool UpdateCategory(CategoryDto Category);
+        CategoryDto GetByCategoryID(int CategoryID);
+        CategoryDto GetByCategoryName(string CategoryName);
 
     }
 

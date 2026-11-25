@@ -104,3 +104,6 @@ D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Settings.frmSetti
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Login.frmLogin.resources
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\bin\Debug\POS_Business.dll.config
 D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Stock_Movements.frmListStock.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Users.frmChangePassword.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Products.frmAddCategory.resources
+D:\ProgrammingAdvices\Projects\Point-of-Sale\POS\obj\Debug\POS.Products.frmAddProduct.resources

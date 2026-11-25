@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS_Business.DTOs.Products
+namespace POS_Business.Security.Products
 {
     public class ProductDto
     {
@@ -15,6 +15,7 @@ namespace POS_Business.DTOs.Products
         public string SKU { get; set; }
         public string Barcode { get; set; }
         public decimal Price { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
         public int CreatedBy { get; set; }

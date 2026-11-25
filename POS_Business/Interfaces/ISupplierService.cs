@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs;
+﻿using POS_Business.Security;
 using System.Data;
 
 namespace POS_Business.Interfaces

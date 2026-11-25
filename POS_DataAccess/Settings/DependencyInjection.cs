@@ -16,11 +16,13 @@ namespace POS_DataAccess
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
             services.AddScoped<ISaleItemsRepository, SaleItemsRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IProductBatchRepository, ProductBatchRepository>();
             services.AddScoped<IStockMovementRepository, StockMovementRepository>();
+
             return services;
         }
     }

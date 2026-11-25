@@ -1,5 +1,5 @@
-﻿using POS_Business.DTOs;
-using POS_Business.DTOs.Sales;
+﻿using POS_Business.Security;
+using POS_Business.Security.Sales;
 using POS_DataAccess.Models;
 using System.Data;
 

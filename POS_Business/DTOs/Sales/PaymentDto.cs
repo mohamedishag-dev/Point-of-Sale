@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POS_Business.DTOs.Sales
+namespace POS_Business.Security.Sales
 {
     public class PaymentDto
     {

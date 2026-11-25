@@ -1,5 +1,5 @@
-﻿using POS_Business.DTOs.Users;
-using POS_Business.LogBAL;
+﻿using POS_Business.LogBAL;
+using POS_Business.Security.Users;
 using System;
 
 namespace POS_Business.Security
@@ -12,7 +12,6 @@ namespace POS_Business.Security
         internal static void Start(UserDto user) { CurrentUser = user; }
         public static void End() { CurrentUser = null; }
 
-        // للواجهة: إخفاء الأزرار
         public static bool Has(string permission)
         {
             return CurrentUser != null && CurrentUser.Role.Permissions.Find(p => p.PermissionName == permission) != null;

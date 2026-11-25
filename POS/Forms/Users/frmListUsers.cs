@@ -1,4 +1,6 @@
-﻿using POS.Forms;
+﻿using Microsoft.Extensions.DependencyInjection;
+using POS.Forms;
+using POS.Users;
 using POS_Business.Services;
 using System;
 using System.Data;
@@ -67,7 +69,7 @@ namespace POS
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            frmAddUpdateUser frm = new frmAddUpdateUser(_userService);
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddUpdateUser>();
             frm.Mode = enMode.AddNew;
             frm.ShowDialog();
             frmListUsers_Load(null, null);
@@ -184,7 +186,7 @@ namespace POS
             }
 
 
-            if (FilterColumn == "UserID" /*&& FilterColumn != "FullName"*/)
+            if (FilterColumn == "UserID")
                 //     in this case we deal with integer not string.
                 _dtAllUsers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
             else
@@ -196,11 +198,26 @@ namespace POS
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddUpdateUser frm = new frmAddUpdateUser(_userService);
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddUpdateUser>();
             frm.UserID = (int)dgvUsers.CurrentRow.Cells[0].Value;
             frm.Mode = enMode.Update;
             frm.ShowDialog();
             frmListUsers_Load(null, null);
+        }
+
+        private void إضافToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmAddUpdateUser>();
+            frm.Mode = enMode.AddNew;
+            frm.ShowDialog();
+            frmListUsers_Load(null, null);
+        }
+
+        private void حذفToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = POS.Program.ServiceProvider.GetRequiredService<frmChangePassword>();
+            frm.UserID = (int)dgvUsers.CurrentRow.Cells[0].Value;
+            frm.ShowDialog();
         }
     }
 

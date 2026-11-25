@@ -6,14 +6,14 @@ namespace POS_DataAccess.Interfaces
     public interface IUserRepository
     {
         DataTable GetAll();
-        bool Delete(int ID);
         int AddUser(User user);
-        User GetUserById(int ID);
-        bool IsUserExists(int ID);
+        bool Delete(int userID);
         bool UpdateUser(User user);
+        User GetUserByID(int userID);
+        bool IsUserExists(int userID);
         bool IsUserExists(string Username);
-        bool ChangePassword(int UserID, string NewPassword);
         User GetByUsernameAndPassword(string Username, string Password);
+        bool ChangePassword(int userID, string OldPassword, string NewPassword);
 
     }
 }

@@ -1,7 +1,7 @@
-﻿using POS_Business.DTOs.Users;
+﻿using POS_Business.Security.Users;
 using System.Collections.Generic;
 
-namespace POS_Business.DTOs
+namespace POS_Business.Security
 {
     public class RoleDto
     {

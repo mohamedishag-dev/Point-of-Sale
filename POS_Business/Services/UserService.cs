@@ -1,6 +1,6 @@
-﻿using POS_Business.DTOs.Users;
-using POS_Business.Interfaces;
+﻿using POS_Business.Interfaces;
 using POS_Business.Security;
+using POS_Business.Security.Users;
 using POS_Business.Validations;
 using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
@@ -50,22 +50,23 @@ namespace POS_Business.Services
 
         private readonly IUserRepository _userRepository;
         private readonly IRoleService _roleService;
-        public UserService(IUserRepository userRepository, IRoleService roleService)
+        public UserService(
+            IUserRepository userRepository,
+            IRoleService roleService)
         {
             _userRepository = userRepository;
             _roleService = roleService;
         }
 
-
         public DataTable GetAll()
         {
+            Session.Require(Perm.UsersView);
             return _userRepository.GetAll();
-
         }
 
         public bool Delete(int userID)
         {
-            Session.Require("");
+            Session.Require(Perm.UsersManage);
 
             if (!_userRepository.IsUserExists(userID))
                 return false;
@@ -81,29 +82,17 @@ namespace POS_Business.Services
 
         public UserDto GetUserByID(int userID)
         {
-            User user = _userRepository.GetUserById(userID);
-            if (user == null)
-                return null;
+            User user = _userRepository.GetUserByID(userID);
+            if (user == null) return null;
 
             UserDto userDto = toDto(user);
             userDto.Role = _roleService.GetRoleByID(user.RoleID);
-
             return userDto;
         }
 
         public bool IsUserExists(string Username)
         {
             return _userRepository.IsUserExists(Username);
-        }
-
-        public bool UpdateUser(CreateUserDto userDto)
-        {
-            if (userDto == null)
-                return false;
-
-            User user = toUser(userDto);
-
-            return _userRepository.UpdateUser(user);
         }
 
         public bool AddUser(CreateUserDto userDto)
@@ -115,50 +104,49 @@ namespace POS_Business.Services
             if (IsUserExists(userDto.Username))
                 throw new ValidationException("اسم المستخدم موجود بالفعل");
 
-
             userDto.UserID = Session.CurrentUser.UserID;
             User user = toUser(userDto);
+            user.PasswordHash = PasswordHasher.HashPassword(user.PasswordHash);
 
             user.UserID = _userRepository.AddUser(user);
             return (user.UserID != -1);
         }
 
-        public bool ChangePassword(int userID, string password)
+        public bool UpdateUser(CreateUserDto userDto)
+        {
+            Session.Require(Perm.UsersManage);
+            UserValidator.Validate(userDto).ThrowIfInvalid();
+
+            User user = toUser(userDto);
+
+            return _userRepository.UpdateUser(user);
+        }
+
+        public bool ChangePassword(int userID, string OldPassword, string Newpassword)
         {
             Session.Require(Perm.UsersManage);
 
-            return _userRepository.ChangePassword(userID, PasswordHasher.HashPassword(password));
+            return _userRepository.ChangePassword(userID, PasswordHasher.HashPassword(OldPassword), 
+                PasswordHasher.HashPassword(Newpassword));
         }
 
-        public async Task<AuthResult> Login(string username, string password)
+        public async Task<AuthorizationResult> Login(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password))
-                return new AuthResult { Status = LoginStatus.InvalidCredentials };
-
-            User user = _userRepository.GetByUsernameAndPassword(username, password);
-
-            if (user == null)
-                return new AuthResult { Status = LoginStatus.InvalidCredentials };
-
-            if (!user.IsActive)
-                return new AuthResult { Status = LoginStatus.Inactive };
-
-            Session.Start(toDto(user));
-            Session.CurrentUser.Role = _roleService.GetRoleByID(user.RoleID);
-            return new AuthResult { Status = LoginStatus.Success };
-
-        }
-
-        public UserDto GetByUsernameAndPassword(string username, string password)
-        {
+                return new AuthorizationResult { Status = LoginStatus.InvalidCredentials };
 
             User user = _userRepository.GetByUsernameAndPassword(username, PasswordHasher.HashPassword(password));
 
-            if (user == null) return null;
+            if (user == null)
+                return new AuthorizationResult { Status = LoginStatus.InvalidCredentials };
 
-            if (!user.IsActive) return null;
+            if (!user.IsActive)
+                return new AuthorizationResult { Status = LoginStatus.Inactive };
 
-            return toDto(user);
+            Session.Start(toDto(user));
+            Session.CurrentUser.Role = _roleService.GetRoleByID(user.RoleID);
+            return new AuthorizationResult { Status = LoginStatus.Success };
+
         }
 
     }

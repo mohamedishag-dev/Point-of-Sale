@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Users;
+﻿using POS_Business.Security.Users;
 using System.Data;
 namespace POS_Business.Services
 {
@@ -10,8 +10,8 @@ namespace POS_Business.Services
         UserDto GetUserByID(int userID);
         bool IsUserExists(string Username);
         bool AddUser(CreateUserDto createUser);
-        bool ChangePassword(int userID, string password);
-        UserDto GetByUsernameAndPassword(string Username, string Password);
+        bool UpdateUser(CreateUserDto createUser);
+        bool ChangePassword(int userID, string Oldpassword, string Newpassword);
 
     }
 }

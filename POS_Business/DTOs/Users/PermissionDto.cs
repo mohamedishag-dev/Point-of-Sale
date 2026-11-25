@@ -1,4 +1,4 @@
-﻿namespace POS_Business.DTOs.Users
+﻿namespace POS_Business.Security.Users
 {
     public class PermissionDto
     {

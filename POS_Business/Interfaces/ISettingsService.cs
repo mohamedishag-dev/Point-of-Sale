@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Settings;
+﻿using POS_Business.Security.Settings;
 
 namespace POS_Business.Interfaces
 {

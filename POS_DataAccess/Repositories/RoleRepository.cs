@@ -64,7 +64,7 @@ namespace POS_DataAccess.Repositories
             return dtRoles;
         }
 
-        public Role GetById(int roleID)
+        public Role GetByID(int roleID)
         {
             const string query = @"SELECT * FROM Roles WHERE RoleID = @RoleID;";
 
@@ -74,6 +74,39 @@ namespace POS_DataAccess.Repositories
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@RoleID", roleID);
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                            return null;
+
+                        return new Role
+                        {
+                            RoleID = (int)reader["RoleID"],
+                            RoleName = (string)reader["RoleName"]
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to get the roles", ex);
+                return null;
+            }
+
+        }
+
+        public Role GetByRoleName(string roleName)
+        {
+            const string query = @"SELECT * FROM Roles WHERE RoleName = @RoleName;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@RoleName", roleName);
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())

@@ -1,88 +1,134 @@
-﻿using POS_Business.DTOs.Products;
+﻿using POS_Business.Security;
+using POS_Business.Security.Products;
+using POS_Business.Validations;
 using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
-using POS_DataAccess.Repositories;
 using System.Data;
 
 namespace POS_Business.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _repo;// = new ProductRepository();
-
-        public ProductService(IProductRepository repo)
+        internal ProductDto toDto(Product user)
         {
-            _repo = repo;
+            return new ProductDto
+            {
+                ProductID = user.ProductID,
+                CategoryID = user.CategoryID,
+                UnitID = user.UnitID,
+                ProductName = user.ProductName,
+                SKU = user.SKU,
+                Barcode = user.Barcode as string,
+                Price = user.Price,
+                CreatedAt = user.CreatedAt,
+                ImagePath = user.ImagePath as string,
+                CreatedBy = user.CreatedBy,
+                Description = user.Description as string,
+
+            };
+        }
+        internal Product toProduct(ProductDto productDto)
+        {
+            return new Product
+            {
+                ProductID = productDto.ProductID,
+                CategoryID = productDto.CategoryID,
+                UnitID = productDto.UnitID,
+                ProductName = productDto.ProductName,
+                SKU = productDto.SKU,
+                Barcode = productDto.SKU,
+                Price = productDto.Price,
+                ImagePath = productDto.ImagePath,
+                CreatedBy = productDto.CreatedBy,
+                Description = productDto.Description,
+
+            };
+        }
+        private readonly IProductRepository _productRepository;
+
+        public ProductService(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
 
         }
 
         public DataTable GetAllProducts()
         {
-
-            return _repo.GetAllProducts();
+            Session.Require(Perm.ProductsView);
+            return _productRepository.GetAllProducts();
 
         }
 
         public bool DeleteProduct(int productID)
         {
-            if (_repo.IsProductExists(productID))
-                return (_repo.DeleteProduct(productID));
+            Session.Require(Perm.ProductsDelete);
 
-            return false;
+            if (!_productRepository.IsProductExists(productID))
+                return false;
 
-        }
-
-        public bool AddNewProduct(Product product)
-        {
-            product.ProductID = _repo.AddNewProduct(product);
-
-            return (product.ProductID != -1);
-
+            return (_productRepository.DeleteProduct(productID));
         }
 
         public bool IsProductExists(int productID)
         {
 
-            return _repo.IsProductExists(productID);
+            return _productRepository.IsProductExists(productID);
 
         }
 
-        public bool IsProductExists(string productName)
+        public bool AddProduct(ProductDto productDto)
         {
+            Session.Require(Perm.ProductsAdd);
 
-            return _repo.IsProductExists(productName);
+            ProductValidator.Validate(productDto).ThrowIfInvalid();
 
-        }
+            if (_productRepository.IsProductExistsWithProductName(productDto.ProductName))
+                throw new ValidationException("المنتج موجود بالفعل");
+         
+            if (_productRepository.IsProductExistsWithBarcode(productDto.Barcode))
+                throw new ValidationException("Barcode موجود بالفعل");
 
-        public bool UpdateProduct(Product product)
-        {
+            Product product = toProduct(productDto);
+            product.CreatedBy = Session.CurrentUser.UserID;
 
-            return _repo.UpdateProduct(product);
+            product.ProductID = _productRepository.AddProduct(product);
+
+            return (product.ProductID != -1);
 
         }
 
         public ProductDto GetProductByID(int productID)
         {
-            Product product = _repo.GetProductById(productID);
+            Session.Require(Perm.ProductsView);
 
-            if (product == null)
-                return null;
+            Product product = _productRepository.GetProductByID(productID);
 
-            return new ProductDto
-            {
-                ProductID = product.ProductID,
-                CategoryID = product.CategoryID,
-                UnitID = product.UnitID,
-                ProductName = product.ProductName,
-                SKU = product.SKU,
-                Barcode = product.Barcode,
-                Price = product.Price,
-                ImagePath = product.ImagePath as string,
-                Description = product.Description,
-                CreatedBy = product.CreatedBy
-            };
+            if (product == null) return null;
 
+            return toDto(product);
+        }
+
+        public bool UpdateProduct(ProductDto productDto)
+        {
+            Session.Require(Perm.ProductsEdit);
+            ProductValidator.Validate(productDto).ThrowIfInvalid();
+            Product product = toProduct(productDto);
+
+            return _productRepository.UpdateProduct(product);
 
         }
+
+        public bool IsProductExistsWithBarcode(string barcode)
+        {
+            return _productRepository.IsProductExistsWithBarcode(barcode);
+        }
+
+        public bool IsProductExistsWithProductName(string productName)
+        {
+
+            return _productRepository.IsProductExistsWithProductName(productName);
+
+        }
+
     }
 }

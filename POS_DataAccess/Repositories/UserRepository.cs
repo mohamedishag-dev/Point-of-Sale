@@ -15,8 +15,7 @@ namespace POS_DataAccess.Repositories
 
             string query = @"SELECT U.UserID, U.FullName, U.Username, U.Phone,
                                     U.Email, U.Address, Roles.RoleName, U.IsActive
-                               FROM Users U INNER JOIN
-                              Roles ON U.RoleID = Roles.RoleID";
+                                    FROM Users U INNER JOIN Roles ON U.RoleID = Roles.RoleID";
 
             try
             {
@@ -161,7 +160,7 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public User GetUserById(int userID)
+        public User GetUserByID(int userID)
         {
             const string query = @"SELECT UserID, FullName, Username ,Phone, Email, Address,
                                           ImagePath, CreatedAt, IsActive, RoleID, CreatedBy 
@@ -262,35 +261,6 @@ namespace POS_DataAccess.Repositories
             return isFound;
         }
 
-        public bool ChangePassword(int userID, string newPassword)
-        {
-            int rowsAffected = 0;
-
-            string query = @"Update Users  
-                            SET PasswordHash = @NewPassword
-                            WHERE UserID = @UserID;";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@UserID", userID);
-                    command.Parameters.AddWithValue("@NewPassword", newPassword);
-
-                    connection.Open();
-                    rowsAffected = command.ExecuteNonQuery();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                EventViewerLogger.Error("Failed to update user", ex);
-            }
-
-            return (rowsAffected > 0);
-        }
-
         public User GetByUsernameAndPassword(string Username, string Password)
         {
             const string query = @"SELECT UserID, FullName, Username,Phone, Email, Address, 
@@ -334,6 +304,37 @@ namespace POS_DataAccess.Repositories
                 EventViewerLogger.Error("Failed to get user", ex);
                 return null;
             }
+        }
+
+        public bool ChangePassword(int userID, string OldPassword, string NewPassword)
+        {
+            int rowsAffected = 0;
+
+            string query = @"Update Users  
+                             SET PasswordHash = @NewPassword
+                                 WHERE UserID = @UserID
+                             AND PasswordHash = @Oldpassword;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", userID);
+                    command.Parameters.AddWithValue("@Oldpassword", OldPassword);
+                    command.Parameters.AddWithValue("@NewPassword", NewPassword);
+
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to update user", ex);
+            }
+
+            return (rowsAffected > 0);
         }
 
 

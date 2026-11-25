@@ -1,86 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{83171F86-7583-42E0-BBDA-722621D4B31C}|..\\POS_Business\\POS_Business.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_business\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{83171F86-7583-42E0-BBDA-722621D4B31C}|..\\POS_Business\\POS_Business.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_business\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{83171F86-7583-42E0-BBDA-722621D4B31C}|..\\POS_Business\\POS_Business.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_business\\interfaces\\iroleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB4358CB-1AD2-401D-959C-F2FF46F421A3}|..\\POS_DataAccess\\POS_DataAccess.csproj|d:\\programmingadvices\\projects\\point-of-sale\\pos_dataaccess\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "..\\POS_Business\\Services\\UserService.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\UserService.cs",
-              "RelativeToolTip": "..\\POS_Business\\Services\\UserService.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAiwJsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-17T04:46:56.165Z",
-              "IsPinned": true,
-              "EditorCaption": "",
-              "OwnerCaption": "%2"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RoleService.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\RoleService.cs",
-              "RelativeDocumentMoniker": "..\\POS_Business\\Services\\RoleService.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Services\\RoleService.cs",
-              "RelativeToolTip": "..\\POS_Business\\Services\\RoleService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAxwGEAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-17T13:12:48.685Z",
-              "OwnerCaption": "%2"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IRoleService.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Interfaces\\IRoleService.cs",
-              "RelativeDocumentMoniker": "..\\POS_Business\\Interfaces\\IRoleService.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_Business\\Interfaces\\IRoleService.cs",
-              "RelativeToolTip": "..\\POS_Business\\Interfaces\\IRoleService.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAUwBQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-17T13:07:33.152Z",
-              "OwnerCaption": "%2"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_DataAccess\\Models\\User.cs",
-              "RelativeDocumentMoniker": "..\\POS_DataAccess\\Models\\User.cs",
-              "ToolTip": "D:\\ProgrammingAdvices\\Projects\\Point-of-Sale\\POS_DataAccess\\Models\\User.cs",
-              "RelativeToolTip": "..\\POS_DataAccess\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-17T13:06:48.177Z",
-              "OwnerCaption": "%2"
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

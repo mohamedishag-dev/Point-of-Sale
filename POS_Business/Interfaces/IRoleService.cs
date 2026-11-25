@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs;
+﻿using POS_Business.Security;
 using POS_DataAccess.Models;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +14,7 @@ namespace POS_Business.Interfaces
         DataTable GetAllPermissions();
         bool UpdateRole(RoleDto role);
         RoleDto GetRoleByID(int roleID);
+        RoleDto GetByRoleName(string roleName);
         List<Permission> GetAllPermissionsByRole(int roleID);
 
     }

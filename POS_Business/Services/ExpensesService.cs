@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Expenses;
+﻿using POS_Business.Security.Expenses;
 using POS_Business.Interfaces;
 using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;

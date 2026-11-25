@@ -1,7 +1,7 @@
 ﻿using POS.Global_classes;
-using POS_Business.DTOs.Users;
 using POS_Business.Interfaces;
 using POS_Business.LogBAL;
+using POS_Business.Security;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -10,7 +10,6 @@ namespace POS.Login
 {
     public partial class frmLogin : Form
     {
-
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, string lParam);
@@ -86,7 +85,7 @@ namespace POS.Login
 
             try
             {
-                AuthResult result = _authService.Login(username, password).Result;
+                AuthorizationResult result = _authService.Login(username, password).Result;
                 if (result.Status == LoginStatus.Inactive)
                 {
                     ShowError("هذا الحساب موقوف");

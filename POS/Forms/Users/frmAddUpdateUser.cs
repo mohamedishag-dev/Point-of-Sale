@@ -1,9 +1,11 @@
 ﻿using POS.Properties;
-using POS_Business.DTOs.Users;
+using POS_Business.Interfaces;
+using POS_Business.Security.Users;
 using POS_Business.Services;
 using POS_Business.Validations;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -11,54 +13,78 @@ namespace POS.Forms
     public partial class frmAddUpdateUser : Form
     {
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
         public enum enMode { AddNew = 0, Update = 1 };
         public int UserID = -1;
+        public UserDto _UserDto;
         public enMode Mode;
 
-        public frmAddUpdateUser(IUserService userService)
+        public frmAddUpdateUser(IUserService userService, IRoleService roleService)
         {
             InitializeComponent();
             _userService = userService;
+            _roleService = roleService;
             Mode = enMode.AddNew;
         }
 
         private void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
+            circlepbUserImage.Image = Resources.Male_512;
             llRemoveImage.Visible = false;
+            _FillRolesInComoboBox();
+            cmbRole.SelectedIndex = 1;
 
             if (Mode == enMode.Update)
                 _LoadData();
 
         }
 
+        private void _FillRolesInComoboBox()
+        {
+            DataTable dtRoles = _roleService.GetAllRoles();
+
+            foreach (DataRow row in dtRoles.Rows)
+            {
+                cmbRole.Items.Add(row["RoleName"]);
+            }
+
+        }
+
         private void _LoadData()
         {
 
-            UserDto userDto = _userService.GetUserByID(UserID);
+            _UserDto = _userService.GetUserByID(UserID);
 
-            if (userDto == null)
+            if (_UserDto == null)
             {
                 MessageBox.Show("لا يوجد مستخدم بالرقم = " + UserID, "المستخدم غير موجود", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 this.Close();
                 return;
             }
 
+            Text = "تعديل بيانات المستخدم";
             //the following code will not be executed if the user was not found
-            txtFullName.Text = userDto.FullName;
-            txtUserName.Text = userDto.Username;
-            txtPhone.Text = userDto.Phone;
-            txtEmail.Text = userDto.Email;
-            txtAddress.Text = userDto.Address;
-            txtEmail.Text = userDto.Email;
-            checkbIsActive.Checked = userDto.IsActive;
+            txtFullName.Text = _UserDto.FullName;
+            txtUserName.Text = _UserDto.Username;
+            txtPhone.Text = _UserDto.Phone;
+            txtEmail.Text = _UserDto.Email;
+            txtAddress.Text = _UserDto.Address;
+            txtEmail.Text = _UserDto.Email;
+            cmbRole.SelectedIndex = cmbRole.FindString(_UserDto.Role.RoleName);
+            checkbIsActive.Checked = _UserDto.IsActive;
+
+            txtPassword.Enabled = false;
+            txtConfirmPassword.Enabled = false;
+            txtPassword.Text = "0";
+            txtConfirmPassword.Text = "0";
 
             //load user image incase it was set.
-            if (userDto.ImagePath != string.Empty)
-                circlepbUserImage.ImageLocation = userDto.ImagePath;
+            if (_UserDto.ImagePath != string.Empty)
+                circlepbUserImage.ImageLocation = _UserDto.ImagePath;
 
 
             //hide/show the remove linke incase there is no image for the user.
-            llRemoveImage.Visible = (userDto.ImagePath != "");
+            llRemoveImage.Visible = (_UserDto.ImagePath != "");
 
         }
 
@@ -82,8 +108,11 @@ namespace POS.Forms
                 return;
             }
 
+            int roleID = _roleService.GetByRoleName(cmbRole.Text).RoleID;
+
             CreateUserDto createUserDto = new CreateUserDto
             {
+                UserID = _UserDto.UserID,
                 FullName = txtFullName.Text.Trim(),
                 Username = txtUserName.Text.Trim(),
                 Password = txtPassword.Text,
@@ -92,16 +121,18 @@ namespace POS.Forms
                 Address = txtAddress.Text.Trim(),
                 ImagePath = circlepbUserImage.ImageLocation,
                 IsActive = checkbIsActive.Checked,
-                RoleID = 2
+                RoleID = roleID
             };
-
-            bool success = false;
-
-            success = _userService.AddUser(createUserDto);
 
             try
             {
-                success = _userService.AddUser(createUserDto);
+                bool success = false;
+                if (Mode == enMode.Update)
+                    success = _userService.UpdateUser(createUserDto);
+                else
+                    success = _userService.AddUser(createUserDto);
+
+
                 if (success)
                 {
                     btnSave.Enabled = false;
@@ -153,6 +184,7 @@ namespace POS.Forms
             {
                 errorProvider1.SetError(Temp, null);
             }
+
         }
 
         private void txtPassword_Validating(object sender, CancelEventArgs e)
@@ -210,6 +242,6 @@ namespace POS.Forms
 
         }
 
-      
+
     }
 }

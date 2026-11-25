@@ -6,6 +6,7 @@ using POS.Settings;
 using POS.Stock_Movements;
 using POS.Suppliers;
 using POS_Business.Security;
+using POS_Business.Services;
 using System;
 using System.Windows.Forms;
 namespace POS
@@ -21,6 +22,7 @@ namespace POS
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
+            Session.Has(Perm.UsersView);
             var frm = _serviceProvider.GetRequiredService<frmListUsers>();
             frm.ShowDialog();
         }
@@ -67,6 +69,18 @@ namespace POS
             if (Session.CurrentUser != null)
             {
                 lblUser.Text = Session.CurrentUser.Username;
+
+                btnCashier.Visible = Session.Has(Perm.UsersView);
+                btnProducts.Visible = Session.Has(Perm.ProductsView);
+                btnSuppliers.Visible = Session.Has(Perm.SuppliersView);
+                btnReturns.Visible = Session.Has(Perm.ReportsSales);
+                btnInventory.Visible = Session.Has(Perm.InventoryView);
+                btnReports.Visible = Session.Has(Perm.ReportsSales);
+                btnUsers.Visible = Session.Has(Perm.UsersView);
+                btnPurchases.Visible = Session.Has(Perm.PurchasesReceive);
+                btnSettings.Visible = Session.Has(Perm.SettingsManage);
+                btnCashier.Visible = Session.Has(Perm.SalesCreate);
+
             }
         }
 
@@ -96,7 +110,9 @@ namespace POS
 
         }
 
+      
 
+   
     }
 
 }

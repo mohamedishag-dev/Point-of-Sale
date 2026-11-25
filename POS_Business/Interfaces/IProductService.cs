@@ -1,11 +1,5 @@
-﻿using POS_Business.DTOs.Products;
-using POS_DataAccess.Models;
-using System;
-using System.Collections.Generic;
+﻿using POS_Business.Security.Products;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS_Business.Services
 {
@@ -13,10 +7,11 @@ namespace POS_Business.Services
     {
         DataTable GetAllProducts();
         bool DeleteProduct(int productID);
-        bool AddNewProduct(Product product);
+        bool AddProduct(ProductDto product);
         bool IsProductExists(int productID);
-        bool UpdateProduct(Product product);
+        bool UpdateProduct(ProductDto product);
         ProductDto GetProductByID(int productID);
-        bool IsProductExists(string productName);
+        bool IsProductExistsWithBarcode(string Barcode);
+        bool IsProductExistsWithProductName(string productName);
     }
 }

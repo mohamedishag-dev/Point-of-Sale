@@ -106,14 +106,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\Expenses\ExpenseDto.cs" />
-    <Compile Include="DTOs\Mappings\Mapper.cs" />
+    <Compile Include="DTOs\Products\CategoryDto.cs" />
     <Compile Include="DTOs\Products\ProductDto.cs" />
+    <Compile Include="DTOs\Products\UnitDto.cs" />
     <Compile Include="DTOs\Purchases\PurchaseDto.cs" />
     <Compile Include="DTOs\Purchases\PurchaseItemDto.cs" />
     <Compile Include="DTOs\Sales\PaymentDto.cs" />
     <Compile Include="DTOs\Settings\SettingsDto.cs" />
     <Compile Include="DTOs\Suppliers\SupplierDto.cs" />
-    <Compile Include="DTOs\Users\AuthResult.cs" />
+    <Compile Include="Security\AuthorizationResult.cs" />
     <Compile Include="DTOs\Users\PermissionDto.cs" />
     <Compile Include="DTOs\Users\RoleDto.cs" />
     <Compile Include="DTOs\Sales\SaleDto.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="LogBAL\Logger.cs" />
+    <Compile Include="Validations\ProductValidator.cs" />
     <Compile Include="Validations\RoleValidator.cs" />
     <Compile Include="Validations\SaleValidator.cs" />
     <Compile Include="Validations\UserValidator.cs" />

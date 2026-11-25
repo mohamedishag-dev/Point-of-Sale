@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POS_Business.DTOs.Expenses
+namespace POS_Business.Security.Expenses
 {
     public class ExpenseDto
     {

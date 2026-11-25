@@ -7,11 +7,12 @@ namespace POS_DataAccess.Interfaces
     {
         DataTable GetAllProducts();
         bool DeleteProduct(int productID);
-        int AddNewProduct(Product product);
+        int AddProduct(Product product);
         bool UpdateProduct(Product product);
         bool IsProductExists(int productID);
-        Product GetProductById(int productID);
-        bool IsProductExists(string productName);
+        Product GetProductByID(int productID);
+        bool IsProductExistsWithBarcode(string barcode);
+        bool IsProductExistsWithProductName(string productName);
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Sales;
+﻿using POS_Business.Security.Sales;
 using POS_DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS_Business.DTOs
+namespace POS_Business.Security
 {
     public class SaleDto
     {

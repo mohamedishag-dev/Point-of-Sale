@@ -30,12 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lblLogo = new System.Windows.Forms.Label();
-            this.btnSuppliers = new System.Windows.Forms.Button();
-            this.btnReturns = new System.Windows.Forms.Button();
-            this.btnInventory = new System.Windows.Forms.Button();
-            this.btnProducts = new System.Windows.Forms.Button();
-            this.btnReports = new System.Windows.Forms.Button();
-            this.btnUsers = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,8 +37,15 @@
             this.btnSettings = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnReturns = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
             this.btnPurchases = new System.Windows.Forms.Button();
             this.btnCashier = new System.Windows.Forms.Button();
+            this.btnSuppliers = new System.Windows.Forms.Button();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnInventory = new System.Windows.Forms.Button();
+            this.btnUsers = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -54,6 +55,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circlepbUserImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -72,116 +74,6 @@
             this.lblLogo.TabIndex = 11;
             this.lblLogo.Text = "متجر النور";
             this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnSuppliers
-            // 
-            this.btnSuppliers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnSuppliers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSuppliers.FlatAppearance.BorderSize = 0;
-            this.btnSuppliers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnSuppliers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuppliers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnSuppliers.Location = new System.Drawing.Point(477, 195);
-            this.btnSuppliers.Name = "btnSuppliers";
-            this.btnSuppliers.Size = new System.Drawing.Size(225, 174);
-            this.btnSuppliers.TabIndex = 3;
-            this.btnSuppliers.Text = "الموردين";
-            this.btnSuppliers.UseVisualStyleBackColor = false;
-            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
-            // 
-            // btnReturns
-            // 
-            this.btnReturns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnReturns.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReturns.FlatAppearance.BorderSize = 0;
-            this.btnReturns.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnReturns.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReturns.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnReturns.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnReturns.Location = new System.Drawing.Point(246, 195);
-            this.btnReturns.Name = "btnReturns";
-            this.btnReturns.Size = new System.Drawing.Size(225, 174);
-            this.btnReturns.TabIndex = 5;
-            this.btnReturns.Text = "المرتجعات";
-            this.btnReturns.UseVisualStyleBackColor = false;
-            this.btnReturns.Click += new System.EventHandler(this.btnReturns_Click);
-            // 
-            // btnInventory
-            // 
-            this.btnInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnInventory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInventory.FlatAppearance.BorderSize = 0;
-            this.btnInventory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnInventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInventory.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnInventory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnInventory.Location = new System.Drawing.Point(15, 15);
-            this.btnInventory.Name = "btnInventory";
-            this.btnInventory.Size = new System.Drawing.Size(225, 174);
-            this.btnInventory.TabIndex = 2;
-            this.btnInventory.Text = "المخزون";
-            this.btnInventory.UseVisualStyleBackColor = false;
-            this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
-            // 
-            // btnProducts
-            // 
-            this.btnProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnProducts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProducts.FlatAppearance.BorderSize = 0;
-            this.btnProducts.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProducts.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnProducts.Location = new System.Drawing.Point(477, 15);
-            this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(225, 174);
-            this.btnProducts.TabIndex = 1;
-            this.btnProducts.Text = "المنتجات";
-            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnProducts.UseVisualStyleBackColor = false;
-            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
-            // 
-            // btnReports
-            // 
-            this.btnReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnReports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReports.FlatAppearance.BorderSize = 0;
-            this.btnReports.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReports.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnReports.Location = new System.Drawing.Point(15, 195);
-            this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(225, 174);
-            this.btnReports.TabIndex = 6;
-            this.btnReports.Text = "التقارير";
-            this.btnReports.UseVisualStyleBackColor = false;
-            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
-            // 
-            // btnUsers
-            // 
-            this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUsers.FlatAppearance.BorderSize = 0;
-            this.btnUsers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.btnUsers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
-            this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.btnUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnUsers.Location = new System.Drawing.Point(708, 195);
-            this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(225, 174);
-            this.btnUsers.TabIndex = 4;
-            this.btnUsers.Text = "المستخدمين";
-            this.btnUsers.UseVisualStyleBackColor = false;
-            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // label1
             // 
@@ -281,42 +173,98 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnPurchases);
-            this.panel1.Controls.Add(this.btnInventory);
-            this.panel1.Controls.Add(this.btnReports);
-            this.panel1.Controls.Add(this.btnProducts);
-            this.panel1.Controls.Add(this.btnReturns);
-            this.panel1.Controls.Add(this.btnSuppliers);
-            this.panel1.Controls.Add(this.btnCashier);
-            this.panel1.Controls.Add(this.btnUsers);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(16, 191);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(946, 390);
             this.panel1.TabIndex = 16;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.btnReturns, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnReports, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnPurchases, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnCashier, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSuppliers, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnProducts, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnInventory, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnUsers, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(-1, -1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(946, 390);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // btnReturns
+            // 
+            this.btnReturns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnReturns.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReturns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReturns.FlatAppearance.BorderSize = 0;
+            this.btnReturns.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnReturns.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnReturns.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturns.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnReturns.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnReturns.Location = new System.Drawing.Point(234, 198);
+            this.btnReturns.Name = "btnReturns";
+            this.btnReturns.Size = new System.Drawing.Size(225, 189);
+            this.btnReturns.TabIndex = 11;
+            this.btnReturns.Text = "المرتجعات";
+            this.btnReturns.UseVisualStyleBackColor = false;
+            this.btnReturns.Click += new System.EventHandler(this.btnReturns_Click);
+            // 
+            // btnReports
+            // 
+            this.btnReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReports.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReports.FlatAppearance.BorderSize = 0;
+            this.btnReports.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReports.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnReports.Location = new System.Drawing.Point(3, 198);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(225, 189);
+            this.btnReports.TabIndex = 10;
+            this.btnReports.Text = "التقارير";
+            this.btnReports.UseVisualStyleBackColor = false;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
+            // 
             // btnPurchases
             // 
             this.btnPurchases.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.btnPurchases.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPurchases.FlatAppearance.BorderSize = 0;
             this.btnPurchases.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
             this.btnPurchases.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
             this.btnPurchases.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPurchases.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
             this.btnPurchases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnPurchases.Location = new System.Drawing.Point(246, 15);
+            this.btnPurchases.Location = new System.Drawing.Point(234, 3);
             this.btnPurchases.Name = "btnPurchases";
-            this.btnPurchases.Size = new System.Drawing.Size(225, 174);
-            this.btnPurchases.TabIndex = 7;
+            this.btnPurchases.Size = new System.Drawing.Size(225, 189);
+            this.btnPurchases.TabIndex = 8;
             this.btnPurchases.Text = "قائمة المشتريات";
             this.btnPurchases.UseVisualStyleBackColor = false;
-            this.btnPurchases.Click += new System.EventHandler(this.btnPurchases_Click);
             // 
             // btnCashier
             // 
             this.btnCashier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(110)))), ((int)(((byte)(86)))));
             this.btnCashier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCashier.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCashier.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
             this.btnCashier.FlatAppearance.BorderSize = 0;
             this.btnCashier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
@@ -324,14 +272,92 @@
             this.btnCashier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCashier.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCashier.ForeColor = System.Drawing.Color.White;
-            this.btnCashier.Location = new System.Drawing.Point(708, 15);
+            this.btnCashier.Location = new System.Drawing.Point(696, 3);
             this.btnCashier.Name = "btnCashier";
-            this.btnCashier.Size = new System.Drawing.Size(225, 174);
-            this.btnCashier.TabIndex = 0;
+            this.btnCashier.Size = new System.Drawing.Size(247, 189);
+            this.btnCashier.TabIndex = 1;
             this.btnCashier.Text = "الكاشير";
             this.btnCashier.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCashier.UseVisualStyleBackColor = false;
             this.btnCashier.Click += new System.EventHandler(this.btnCashier_Click);
+            // 
+            // btnSuppliers
+            // 
+            this.btnSuppliers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnSuppliers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSuppliers.FlatAppearance.BorderSize = 0;
+            this.btnSuppliers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnSuppliers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSuppliers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnSuppliers.Location = new System.Drawing.Point(465, 198);
+            this.btnSuppliers.Name = "btnSuppliers";
+            this.btnSuppliers.Size = new System.Drawing.Size(225, 189);
+            this.btnSuppliers.TabIndex = 12;
+            this.btnSuppliers.Text = "الموردين";
+            this.btnSuppliers.UseVisualStyleBackColor = false;
+            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
+            // 
+            // btnProducts
+            // 
+            this.btnProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnProducts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProducts.FlatAppearance.BorderSize = 0;
+            this.btnProducts.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProducts.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnProducts.Location = new System.Drawing.Point(696, 198);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(247, 189);
+            this.btnProducts.TabIndex = 2;
+            this.btnProducts.Text = "المنتجات";
+            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnProducts.UseVisualStyleBackColor = false;
+            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
+            // 
+            // btnInventory
+            // 
+            this.btnInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnInventory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInventory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnInventory.FlatAppearance.BorderSize = 0;
+            this.btnInventory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnInventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInventory.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnInventory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnInventory.Location = new System.Drawing.Point(465, 3);
+            this.btnInventory.Name = "btnInventory";
+            this.btnInventory.Size = new System.Drawing.Size(225, 189);
+            this.btnInventory.TabIndex = 9;
+            this.btnInventory.Text = "المخزون";
+            this.btnInventory.UseVisualStyleBackColor = false;
+            this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
+            // 
+            // btnUsers
+            // 
+            this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUsers.FlatAppearance.BorderSize = 0;
+            this.btnUsers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
+            this.btnUsers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(118)))), ((int)(((byte)(110)))));
+            this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsers.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
+            this.btnUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnUsers.Location = new System.Drawing.Point(3, 3);
+            this.btnUsers.Name = "btnUsers";
+            this.btnUsers.Size = new System.Drawing.Size(225, 189);
+            this.btnUsers.TabIndex = 13;
+            this.btnUsers.Text = "المستخدمين";
+            this.btnUsers.UseVisualStyleBackColor = false;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // label4
             // 
@@ -443,10 +469,10 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.circlepbUserImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -459,13 +485,6 @@
 
         #endregion
         private System.Windows.Forms.Label lblLogo;
-        private System.Windows.Forms.Button btnCashier;
-        private System.Windows.Forms.Button btnSuppliers;
-        private System.Windows.Forms.Button btnReturns;
-        private System.Windows.Forms.Button btnInventory;
-        private System.Windows.Forms.Button btnProducts;
-        private System.Windows.Forms.Button btnReports;
-        private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -473,7 +492,6 @@
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPurchases;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblUser;
         private CirclePictureBox circlepbUserImage;
@@ -482,5 +500,14 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnReturns;
+        private System.Windows.Forms.Button btnReports;
+        private System.Windows.Forms.Button btnPurchases;
+        private System.Windows.Forms.Button btnCashier;
+        private System.Windows.Forms.Button btnSuppliers;
+        private System.Windows.Forms.Button btnProducts;
+        private System.Windows.Forms.Button btnInventory;
+        private System.Windows.Forms.Button btnUsers;
     }
 }

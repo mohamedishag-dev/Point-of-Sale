@@ -7,10 +7,11 @@ namespace POS_DataAccess.Interfaces
     {
         int AddRole(Role role);
         DataTable GetAllRoles();
-        Role GetById(int roleID);
+        Role GetByID(int roleID);
         bool IsExists(int roleID);
         bool UpdateRole(Role role);
         bool DeleteRole(int roleID);
+        Role GetByRoleName(string roleName);
 
     }
 }

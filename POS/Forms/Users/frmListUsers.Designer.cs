@@ -33,19 +33,32 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListUsers));
             this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.cmsUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.إضافToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.حذفToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
             this.cbIsActive = new System.Windows.Forms.ComboBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.cbFilterBy = new System.Windows.Forms.ComboBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.cmsPeople = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showDitelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sendEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phoneCallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.cmsUsers.SuspendLayout();
+            this.cmsPeople.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUsers
@@ -102,23 +115,40 @@
             // 
             // cmsUsers
             // 
+            this.cmsUsers.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.cmsUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateToolStripMenuItem});
+            this.إضافToolStripMenuItem,
+            this.updateToolStripMenuItem,
+            this.حذفToolStripMenuItem});
             this.cmsUsers.Name = "cmsUsers";
-            this.cmsUsers.Size = new System.Drawing.Size(104, 26);
+            this.cmsUsers.Size = new System.Drawing.Size(121, 82);
+            // 
+            // إضافToolStripMenuItem
+            // 
+            this.إضافToolStripMenuItem.Name = "إضافToolStripMenuItem";
+            this.إضافToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.إضافToolStripMenuItem.Text = "إضاف";
+            this.إضافToolStripMenuItem.Click += new System.EventHandler(this.إضافToolStripMenuItem_Click);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.updateToolStripMenuItem.Text = "تعديل";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // حذفToolStripMenuItem
+            // 
+            this.حذفToolStripMenuItem.Name = "حذفToolStripMenuItem";
+            this.حذفToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.حذفToolStripMenuItem.Text = "حذف";
+            this.حذفToolStripMenuItem.Click += new System.EventHandler(this.حذفToolStripMenuItem_Click);
             // 
             // lblRecordsCount
             // 
             this.lblRecordsCount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(46)))), ((int)(((byte)(44)))));
-            this.lblRecordsCount.Location = new System.Drawing.Point(43, 438);
+            this.lblRecordsCount.Location = new System.Drawing.Point(617, 440);
             this.lblRecordsCount.Name = "lblRecordsCount";
             this.lblRecordsCount.Size = new System.Drawing.Size(69, 18);
             this.lblRecordsCount.TabIndex = 15;
@@ -130,30 +160,12 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.label1.Location = new System.Drawing.Point(109, 438);
+            this.label1.Location = new System.Drawing.Point(692, 438);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(117, 22);
             this.label1.TabIndex = 14;
             this.label1.Text = "عدد المستخدمين:";
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
-            this.btnClose.Location = new System.Drawing.Point(703, 438);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(106, 38);
-            this.btnClose.TabIndex = 16;
-            this.btnClose.Text = "الغاء";
-            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAddUser
             // 
@@ -241,18 +253,101 @@
             this.cbFilterBy.TabIndex = 19;
             this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(64)))), ((int)(((byte)(14)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.btnClose.Location = new System.Drawing.Point(38, 431);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(121, 41);
+            this.btnClose.TabIndex = 44;
+            this.btnClose.Text = "أغلاق";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // cmsPeople
+            // 
+            this.cmsPeople.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmsPeople.ImageScalingSize = new System.Drawing.Size(25, 25);
+            this.cmsPeople.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showDitelsToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.sendEmailToolStripMenuItem,
+            this.phoneCallToolStripMenuItem});
+            this.cmsPeople.Name = "contextMenuStrip1";
+            this.cmsPeople.Size = new System.Drawing.Size(172, 208);
+            // 
+            // showDitelsToolStripMenuItem
+            // 
+            this.showDitelsToolStripMenuItem.Name = "showDitelsToolStripMenuItem";
+            this.showDitelsToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.showDitelsToolStripMenuItem.Text = "Show Ditels";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(168, 6);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addToolStripMenuItem.Image")));
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(168, 6);
+            // 
+            // sendEmailToolStripMenuItem
+            // 
+            this.sendEmailToolStripMenuItem.Name = "sendEmailToolStripMenuItem";
+            this.sendEmailToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.sendEmailToolStripMenuItem.Text = "Send Email";
+            // 
+            // phoneCallToolStripMenuItem
+            // 
+            this.phoneCallToolStripMenuItem.Name = "phoneCallToolStripMenuItem";
+            this.phoneCallToolStripMenuItem.Size = new System.Drawing.Size(171, 32);
+            this.phoneCallToolStripMenuItem.Text = "Phone Call";
+            // 
             // frmListUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(850, 488);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.cbIsActive);
             this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.txtFilterValue);
             this.Controls.Add(this.cbFilterBy);
             this.Controls.Add(this.btnAddUser);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvUsers);
@@ -266,6 +361,7 @@
             this.Load += new System.EventHandler(this.frmListUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.cmsUsers.ResumeLayout(false);
+            this.cmsPeople.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,7 +372,6 @@
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.ComboBox cbIsActive;
         private System.Windows.Forms.Label lblFilter;
@@ -284,5 +379,17 @@
         private System.Windows.Forms.ComboBox cbFilterBy;
         private System.Windows.Forms.ContextMenuStrip cmsUsers;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.ToolStripMenuItem إضافToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem حذفToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cmsPeople;
+        private System.Windows.Forms.ToolStripMenuItem showDitelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem sendEmailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phoneCallToolStripMenuItem;
     }
 }

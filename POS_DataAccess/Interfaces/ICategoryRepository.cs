@@ -5,12 +5,14 @@ namespace POS_DataAccess.Interfaces
 {
     public interface ICategoryRepository
     {
-        DataTable GetAll();
-        int Add(Category category);
+        DataTable GetAllUnits();
+        DataTable GetAllCategories();
         bool IsExists(int CategoryID);
-        bool Update(Category category);
         bool Deactivate(int CategoryID);
+        int AddCategory(Category category);
+        Unit GetByUnitName(string UnitName);
+        bool UpdateCategory(Category category);
         Category GetByCategoryID(int CategoryID);
-
+        Category GetByCategoryName(string CategoryName);
     }
 }

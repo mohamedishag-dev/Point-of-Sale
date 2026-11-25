@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POS_Business.DTOs.Settings
+namespace POS_Business.Security.Settings
 {
     public class SettingsDto
     {

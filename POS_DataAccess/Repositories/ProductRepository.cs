@@ -77,15 +77,15 @@ namespace POS_DataAccess.Repositories
             return (rowsAffected > 0);
         }
 
-        public int AddNewProduct(Product product)
+        public int AddProduct(Product product)
         {
             //this function will return the new Product id if succeeded and -1 if not.
             int ProductID = -1;
 
             string query = @"INSERT INTO Products (CategoryID, UnitID, ProductName, SKU, Barcode,
-                                     Price, Description, CreatedAt, ImagePath, CreatedBy)
+                                     Price, Description, ImagePath, CreatedBy)
                              VALUES (@CategoryID, @UnitID, @ProductName, @SKU, @Barcode,
-                                     @Price, @Description, @CreatedAt,  @ImagePath, @CreatedBy)
+                                     @Price, @Description,  @ImagePath, @CreatedBy)
                              SELECT SCOPE_IDENTITY();";
 
             try
@@ -98,12 +98,11 @@ namespace POS_DataAccess.Repositories
                     command.Parameters.AddWithValue("@ProductName", product.ProductName);
                     command.Parameters.AddWithValue("@SKU", product.SKU);
                     command.Parameters.AddWithValue("@Price", product.Price);
-                    command.Parameters.AddWithValue("@Description", product.Description);
-                    command.Parameters.AddWithValue("@CreatedAt", product.CreatedAt);
                     command.Parameters.AddWithValue("@CreatedBy", product.CreatedBy);
 
                     command.Parameters.AddWithValue("@Barcode", (object)product.Barcode ?? DBNull.Value);
                     command.Parameters.AddWithValue("@ImagePath", (object)product.ImagePath ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@Description",(object)product.Description ?? DBNull.Value);
 
                     connection.Open();
 
@@ -200,7 +199,7 @@ namespace POS_DataAccess.Repositories
             return isFound;
         }
 
-        public Product GetProductById(int productID)
+        public Product GetProductByID(int productID)
         {
             const string query = @"SELECT * FROM Products WHERE ProductID = @ProductID;";
 
@@ -243,7 +242,36 @@ namespace POS_DataAccess.Repositories
 
         }
 
-        public bool IsProductExists(string productName)
+        public bool IsProductExistsWithBarcode(string barcode)
+        {
+            bool isFound = false;
+
+            string query = "SELECT Found=1 FROM Products WHERE Barcode = @Barcode";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Barcode", barcode);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        isFound = reader.HasRows;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                EventViewerLogger.Error("Failed to check if the Product exists", ex);
+            }
+
+            return isFound;
+        }
+
+        public bool IsProductExistsWithProductName(string productName)
         {
             bool isFound = false;
 
@@ -271,7 +299,6 @@ namespace POS_DataAccess.Repositories
 
             return isFound;
         }
-
 
     }
 }

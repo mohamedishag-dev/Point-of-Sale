@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace POS_Business.DTOs.Purchases
+namespace POS_Business.Security.Purchases
 {
     public class PurchaseDto
     {

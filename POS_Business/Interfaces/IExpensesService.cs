@@ -1,4 +1,4 @@
-﻿using POS_Business.DTOs.Expenses;
+﻿using POS_Business.Security.Expenses;
 using System.Data;
 
 namespace POS_Business.Interfaces

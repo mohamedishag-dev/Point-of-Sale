@@ -71,6 +71,7 @@
     <Compile Include="Models\SaleItem.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\StockMovement.cs" />
+    <Compile Include="Models\Unit.cs" />
     <Compile Include="Repositories\ExpenseRepository.cs" />
     <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />

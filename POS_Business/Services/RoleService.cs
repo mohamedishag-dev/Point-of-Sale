@@ -1,10 +1,9 @@
-﻿using POS_Business.DTOs;
-using POS_Business.DTOs.Users;
-using POS_Business.Interfaces;
+﻿using POS_Business.Interfaces;
+using POS_Business.Security;
+using POS_Business.Security.Users;
 using POS_Business.Validations;
 using POS_DataAccess.Interfaces;
 using POS_DataAccess.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -66,38 +65,44 @@ namespace POS_Business.Services
 
         public DataTable GetAllRoles()
         {
+            Session.Require(Perm.RolesManage);
             return _roleRepository.GetAllRoles();
 
         }
+
         public bool IsExists(int roleID)
         {
+            Session.Require(Perm.RolesManage);
             return _roleRepository.IsExists(roleID);
         }
+
         public bool DeleteRole(int roleID)
         {
-
+            Session.Require(Perm.RolesManage);
             return _roleRepository.DeleteRole(roleID);
-
         }
+
         public bool AddRole(RoleDto roleDto)
         {
-
+            Session.Require(Perm.RolesManage);
             RoleValidator.Validate(toRole(roleDto)).ThrowIfInvalid();
 
             Role role = toRole(roleDto);
-
             role.RoleID = _roleRepository.AddRole(role);
             return (role.RoleID != -1);
 
         }
+
         public DataTable GetAllPermissions()
         {
+            Session.Require(Perm.RolesManage);
             return _permissionRepository.GetAllPermissions();
 
         }
+
         public RoleDto GetRoleByID(int roleID)
         {
-            Role role = _roleRepository.GetById(roleID);
+            Role role = _roleRepository.GetByID(roleID);
             if (role == null) return null;
 
             role.Permissions = _permissionRepository.GetAllPermissionsByRole(roleID);
@@ -105,21 +110,33 @@ namespace POS_Business.Services
             return toDto(role);
 
         }
+
         public bool UpdateRole(RoleDto roleDto)
         {
+            Session.Require(Perm.RolesManage);
+
             if (roleDto == null) return false;
 
-            Role role = new Role
-            {
-                RoleID = roleDto.RoleID,
-                RoleName = roleDto.RoleName
-            };
+            Role role = toRole(roleDto);
 
             return _roleRepository.UpdateRole(role);
 
         }
+
+        public RoleDto GetByRoleName(string roleName)
+        {
+            Role role = _roleRepository.GetByRoleName(roleName);
+            if (role == null) return null;
+
+            role.Permissions = _permissionRepository.GetAllPermissionsByRole(role.RoleID);
+
+            return toDto(role);
+
+        }
+
         public List<Permission> GetAllPermissionsByRole(int roleID)
         {
+            Session.Require(Perm.RolesManage);
             return _permissionRepository.GetAllPermissionsByRole(roleID);
         }
 
